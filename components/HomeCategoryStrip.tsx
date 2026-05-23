@@ -2,18 +2,22 @@ import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { CATEGORY_STRIP_ICON_URLS } from '@/lib/category-strip-icons';
-import { getTrucks, type TruckFromWP } from '@/lib/products';
+import { trucks, type Truck } from '@/lib/mock-data';
 
-type Cat = TruckFromWP['category'];
+type Cat = Truck['category'];
+
+function countCategory(cat: Cat) {
+  return trucks.filter((t) => t.category === cat).length;
+}
+
+function countCondition(c: Truck['condition']) {
+  return trucks.filter((t) => t.condition === c).length;
+}
 
 type StripLabelKey = 'zugmaschinen' | 'aufbau' | 'kipper' | 'kasten' | 'gebraucht' | 'search';
 
 export default async function HomeCategoryStrip() {
   const t = await getTranslations('CategoryStrip');
-  const trucks = await getTrucks('de');
-
-  const countCategory = (cat: Cat) => trucks.filter((tr) => tr.category === cat).length;
-  const countCondition = (c: TruckFromWP['condition']) => trucks.filter((tr) => tr.condition === c).length;
 
   const stripItems: {
     href: string;

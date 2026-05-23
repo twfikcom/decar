@@ -2,7 +2,7 @@ import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { getInventoryCount } from '@/lib/products';
+import { cars, trucks } from '@/lib/mock-data';
 import WarrantyShieldTruckIcon from '@/components/icons/WarrantyShieldTruckIcon';
 
 const NEW_IMG =
@@ -12,7 +12,7 @@ const SERVICE_IMG =
 
 export default async function HomeHighlightCards() {
   const t = await getTranslations('HomeHighlight');
-  const total = await getInventoryCount();
+  const total = cars.length + trucks.length;
 
   const barRow = (label: string) => (
     <div className="flex items-center justify-between gap-3 bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 px-4 py-3 sm:px-5">

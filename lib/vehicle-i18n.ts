@@ -1,6 +1,5 @@
 import { getMessages } from 'next-intl/server';
 import type { Car, Truck } from '@/lib/mock-data';
-import { localizedFromVehicle, type CarFromWP, type TruckFromWP } from '@/lib/wordpress-api';
 
 export type LocalizedVehicle = {
   title: string;
@@ -13,19 +12,10 @@ type InventoryBlock = {
   trucks?: Record<string, LocalizedVehicle>;
 };
 
-function hasWpI18n(vehicle: Car | Truck): vehicle is CarFromWP | TruckFromWP {
-  return 'i18n' in vehicle && Boolean((vehicle as CarFromWP).i18n);
-}
-
-export async function getLocalizedCar(locale: string, car: Car | CarFromWP): Promise<LocalizedVehicle> {
-  if (hasWpI18n(car)) {
-    return localizedFromVehicle(locale, car);
-  }
-
+export async function getLocalizedCar(locale: string, car: Car): Promise<LocalizedVehicle> {
   if (locale === 'de') {
     return { title: car.title, description: car.description, features: car.features };
   }
-
   const messages = await getMessages();
   const inv = messages.Inventory as InventoryBlock | undefined;
   const block = inv?.cars?.[car.id];
@@ -33,15 +23,10 @@ export async function getLocalizedCar(locale: string, car: Car | CarFromWP): Pro
   return { title: car.title, description: car.description, features: car.features };
 }
 
-export async function getLocalizedTruck(locale: string, truck: Truck | TruckFromWP): Promise<LocalizedVehicle> {
-  if (hasWpI18n(truck)) {
-    return localizedFromVehicle(locale, truck);
-  }
-
+export async function getLocalizedTruck(locale: string, truck: Truck): Promise<LocalizedVehicle> {
   if (locale === 'de') {
     return { title: truck.title, description: truck.description, features: truck.features };
   }
-
   const messages = await getMessages();
   const inv = messages.Inventory as InventoryBlock | undefined;
   const block = inv?.trucks?.[truck.id];

@@ -3,7 +3,7 @@ import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { CarFront, ArrowRight, Fuel } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { getCars } from '@/lib/products';
+import { cars } from '@/lib/mock-data';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedCar } from '@/lib/vehicle-i18n';
 
@@ -28,7 +28,6 @@ export default async function CarsPage({ params }: { params: Promise<{ locale: s
   const tEnum = await getTranslations('VehicleEnums');
   const tCommon = await getTranslations('Common');
   const nl = numberLocale(locale);
-  const cars = await getCars(locale);
 
   const label = (group: 'bodyType' | 'fuel', value: string) =>
     tEnum(`${group}.${value}` as 'bodyType.Limousine');

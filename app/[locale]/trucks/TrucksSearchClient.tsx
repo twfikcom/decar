@@ -12,8 +12,8 @@ import {
   LayoutGrid,
   Truck as TruckIcon,
 } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
-import type { TruckFromWP } from '@/lib/products';
+import { useLocale, useTranslations, useMessages } from 'next-intl';
+import { trucks, type Truck } from '@/lib/mock-data';
 import { numberLocale } from '@/lib/locale-format';
 
 const SORT_IDS = [
@@ -39,7 +39,7 @@ const SORT_LABEL_KEY: Record<
   'mileage-desc': 'sortMileageDesc',
 };
 
-function sortList(list: TruckFromWP[], sort: SortId): TruckFromWP[] {
+function sortList(list: Truck[], sort: SortId): Truck[] {
   const copy = [...list];
   switch (sort) {
     case 'price-asc':
@@ -59,30 +59,33 @@ function sortList(list: TruckFromWP[], sort: SortId): TruckFromWP[] {
   }
 }
 
-export default function TrucksSearchClient({ trucks }: { trucks: TruckFromWP[] }) {
+export default function TrucksSearchClient() {
   const t = useTranslations('Trucks');
   const tEnum = useTranslations('VehicleEnums');
   const tCommon = useTranslations('Common');
+  const messages = useMessages();
   const locale = useLocale();
   const nl = numberLocale(locale);
   const searchParams = useSearchParams();
   const [query, setQuery] = useState('');
   const [brands, setBrands] = useState<Record<string, boolean>>({});
   const [categories, setCategories] = useState<Record<string, boolean>>({});
-  const [condition, setCondition] = useState<'all' | TruckFromWP['condition']>('all');
+  const [condition, setCondition] = useState<'all' | Truck['condition']>('all');
   const [priceMin, setPriceMin] = useState('');
   const [priceMax, setPriceMax] = useState('');
   const [mileageMax, setMileageMax] = useState('');
   const [sort, setSort] = useState<SortId>('year-desc');
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  const inventory = messages.Inventory as { trucks?: Record<string, { title?: string }> } | undefined;
+
   const truckListTitle = useCallback(
-    (truck: TruckFromWP) => truck.i18n?.[locale as 'de' | 'en' | 'ar']?.title ?? truck.title,
-    [locale],
+    (truck: Truck) => inventory?.trucks?.[truck.id]?.title ?? truck.title,
+    [inventory],
   );
 
   const truckCategoryLabel = useCallback(
-    (c: TruckFromWP['category']) => tEnum(`truckCategory.${c}` as 'truckCategory.Sattelzugmaschine'),
+    (c: Truck['category']) => tEnum(`truckCategory.${c}` as 'truckCategory.Sattelzugmaschine'),
     [tEnum],
   );
 
@@ -117,7 +120,7 @@ export default function TrucksSearchClient({ trucks }: { trucks: TruckFromWP[] }
   );
 
   useEffect(() => {
-    const valid = new Set<TruckFromWP['category']>(categoryOptions as TruckFromWP['category'][]);
+    const valid = new Set<Truck['category']>(categoryOptions as Truck['category'][]);
     const fromUrl = searchParams
       .getAll('category')
       .map((raw) => {
@@ -127,7 +130,7 @@ export default function TrucksSearchClient({ trucks }: { trucks: TruckFromWP[] }
           return raw;
         }
       })
-      .filter((c): c is TruckFromWP['category'] => valid.has(c as TruckFromWP['category']));
+      .filter((c): c is Truck['category'] => valid.has(c as Truck['category']));
     if (fromUrl.length) {
       setCategories((prev) => {
         const next = { ...prev };
@@ -194,7 +197,7 @@ export default function TrucksSearchClient({ trucks }: { trucks: TruckFromWP[] }
     priceMax !== '' ||
     mileageMax !== '';
 
-  const conditionLabel = (c: 'all' | TruckFromWP['condition']) => {
+  const conditionLabel = (c: 'all' | Truck['condition']) => {
     if (c === 'all') return t('all');
     if (c === 'Neu') return t('new');
     return t('used');
@@ -247,7 +250,7 @@ export default function TrucksSearchClient({ trucks }: { trucks: TruckFromWP[] }
                 onChange={() => toggleCategory(c)}
                 className="size-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
               />
-              {truckCategoryLabel(c as TruckFromWP['category'])}
+              {truckCategoryLabel(c as Truck['category'])}
             </label>
           ))}
         </div>
@@ -421,7 +424,7 @@ export default function TrucksSearchClient({ trucks }: { trucks: TruckFromWP[] }
                 ))}
                 {activeCategoryFilters.map((c) => (
                   <span key={c} className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-bold text-zinc-800">
-                    {truckCategoryLabel(c as TruckFromWP['category'])}
+                    {truckCategoryLabel(c as Truck['category'])}
                   </span>
                 ))}
                 {condition !== 'all' && (
