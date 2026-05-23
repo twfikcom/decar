@@ -147,12 +147,17 @@
     "titleLine": "PKW &",
     "titleAccent": "Gebrauchtwagen",
     "subtitle": "Unser PKW-Bestand ist klar vom Nutzfahrzeug-Angebot getrennt: gleiche Seriosität, andere Fahrzeugklasse.",
+    "breadcrumbSearch": "PKW Suche",
+    "filterSubtitle": "Filtern Sie nach Marke, Karosserie, Kraftstoff und Budget. Suchergebnis in Echtzeit.",
+    "catalogView": "Katalogansicht · PKW",
     "count": "Fahrzeuge (PKW)",
     "linkTrucks": "Zu den LKW & Nutzfahrzeugen",
     "badge": "PKW",
     "price": "Preis",
     "brandFilter": "Marken",
-    "brandFilterAria": "PKW nach Marke filtern"
+    "brandFilterAria": "PKW nach Marke filtern",
+    "bodyTypeFilter": "Karosserie",
+    "fuelFilter": "Kraftstoff"
   },
   "Contact": {
     "title": "Kontakt",

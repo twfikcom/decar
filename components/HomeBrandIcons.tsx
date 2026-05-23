@@ -18,7 +18,7 @@ export default async function HomeBrandIcons({ kind }: HomeBrandIconsProps) {
       <BrandIconRow
         brands={isTrucks ? TRUCK_BRANDS : CAR_BRANDS}
         basePath={isTrucks ? '/trucks' : '/cars'}
-        hash={isTrucks ? '#schnellsuche' : '#brand-filter'}
+        hash="#schnellsuche"
         tone={isTrucks ? 'red' : 'emerald'}
         ariaLabel={isTrucks ? t('brandStripTrucksAria') : t('brandStripCarsAria')}
       />

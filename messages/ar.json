@@ -143,12 +143,17 @@
     "titleLine": "سيارات مستعملة",
     "titleAccent": "بحالة ممتازة",
     "subtitle": "جودة يمكنك الوثوق بها، وأسعار واضحة تناسب ميزانيتك.",
+    "breadcrumbSearch": "بحث الملاكي",
+    "filterSubtitle": "صفِّ حسب الماركة ونوع الهيكل والوقود والميزانية. نتائج فورية.",
+    "catalogView": "عرض الكتalog · مlaكi",
     "count": "ملاكي",
     "linkTrucks": "شاحنات النقل",
     "badge": "ملاكي",
     "price": "السعر",
     "brandFilter": "الماركات",
-    "brandFilterAria": "تصفية الملاكي حسب الماركة"
+    "brandFilterAria": "تصفية الملاكي حسب الماركة",
+    "bodyTypeFilter": "نوع الهيكل",
+    "fuelFilter": "الوقود"
   },
   "Contact": {
     "title": "اتصل بنا",

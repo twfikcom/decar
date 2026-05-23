@@ -143,12 +143,17 @@
     "titleLine": "Cars &",
     "titleAccent": "used cars",
     "subtitle": "Our car stock is clearly separate from commercial vehicles: same professionalism, different segment.",
+    "breadcrumbSearch": "Car search",
+    "filterSubtitle": "Filter by brand, body type, fuel and budget. Live search results.",
+    "catalogView": "Catalog view · Cars",
     "count": "vehicles (cars)",
     "linkTrucks": "Trucks & commercial vehicles",
     "badge": "Car",
     "price": "Price",
     "brandFilter": "Brands",
-    "brandFilterAria": "Filter cars by brand"
+    "brandFilterAria": "Filter cars by brand",
+    "bodyTypeFilter": "Body type",
+    "fuelFilter": "Fuel"
   },
   "Contact": {
     "title": "Contact",
