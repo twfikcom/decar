@@ -12,15 +12,15 @@ import {
 export type { Car, Truck, CarFromWP, TruckFromWP };
 
 export async function getCars(locale: string): Promise<CarFromWP[]> {
+  if (!isWordPressConfigured()) return mockCars;
   const remote = await fetchCarsFromWordPress(locale);
-  if (remote !== null) return remote;
-  return mockCars;
+  return remote ?? [];
 }
 
 export async function getTrucks(locale: string): Promise<TruckFromWP[]> {
+  if (!isWordPressConfigured()) return mockTrucks;
   const remote = await fetchTrucksFromWordPress(locale);
-  if (remote !== null) return remote;
-  return mockTrucks;
+  return remote ?? [];
 }
 
 export async function getCarById(locale: string, id: string): Promise<CarFromWP | undefined> {

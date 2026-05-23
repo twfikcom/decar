@@ -1,3 +1,4 @@
+import { domainToASCII } from 'node:url';
 import type { Car, Truck } from '@/lib/mock-data';
 
 export type SupportedLocale = 'de' | 'en' | 'ar';
@@ -13,11 +14,21 @@ export type VehicleI18n = Partial<Record<SupportedLocale, LocalizedBlock>>;
 export type CarFromWP = Car & { i18n?: VehicleI18n };
 export type TruckFromWP = Truck & { i18n?: VehicleI18n };
 
-const DEFAULT_REVALIDATE = 300;
+export const WP_INVENTORY_CACHE_TAG = 'wp-inventory';
+
+const DEFAULT_REVALIDATE = 60;
 
 function apiBase(): string | null {
   const url = process.env.WORDPRESS_API_URL?.trim();
-  return url ? url.replace(/\/$/, '') : null;
+  if (!url) return null;
+
+  try {
+    const parsed = new URL(url);
+    parsed.hostname = domainToASCII(parsed.hostname);
+    return parsed.toString().replace(/\/$/, '');
+  } catch {
+    return url.replace(/\/$/, '');
+  }
 }
 
 function revalidateSeconds(): number {
@@ -31,6 +42,22 @@ function normalizeLang(locale: string): SupportedLocale {
   return 'de';
 }
 
+function fetchOptions(): RequestInit {
+  const seconds = revalidateSeconds();
+
+  if (seconds === 0) {
+    return {
+      cache: 'no-store',
+      headers: { Accept: 'application/json' },
+    };
+  }
+
+  return {
+    next: { revalidate: seconds, tags: [WP_INVENTORY_CACHE_TAG] },
+    headers: { Accept: 'application/json' },
+  };
+}
+
 async function fetchWp<T>(path: string, locale: string): Promise<T | null> {
   const base = apiBase();
   if (!base) return null;
@@ -39,11 +66,7 @@ async function fetchWp<T>(path: string, locale: string): Promise<T | null> {
   const url = `${base}/wp-json/lowe-trucks/v1/${path}${path.includes('?') ? '&' : '?'}lang=${lang}`;
 
   try {
-    const res = await fetch(url, {
-      next: { revalidate: revalidateSeconds() },
-      headers: { Accept: 'application/json' },
-    });
-
+    const res = await fetch(url, fetchOptions());
     if (!res.ok) return null;
     return (await res.json()) as T;
   } catch {

@@ -43,14 +43,18 @@
 NODE_ENV=production
 APP_URL=https://löwetrucks.de
 WORDPRESS_API_URL=https://admin.löwetrucks.de
-WORDPRESS_REVALIDATE_SECONDS=300
+WORDPRESS_REVALIDATE_SECONDS=60
 ```
 
 اختياري:
 
 ```env
 GEMINI_API_KEY=your-key-if-needed
+REVALIDATE_SECRET=نفس-القيمة-في-WordPress-Next.js-Sync
 ```
+
+> **REVALIDATE_SECRET**: أنشئ سلسلة عشوائية طويلة. أضفها في Hostinger **و** في WordPress:  
+> **Löwe Inventory → Next.js Sync**
 
 ---
 

@@ -164,7 +164,32 @@ class LTI_REST_API {
 			)
 		);
 
-		return $query->posts[0] ?? null;
+		if ( ! empty( $query->posts[0] ) ) {
+			return $query->posts[0];
+		}
+
+		$prefix = LTI_Post_Types::TRUCK === $post_type ? 't-' : 'c-';
+		if ( 0 === strpos( $external_id, $prefix ) ) {
+			$post_id = absint( substr( $external_id, strlen( $prefix ) ) );
+			if ( $post_id > 0 ) {
+				$post = get_post( $post_id );
+				if ( $post instanceof WP_Post && $post->post_type === $post_type && 'publish' === $post->post_status ) {
+					return $post;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	private static function resolve_external_id( WP_Post $post ): string {
+		$id = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'external_id' );
+		if ( '' !== $id ) {
+			return $id;
+		}
+
+		$prefix = LTI_Post_Types::TRUCK === $post->post_type ? 't-' : 'c-';
+		return $prefix . $post->ID;
 	}
 
 	private static function format_truck( WP_Post $post, string $lang ): array {
@@ -188,7 +213,7 @@ class LTI_REST_API {
 		}
 
 		return array(
-			'id'          => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'external_id' ),
+			'id'          => self::resolve_external_id( $post ),
 			'title'       => $localized['title'],
 			'description' => $localized['description'],
 			'features'    => $localized['features'],
@@ -232,7 +257,7 @@ class LTI_REST_API {
 		}
 
 		return array(
-			'id'          => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'external_id' ),
+			'id'          => self::resolve_external_id( $post ),
 			'title'       => $localized['title'],
 			'description' => $localized['description'],
 			'features'    => $localized['features'],

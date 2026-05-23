@@ -47,7 +47,20 @@ WORDPRESS_REVALIDATE_SECONDS=300
 
 إذا كان WordPress غير متاح، يعود الموقع تلقائياً إلى البيانات الوهمية (`lib/mock-data.ts`).
 
-## الحقول المشتركة vs المترجمة
+## مزامنة فورية عند نشر منتج (Next.js Sync)
+
+1. في Hostinger أضف:
+   ```env
+   REVALIDATE_SECRET=سلسلة-سرية-طويلة
+   WORDPRESS_REVALIDATE_SECONDS=60
+   ```
+2. في WordPress: **Löwe Inventory → Next.js Sync**
+   - Next.js site URL: `https://löwetrucks.de`
+   - Revalidate secret: **نفس القيمة** أعلاه
+3. اضغط **Test sync now** للتأكد
+4. عند **Publish** لأي شاحنة/سيارة يُحدَّث الموقع تلقائياً
+
+## تأكد قبل النشر في WordPress
 
 | مشترك (لغة واحدة) | مترجم (DE / EN / AR) |
 |---------------------|----------------------|

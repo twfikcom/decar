@@ -24,6 +24,7 @@ require_once LTI_PLUGIN_DIR . 'includes/class-meta-fields.php';
 require_once LTI_PLUGIN_DIR . 'includes/class-admin-ui.php';
 require_once LTI_PLUGIN_DIR . 'includes/class-admin-menu.php';
 require_once LTI_PLUGIN_DIR . 'includes/class-rest-api.php';
+require_once LTI_PLUGIN_DIR . 'includes/class-revalidate.php';
 
 final class Lowe_Trucks_Inventory {
 
@@ -33,6 +34,7 @@ final class Lowe_Trucks_Inventory {
 		LTI_Admin_UI::init();
 		LTI_Admin_Menu::init();
 		LTI_REST_API::init();
+		LTI_Revalidate::init();
 	}
 
 	public static function activate(): void {
