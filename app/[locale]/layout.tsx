@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HomeLoader from '@/components/HomeLoader';
 import { routing } from '@/i18n/routing';
+import { getSiteUrl } from '@/lib/site-url';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
@@ -29,6 +30,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Meta' });
   return {
+    metadataBase: getSiteUrl(),
     title: t('title'),
     description: t('description'),
   };

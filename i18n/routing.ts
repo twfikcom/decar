@@ -5,4 +5,5 @@ export const routing = defineRouting({
   defaultLocale: 'de',
   // Explicit /de /en /ar prefixes — more reliable on Hostinger than "as-needed"
   localePrefix: 'always',
+  localeDetection: false,
 });

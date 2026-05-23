@@ -47,6 +47,8 @@ WORDPRESS_API_URL=https://admin.löwetrucks.de
 WORDPRESS_REVALIDATE_SECONDS=60
 ```
 
+> **ملاحظة IDN:** `löwetrucks.de` = `xn--lwetrucks-07a.de` — نفس الدومين. المتصفح يعرض Unicode لكن السيرفر يستخدم punycode داخلياً. هذا طبيعي.
+
 اختياري:
 
 ```env
