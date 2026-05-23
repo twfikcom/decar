@@ -26,7 +26,7 @@
 |--------|--------|
 | **Install command** | `npm ci` |
 | **Build command** | `npm run build` |
-| **Start command** | `npm run start -- -p $PORT` |
+| **Start command** | `npm start` |
 | **Node.js version** | `20` |
 | **Framework** | Next.js (يُكتشف تلقائياً) |
 | **Output directory** | `.next` |
@@ -123,7 +123,7 @@ Hostinger يعيد البناء تلقائياً عند push إلى `main` (إن
 | Build failed | تحقق من Node 20 و `npm run build` محلياً |
 | المنتجات لا تظهر من WordPress | تحقق من `WORDPRESS_API_URL` و REST API |
 | الصور لا تظهر | أضف hostname الصورة في `next.config.ts` → `images.remotePatterns` |
-| المنفذ (Port) | Hostinger يمرّر `$PORT` — لا تثبت منفذاً يدوياً |
+| المنفذ (Port) | Hostinger يضبط `PORT` تلقائياً — `npm start` يقرأه من `package.json` |
 
 ---
 
