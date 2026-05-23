@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getTruckById } from '@/lib/products';
+import { trucks } from '@/lib/mock-data';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { ArrowLeft, MessageCircle, Check, Phone, Video } from 'lucide-react';
@@ -14,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; id: string }>;
 }): Promise<Metadata> {
   const { locale, id } = await params;
-  const truck = await getTruckById(locale, id);
+  const truck = trucks.find((x) => x.id === id);
   if (!truck) return {};
   setRequestLocale(locale);
   const copy = await getLocalizedTruck(locale, truck);
@@ -32,7 +32,7 @@ export default async function TruckDetailPage({
 }) {
   const { locale, id } = await params;
   setRequestLocale(locale);
-  const truck = await getTruckById(locale, id);
+  const truck = trucks.find((x) => x.id === id);
 
   if (!truck) {
     notFound();
