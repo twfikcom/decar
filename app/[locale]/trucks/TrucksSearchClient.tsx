@@ -120,7 +120,7 @@ export default function TrucksSearchClient() {
   );
 
   useEffect(() => {
-    const valid = new Set<Truck['category']>(categoryOptions as Truck['category'][]);
+    const validCategories = new Set<Truck['category']>(categoryOptions as Truck['category'][]);
     const fromUrl = searchParams
       .getAll('category')
       .map((raw) => {
@@ -130,7 +130,7 @@ export default function TrucksSearchClient() {
           return raw;
         }
       })
-      .filter((c): c is Truck['category'] => valid.has(c as Truck['category']));
+      .filter((c): c is Truck['category'] => validCategories.has(c as Truck['category']));
     if (fromUrl.length) {
       setCategories((prev) => {
         const next = { ...prev };
@@ -138,9 +138,29 @@ export default function TrucksSearchClient() {
         return next;
       });
     }
+
+    const validBrands = new Set(brandOptions);
+    const fromBrand = searchParams
+      .getAll('brand')
+      .map((raw) => {
+        try {
+          return decodeURIComponent(raw);
+        } catch {
+          return raw;
+        }
+      })
+      .filter((b) => validBrands.has(b));
+    if (fromBrand.length) {
+      setBrands((prev) => {
+        const next = { ...prev };
+        for (const b of fromBrand) next[b] = true;
+        return next;
+      });
+    }
+
     const cond = searchParams.get('condition');
     if (cond === 'Neu' || cond === 'Gebraucht') setCondition(cond);
-  }, [searchParams, categoryOptions]);
+  }, [searchParams, categoryOptions, brandOptions]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

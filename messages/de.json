@@ -58,6 +58,10 @@
     "pkwSubtitle": "Personenwagen, nicht im LKW-Katalog",
     "allPkw": "Alle PKW",
     "allPkwCta": "Alle PKW ansehen",
+    "brandStripTrucks": "Marken · LKW",
+    "brandStripCars": "Marken · PKW",
+    "brandStripTrucksAria": "LKW nach Marke filtern",
+    "brandStripCarsAria": "PKW nach Marke filtern",
     "value1": "Zertifizierte Gebrauchtfahrzeuge mit Garantie",
     "value2": "Einfache & sichere Kaufabwicklung über WhatsApp",
     "value3": "Unterstützung bei Export und Überführung",
@@ -146,7 +150,9 @@
     "count": "Fahrzeuge (PKW)",
     "linkTrucks": "Zu den LKW & Nutzfahrzeugen",
     "badge": "PKW",
-    "price": "Preis"
+    "price": "Preis",
+    "brandFilter": "Marken",
+    "brandFilterAria": "PKW nach Marke filtern"
   },
   "Contact": {
     "title": "Kontakt",

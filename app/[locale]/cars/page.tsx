@@ -6,6 +6,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { cars } from '@/lib/mock-data';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedCar } from '@/lib/vehicle-i18n';
+import BrandIconRow from '@/components/BrandIconRow';
+import { CAR_BRANDS, isKnownCarBrand } from '@/lib/brand-icons';
 
 export async function generateMetadata({
   params,
@@ -20,14 +22,32 @@ export async function generateMetadata({
   };
 }
 
-export default async function CarsPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function CarsPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ brand?: string | string[] }>;
+}) {
   const { locale } = await params;
+  const sp = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations('Cars');
   const tTrucks = await getTranslations('Trucks');
   const tEnum = await getTranslations('VehicleEnums');
   const tCommon = await getTranslations('Common');
   const nl = numberLocale(locale);
+
+  const brandParam = sp.brand;
+  const activeBrand = Array.isArray(brandParam)
+    ? decodeURIComponent(brandParam[0] ?? '')
+    : brandParam
+      ? decodeURIComponent(brandParam)
+      : undefined;
+  const filteredCars =
+    activeBrand && isKnownCarBrand(activeBrand)
+      ? cars.filter((car) => car.brand === activeBrand)
+      : cars;
 
   const label = (group: 'bodyType' | 'fuel', value: string) =>
     tEnum(`${group}.${value}` as 'bodyType.Limousine');
@@ -48,9 +68,25 @@ export default async function CarsPage({ params }: { params: Promise<{ locale: s
       </div>
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mb-8">
+          <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-slate-500">{t('brandFilter')}</p>
+          <BrandIconRow
+            id="brand-filter"
+            brands={CAR_BRANDS}
+            basePath="/cars"
+            hash="#brand-filter"
+            activeBrand={activeBrand && isKnownCarBrand(activeBrand) ? activeBrand : undefined}
+            tone="emerald"
+            ariaLabel={t('brandFilterAria')}
+          />
+        </div>
+
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-6">
           <p className="text-sm font-black uppercase tracking-widest text-slate-500">
-            <span className="text-slate-900">{cars.length}</span> {t('count')}
+            <span className="text-slate-900">{filteredCars.length}</span> {t('count')}
+            {activeBrand && isKnownCarBrand(activeBrand) ? (
+              <span className="ms-2 text-emerald-700">· {activeBrand}</span>
+            ) : null}
           </p>
           <Link
             href="/trucks"
@@ -62,7 +98,7 @@ export default async function CarsPage({ params }: { params: Promise<{ locale: s
 
         <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {await Promise.all(
-            cars.map(async (car) => {
+            filteredCars.map(async (car) => {
               const copy = await getLocalizedCar(locale, car);
               const condLabel = car.condition === 'Neu' ? tTrucks('new') : tTrucks('used');
               return (

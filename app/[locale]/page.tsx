@@ -10,6 +10,7 @@ import HeroSlider from '@/components/HeroSlider';
 import HeroTextAnimation from '@/components/HeroTextAnimation';
 import HomeCategoryStrip from '@/components/HomeCategoryStrip';
 import HomeHighlightCards from '@/components/HomeHighlightCards';
+import HomeBrandIcons from '@/components/HomeBrandIcons';
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -67,6 +68,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               {t('allTrucks')} <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
+
+          <HomeBrandIcons kind="trucks" />
 
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
             {featuredTruckRows.map(({ truck, copy }) => (
@@ -148,6 +151,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               {t('allPkw')} <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
+
+          <HomeBrandIcons kind="cars" />
 
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
             {featuredCarRows.map(({ car, copy }) => (

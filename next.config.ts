@@ -40,7 +40,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.truckstore.com',
+        hostname: 'cdn.simpleicons.org',
         port: '',
         pathname: '/**',
       },

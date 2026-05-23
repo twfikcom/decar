@@ -54,6 +54,10 @@
     "pkwSubtitle": "معتمدة وبأسعار واضحة",
     "allPkw": "كل الملاكي",
     "allPkwCta": "عرض كل الملاكي",
+    "brandStripTrucks": "الماركات · شاحنات",
+    "brandStripCars": "الماركات · ملاكي",
+    "brandStripTrucksAria": "تصفية الشاحنات حسب الماركة",
+    "brandStripCarsAria": "تصفية الملاكي حسب الماركة",
     "value1": "ملاكي معتمدة مع ضمان",
     "value2": "شراء آمن وسهل عبر واتساب",
     "value3": "دعم التصدير والنقل",
@@ -142,7 +146,9 @@
     "count": "ملاكي",
     "linkTrucks": "شاحنات النقل",
     "badge": "ملاكي",
-    "price": "السعر"
+    "price": "السعر",
+    "brandFilter": "الماركات",
+    "brandFilterAria": "تصفية الملاكي حسب الماركة"
   },
   "Contact": {
     "title": "اتصل بنا",
