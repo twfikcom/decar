@@ -66,7 +66,10 @@ async function fetchWp<T>(path: string, locale: string): Promise<T | null> {
   const url = `${base}/wp-json/lowe-trucks/v1/${path}${path.includes('?') ? '&' : '?'}lang=${lang}`;
 
   try {
-    const res = await fetch(url, fetchOptions());
+    const res = await fetch(url, {
+      ...fetchOptions(),
+      signal: AbortSignal.timeout(15000),
+    });
     if (!res.ok) return null;
     return (await res.json()) as T;
   } catch {

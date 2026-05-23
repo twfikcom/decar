@@ -1,12 +1,21 @@
 import type { Metadata } from 'next';
+import { Inter, Space_Grotesk, Noto_Sans_Arabic } from 'next/font/google';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HomeLoader from '@/components/HomeLoader';
-import DocumentLang from '@/components/DocumentLang';
 import { routing } from '@/i18n/routing';
+import '../globals.css';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const space = Space_Grotesk({ subsets: ['latin'], variable: '--font-heading' });
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ['arabic'],
+  variable: '--font-arabic',
+  weight: ['400', '600', '700'],
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -39,17 +48,22 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   const isRtl = locale === 'ar';
-  const contentClass = isRtl ? 'font-[family-name:var(--font-arabic),sans-serif]' : 'font-sans';
+  const htmlClass = `${inter.variable} ${space.variable} ${notoArabic.variable} scroll-smooth`;
+  const bodyClass = [
+    'flex min-h-screen flex-col text-zinc-900 bg-zinc-100 antialiased selection:bg-orange-500 selection:text-white',
+    isRtl ? 'font-[family-name:var(--font-arabic),sans-serif]' : 'font-sans',
+  ].join(' ');
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <DocumentLang />
-      <div className={contentClass}>
-        <HomeLoader />
-        <Navbar />
-        <main className="flex-1 overflow-x-hidden">{children}</main>
-        <Footer />
-      </div>
-    </NextIntlClientProvider>
+    <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className={htmlClass} suppressHydrationWarning>
+      <body className={bodyClass} suppressHydrationWarning>
+        <NextIntlClientProvider messages={messages}>
+          <HomeLoader />
+          <Navbar />
+          <main className="flex-1 overflow-x-hidden">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

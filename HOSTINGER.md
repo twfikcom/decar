@@ -31,7 +31,8 @@
 | **Framework** | Next.js (يُكتشف تلقائياً) |
 | **Output directory** | `.next` |
 
-> لا تستخدم `next export` — الموقع يحتاج SSR (صفحات ديناميكية + WordPress API).
+> لا تستخدم `next export` — الموقع يحتاج SSR (صفحات ديناميكية + WordPress API).  
+> **لا تستخدم** `output: standalone` — Hostinger يعمل مع `next start` فقط.
 
 ---
 

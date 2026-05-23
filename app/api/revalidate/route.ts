@@ -1,8 +1,6 @@
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { WP_INVENTORY_CACHE_TAG } from '@/lib/wordpress-api';
-
-const INVENTORY_PATHS = ['/', '/cars', '/trucks', '/new-arrivals'];
 
 export async function POST(request: NextRequest) {
   const secret = process.env.REVALIDATE_SECRET;
@@ -20,18 +18,6 @@ export async function POST(request: NextRequest) {
   }
 
   revalidateTag(WP_INVENTORY_CACHE_TAG);
-
-  for (const path of INVENTORY_PATHS) {
-    revalidatePath(path, 'layout');
-    revalidatePath(path, 'page');
-  }
-
-  revalidatePath('/[locale]', 'layout');
-  revalidatePath('/[locale]/cars', 'page');
-  revalidatePath('/[locale]/trucks', 'page');
-  revalidatePath('/[locale]/new-arrivals', 'page');
-  revalidatePath('/[locale]/cars/[id]', 'page');
-  revalidatePath('/[locale]/trucks/[id]', 'page');
 
   return NextResponse.json({
     ok: true,
