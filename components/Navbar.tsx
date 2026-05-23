@@ -41,7 +41,7 @@ export default function Navbar() {
               <Phone className="w-3.5 h-3.5 text-red-600" />
               +49 162 5330280
             </a>
-            <a href="mailto:info@löwetrucks.de" className="hover:text-white transition-colors duration-200">
+            <a href="mailto:info@xn--lwetrucks-07a.de" className="hover:text-white transition-colors duration-200">
               info@löwetrucks.de
             </a>
           </div>
