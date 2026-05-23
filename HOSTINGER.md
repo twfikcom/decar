@@ -71,7 +71,17 @@ REVALIDATE_SECRET=نفس-القيمة-في-WordPress-Next.js-Sync
 
 ### امسح الكاش
 - من hPanel: **Cache Manager** أو **LiteSpeed Cache** → **Purge All**
-- أو عطّل الكاش لموقع Node.js (Next.js لا يعمل جيداً مع كاش HTML قديم)
+- **عطّل** Page Cache / LiteSpeed لموقع Node.js — Next.js لا يعمل مع كاش HTML قديم
+- بعد كل نشر: Purge All ثم افتح في نافذة خاصة
+
+### روابط اللغات (بعد آخر تحديث)
+| اللغة | الرابط |
+|--------|--------|
+| Deutsch | `https://löwetrucks.de/de` |
+| English | `https://löwetrucks.de/en` |
+| العربية | `https://löwetrucks.de/ar` |
+
+`/` يُوجّه تلقائياً إلى `/de`
 
 ### تحقق من الموقع
 - افتح `https://löwetrucks.de` في **نافذة خاصة**
