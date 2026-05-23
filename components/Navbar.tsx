@@ -37,9 +37,9 @@ export default function Navbar() {
             </span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="tel:+201027266627" className="flex items-center gap-2 hover:text-white transition-colors duration-200">
+            <a href="tel:+491625330280" className="flex items-center gap-2 hover:text-white transition-colors duration-200">
               <Phone className="w-3.5 h-3.5 text-red-600" />
-              +20 102 726 6627
+              +49 162 5330280
             </a>
             <a href="mailto:info@löwetrucks.de" className="hover:text-white transition-colors duration-200">
               info@löwetrucks.de
@@ -146,8 +146,8 @@ export default function Navbar() {
                 <span className="flex items-center gap-3 text-sm font-bold text-zinc-400 uppercase tracking-widest">
                   <Clock className="w-4 h-4 text-red-600" /> Mo-Fr: 08:00 - 18:00
                 </span>
-                <a href="tel:+201027266627" className="flex items-center gap-3 text-sm font-bold text-zinc-400 uppercase tracking-widest">
-                  <Phone className="w-4 h-4 text-red-600" /> +20 102 726 6627
+                <a href="tel:+491625330280" className="flex items-center gap-3 text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                  <Phone className="w-4 h-4 text-red-600" /> +49 162 5330280
                 </a>
                 <a
                   href="https://wa.me/491625330280"

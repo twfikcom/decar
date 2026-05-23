@@ -208,11 +208,11 @@ export default async function CarDetailPage({
                 </Link>
                 <div className="border-t border-slate-100 pt-6 text-center">
                   <a
-                    href="tel:+201027266627"
+                    href="tel:+491625330280"
                     className="inline-flex items-center gap-2 font-black text-emerald-700 transition hover:text-emerald-600"
                   >
                     <Phone className="h-6 w-6" aria-hidden />
-                    +20 102 726 6627
+                    +49 162 5330280
                   </a>
                 </div>
               </div>

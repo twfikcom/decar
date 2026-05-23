@@ -195,10 +195,10 @@ export default async function TruckDetailPage({
 
                 <div className="border-t-2 border-zinc-100 pt-6 text-center">
                   <a
-                    href="tel:+201027266627"
+                    href="tel:+491625330280"
                     className="inline-flex items-center gap-3 text-xl font-black text-red-600 transition-colors hover:text-orange-600"
                   >
-                    <Phone className="h-6 w-6" /> +20 102 726 6627
+                    <Phone className="h-6 w-6" /> +49 162 5330280
                   </a>
                 </div>
               </div>

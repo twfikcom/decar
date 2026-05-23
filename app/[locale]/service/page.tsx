@@ -95,11 +95,11 @@ export default async function ServicePage({ params }: { params: Promise<{ locale
           <p className="mx-auto mt-3 max-w-xl text-sm font-medium text-zinc-400">{t('ctaText')}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="tel:+201027266627"
+              href="tel:+491625330280"
               className="inline-flex items-center gap-2 rounded-xl border-2 border-white/20 bg-white/10 px-6 py-3 text-sm font-black uppercase tracking-widest transition hover:bg-white hover:text-zinc-900"
             >
               <Phone className="h-5 w-5" aria-hidden />
-              +20 102 726 6627
+              +49 162 5330280
             </a>
             <a
               href="https://wa.me/491625330280"
