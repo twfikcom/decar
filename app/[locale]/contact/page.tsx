@@ -34,7 +34,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <h2 className="mb-4 text-2xl font-black uppercase tracking-widest text-black">{t('fastTitle')}</h2>
             <p className="mb-6 text-lg font-bold text-zinc-600">{t('fastText')}</p>
             <a
-              href="https://wa.me/201027266627"
+              href="https://wa.me/491625330280"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-b from-[#25D366] to-[#1da851] px-10 py-5 text-xl font-black uppercase tracking-widest text-white shadow-[0_8px_0_0_#128c3e] transition-all hover:translate-y-[4px] hover:shadow-[0_4px_0_0_#128c3e] active:translate-y-[8px] active:shadow-transparent"

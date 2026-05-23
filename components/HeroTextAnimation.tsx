@@ -92,7 +92,7 @@ export default function HeroTextAnimation() {
           {t('ctaSearch')}
         </Link>
         <a 
-          href="https://wa.me/201027266627" 
+          href="https://wa.me/491625330280" 
           target="_blank" rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-3 bg-zinc-900 border-2 border-zinc-700 hover:border-orange-500 hover:bg-black text-white font-black px-10 py-5 rounded-xl transition-all text-xl uppercase tracking-wider shadow-[0_8px_0_0_#27272a] hover:translate-y-[4px] active:shadow-none active:translate-y-[8px]"
         >

@@ -95,7 +95,7 @@ export default function Navbar() {
               <div className="hidden items-center gap-2 lg:flex xl:gap-2.5">
                 <LanguageSwitcher />
                 <a
-                  href="https://wa.me/201027266627"
+                  href="https://wa.me/491625330280"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-black px-3 py-1.5 text-[11px] font-black uppercase tracking-wider text-white shadow-[0_4px_0_0_#18181b] transition-all hover:translate-y-[2px] hover:shadow-[0_2px_0_0_#18181b] active:translate-y-[4px] active:shadow-none xl:px-4 xl:py-2 xl:text-xs"
@@ -150,7 +150,7 @@ export default function Navbar() {
                   <Phone className="w-4 h-4 text-red-600" /> +20 102 726 6627
                 </a>
                 <a
-                  href="https://wa.me/201027266627"
+                  href="https://wa.me/491625330280"
                   target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 bg-gradient-to-b from-orange-500 to-red-600 text-white px-6 py-4 rounded-xl text-lg font-black uppercase tracking-widest shadow-[0_4px_0_0_#7f1d1d] active:shadow-transparent active:translate-y-[4px] transition-all mt-4"
                 >

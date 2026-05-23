@@ -52,7 +52,7 @@ export default async function TruckDetailPage({
   }).format(truck.price);
 
   const whatsappMessage = encodeURIComponent(t('whatsappPrefill', { title: copy.title, price: priceStr }));
-  const whatsappLink = `https://wa.me/201027266627?text=${whatsappMessage}`;
+  const whatsappLink = `https://wa.me/491625330280?text=${whatsappMessage}`;
 
   const condLabel = truck.condition === 'Neu' ? tTrucks('new') : tTrucks('used');
   const categoryLabel = tEnum(`truckCategory.${truck.category}` as 'truckCategory.Sattelzugmaschine');

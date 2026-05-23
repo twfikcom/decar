@@ -102,7 +102,7 @@ export default async function ServicePage({ params }: { params: Promise<{ locale
               +20 102 726 6627
             </a>
             <a
-              href="https://wa.me/201027266627"
+              href="https://wa.me/491625330280"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-black uppercase tracking-widest text-white shadow-[0_4px_0_0_#166534] transition hover:brightness-110 active:translate-y-0.5 active:shadow-none"

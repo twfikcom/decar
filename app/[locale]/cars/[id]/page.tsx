@@ -53,7 +53,7 @@ export default async function CarDetailPage({
   }).format(car.price);
 
   const whatsappMessage = encodeURIComponent(t('whatsappPrefill', { title: copy.title, price: priceStr }));
-  const whatsappLink = `https://wa.me/201027266627?text=${whatsappMessage}`;
+  const whatsappLink = `https://wa.me/491625330280?text=${whatsappMessage}`;
 
   const bodyLabel = (v: string) => tEnum(`bodyType.${v}` as 'bodyType.Limousine');
   const fuelLabel = (v: string) => tEnum(`fuel.${v}` as 'fuel.Diesel');
