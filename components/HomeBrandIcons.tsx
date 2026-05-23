@@ -11,7 +11,7 @@ export default async function HomeBrandIcons({ kind }: HomeBrandIconsProps) {
   const isTrucks = kind === 'trucks';
 
   return (
-    <div className="mb-10 md:mb-12">
+    <div className="mb-10 w-full md:mb-12">
       <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-zinc-500">
         {isTrucks ? t('brandStripTrucks') : t('brandStripCars')}
       </p>

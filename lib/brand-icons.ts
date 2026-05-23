@@ -1,23 +1,27 @@
+export type BrandIconSource =
+  | { type: 'cdn'; slug: string }
+  | { type: 'mercedes-benz' };
+
 export type BrandConfig = {
   name: string;
-  iconSlug: string;
+  icon: BrandIconSource;
 };
 
-/** Truck brands present in inventory — icon slugs from Simple Icons CDN. */
+/** Truck brands present in inventory. */
 export const TRUCK_BRANDS: BrandConfig[] = [
-  { name: 'Mercedes-Benz', iconSlug: 'mercedes' },
-  { name: 'Volvo', iconSlug: 'volvo' },
-  { name: 'Scania', iconSlug: 'scania' },
-  { name: 'MAN', iconSlug: 'man' },
-  { name: 'Ford', iconSlug: 'ford' },
+  { name: 'Mercedes-Benz', icon: { type: 'mercedes-benz' } },
+  { name: 'Volvo', icon: { type: 'cdn', slug: 'volvo' } },
+  { name: 'Scania', icon: { type: 'cdn', slug: 'scania' } },
+  { name: 'MAN', icon: { type: 'cdn', slug: 'man' } },
+  { name: 'Ford', icon: { type: 'cdn', slug: 'ford' } },
 ];
 
 /** Car brands present in inventory. */
 export const CAR_BRANDS: BrandConfig[] = [
-  { name: 'BMW', iconSlug: 'bmw' },
-  { name: 'Mercedes-Benz', iconSlug: 'mercedes' },
-  { name: 'Volkswagen', iconSlug: 'volkswagen' },
-  { name: 'Audi', iconSlug: 'audi' },
+  { name: 'BMW', icon: { type: 'cdn', slug: 'bmw' } },
+  { name: 'Mercedes-Benz', icon: { type: 'mercedes-benz' } },
+  { name: 'Volkswagen', icon: { type: 'cdn', slug: 'volkswagen' } },
+  { name: 'Audi', icon: { type: 'cdn', slug: 'audi' } },
 ];
 
 export function brandIconUrl(slug: string, color = '111827'): string {
