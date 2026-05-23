@@ -1,12 +1,14 @@
 import { Suspense } from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
+import { getTrucks } from '@/lib/products';
 import TrucksSearchClient from './TrucksSearchClient';
 
 export default async function TrucksPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'Common' });
+  const trucks = await getTrucks(locale);
 
   return (
     <Suspense
@@ -16,7 +18,7 @@ export default async function TrucksPage({ params }: { params: Promise<{ locale:
         </div>
       }
     >
-      <TrucksSearchClient />
+      <TrucksSearchClient trucks={trucks} />
     </Suspense>
   );
 }

@@ -44,6 +44,18 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'admin.xn--lwetrucks-57a.de',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'xn--lwetrucks-57a.de',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   output: 'standalone',
