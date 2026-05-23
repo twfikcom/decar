@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
+import SocialLinks from '@/components/SocialLinks';
 
 export default async function Footer() {
   const t = await getTranslations('Footer');
@@ -26,6 +27,13 @@ export default async function Footer() {
             </Link>
 
             <p className="text-zinc-400 max-w-md text-lg leading-relaxed mb-8 font-medium">{t('tagline')}</p>
+            <SocialLinks
+              labels={{
+                facebook: t('facebook'),
+                instagram: t('instagram'),
+                x: t('x'),
+              }}
+            />
           </div>
 
           <div>
