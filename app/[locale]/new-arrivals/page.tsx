@@ -3,15 +3,16 @@ import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { cars, trucks } from '@/lib/mock-data';
+import { getCars, getTrucks } from '@/lib/products';
 import { getLocalizedCar, getLocalizedTruck } from '@/lib/vehicle-i18n';
 import { numberLocale } from '@/lib/locale-format';
+import type { Car, Truck } from '@/lib/mock-data';
 
 type Entry =
   | { kind: 'car'; id: string; year: number; image: string }
   | { kind: 'truck'; id: string; year: number; image: string };
 
-function buildEntries(): Entry[] {
+function buildEntries(cars: Car[], trucks: Truck[]): Entry[] {
   const c = cars.map(
     (car): Entry => ({
       kind: 'car',
@@ -49,7 +50,8 @@ export default async function NewArrivalsPage({ params }: { params: Promise<{ lo
   setRequestLocale(locale);
   const t = await getTranslations('NewArrivals');
   const nl = numberLocale(locale);
-  const entries = buildEntries();
+  const [cars, trucks] = await Promise.all([getCars(locale), getTrucks(locale)]);
+  const entries = buildEntries(cars, trucks);
 
   const rows = await Promise.all(
     entries.map(async (e) => {

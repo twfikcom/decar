@@ -14,7 +14,7 @@ import {
   X,
 } from 'lucide-react';
 import { useLocale, useTranslations, useMessages } from 'next-intl';
-import { cars, type Car } from '@/lib/mock-data';
+import type { Car } from '@/lib/mock-data';
 import { numberLocale } from '@/lib/locale-format';
 import BrandIconRow from '@/components/BrandIconRow';
 import { CAR_BRANDS } from '@/lib/brand-icons';
@@ -70,7 +70,7 @@ function decodeParam(raw: string): string {
   }
 }
 
-export default function CarsSearchClient() {
+export default function CarsSearchClient({ cars }: { cars: Car[] }) {
   const t = useTranslations('Cars');
   const tf = useTranslations('Trucks');
   const tEnum = useTranslations('VehicleEnums');

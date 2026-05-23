@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { cars } from '@/lib/mock-data';
-import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { ArrowLeft, MessageCircle, Check, Phone, Video, Fuel } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Check, Phone, Fuel } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedCar } from '@/lib/vehicle-i18n';
+import { getCarById } from '@/lib/products';
+import VehicleGallery from '@/components/VehicleGallery';
+import VehicleVideo from '@/components/VehicleVideo';
 
 export async function generateMetadata({
   params,
@@ -14,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; id: string }>;
 }): Promise<Metadata> {
   const { locale, id } = await params;
-  const car = cars.find((c) => c.id === id);
+  const car = await getCarById(locale, id);
   if (!car) return {};
   setRequestLocale(locale);
   const copy = await getLocalizedCar(locale, car);
@@ -32,7 +33,7 @@ export default async function CarDetailPage({
 }) {
   const { locale, id } = await params;
   setRequestLocale(locale);
-  const car = cars.find((c) => c.id === id);
+  const car = await getCarById(locale, id);
 
   if (!car) {
     notFound();
@@ -80,9 +81,15 @@ export default async function CarDetailPage({
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="space-y-10 lg:col-span-2">
             <div className="rounded-3xl border-4 border-slate-200 bg-white p-4 shadow-lg">
-              <div className="relative mb-6 aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-900">
-                <Image src={car.images[0]} alt={copy.title} fill className="object-cover" priority />
-                <div className="absolute left-4 top-4 flex gap-2">
+              <div className="relative">
+                <VehicleGallery
+                  images={car.images}
+                  alt={copy.title}
+                  thumbAlt={(n) => t('thumbImageAlt', { title: copy.title, n })}
+                  activeBorderClass="border-emerald-500"
+                  idleBorderClass="border-slate-200 hover:border-emerald-300"
+                />
+                <div className="pointer-events-none absolute left-4 top-4 flex gap-2">
                   <span className="rounded-lg border border-emerald-400 bg-emerald-600 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-white shadow-lg">
                     {tCars('badge')}
                   </span>
@@ -91,37 +98,16 @@ export default async function CarDetailPage({
                   </span>
                 </div>
               </div>
-              <div className="flex gap-4 overflow-x-auto px-1 pb-2">
-                {car.images.map((img, idx) => (
-                  <div
-                    key={idx}
-                    className={`relative h-24 w-40 shrink-0 overflow-hidden rounded-xl border-4 shadow-sm ${
-                      idx === 0 ? 'border-emerald-500' : 'border-slate-200'
-                    }`}
-                  >
-                    <Image
-                      src={img}
-                      alt={t('thumbImageAlt', { title: copy.title, n: idx + 1 })}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
             </div>
 
-            <div className="rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-lg md:p-12">
-              <h2 className="mb-6 flex items-center gap-3 border-b-4 border-slate-100 pb-4 font-heading text-3xl font-black text-slate-900">
-                <Video className="h-8 w-8 text-emerald-600" aria-hidden />
-                {t('videoTitle')}
-              </h2>
-              <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border-4 border-slate-900 bg-slate-900">
-                <div className="text-center text-slate-500">
-                  <Video className="mx-auto mb-3 h-14 w-14 opacity-40" />
-                  <p className="text-sm font-bold uppercase tracking-widest">{t('videoPlaceholder')}</p>
-                </div>
-              </div>
-            </div>
+            <VehicleVideo
+              videoUrl={car.videoUrl}
+              title={copy.title}
+              heading={t('videoTitle')}
+              placeholder={t('videoPlaceholder')}
+              iconClassName="h-8 w-8 text-emerald-600"
+              frameClassName="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border-4 border-slate-900 bg-slate-900"
+            />
 
             <div className="rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-lg md:p-12">
               <h2 className="mb-4 font-heading text-3xl font-black text-slate-900">{t('description')}</h2>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ArrowRight, CheckCircle, CarFront } from 'lucide-react';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
-import { trucks, cars } from '@/lib/mock-data';
+import { getFeaturedCars, getFeaturedTrucks } from '@/lib/products';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedCar, getLocalizedTruck } from '@/lib/vehicle-i18n';
 import HeroSlider from '@/components/HeroSlider';
@@ -19,8 +19,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const tEnum = await getTranslations('VehicleEnums');
   const tCommon = await getTranslations('Common');
   const nl = numberLocale(locale);
-  const featuredTrucks = trucks.filter((x) => x.featured).slice(0, 3);
-  const featuredCars = cars.filter((c) => c.featured).slice(0, 3);
+  const featuredTrucks = await getFeaturedTrucks(locale, 3);
+  const featuredCars = await getFeaturedCars(locale, 3);
   const featuredTruckRows = await Promise.all(
     featuredTrucks.map(async (truck) => ({
       truck,

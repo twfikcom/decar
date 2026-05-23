@@ -1,16 +1,17 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, getLocale } from 'next-intl/server';
 import { CATEGORY_STRIP_ICON_URLS } from '@/lib/category-strip-icons';
-import { trucks, type Truck } from '@/lib/mock-data';
+import { getTrucks } from '@/lib/products';
+import type { Truck } from '@/lib/mock-data';
 
 type Cat = Truck['category'];
 
-function countCategory(cat: Cat) {
+function countCategory(trucks: Truck[], cat: Cat) {
   return trucks.filter((t) => t.category === cat).length;
 }
 
-function countCondition(c: Truck['condition']) {
+function countCondition(trucks: Truck[], c: Truck['condition']) {
   return trucks.filter((t) => t.condition === c).length;
 }
 
@@ -18,6 +19,8 @@ type StripLabelKey = 'zugmaschinen' | 'aufbau' | 'kipper' | 'kasten' | 'gebrauch
 
 export default async function HomeCategoryStrip() {
   const t = await getTranslations('CategoryStrip');
+  const locale = await getLocale();
+  const trucks = await getTrucks(locale);
 
   const stripItems: {
     href: string;
@@ -28,31 +31,31 @@ export default async function HomeCategoryStrip() {
     {
       href: `/trucks?category=${encodeURIComponent('Sattelzugmaschine')}`,
       labelKey: 'zugmaschinen',
-      count: () => countCategory('Sattelzugmaschine'),
+      count: () => countCategory(trucks, 'Sattelzugmaschine'),
       iconSrc: CATEGORY_STRIP_ICON_URLS.zugmaschinen,
     },
     {
       href: `/trucks?category=${encodeURIComponent('Festaufbau')}`,
       labelKey: 'aufbau',
-      count: () => countCategory('Festaufbau'),
+      count: () => countCategory(trucks, 'Festaufbau'),
       iconSrc: CATEGORY_STRIP_ICON_URLS.aufbau,
     },
     {
       href: `/trucks?category=${encodeURIComponent('Kipper')}`,
       labelKey: 'kipper',
-      count: () => countCategory('Kipper'),
+      count: () => countCategory(trucks, 'Kipper'),
       iconSrc: CATEGORY_STRIP_ICON_URLS.kipper,
     },
     {
       href: `/trucks?category=${encodeURIComponent('Kastenwagen')}`,
       labelKey: 'kasten',
-      count: () => countCategory('Kastenwagen'),
+      count: () => countCategory(trucks, 'Kastenwagen'),
       iconSrc: CATEGORY_STRIP_ICON_URLS.kasten,
     },
     {
       href: '/trucks?condition=Gebraucht',
       labelKey: 'gebraucht',
-      count: () => countCondition('Gebraucht'),
+      count: () => countCondition(trucks, 'Gebraucht'),
       iconSrc: CATEGORY_STRIP_ICON_URLS.gebraucht,
     },
     {

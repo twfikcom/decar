@@ -13,7 +13,7 @@ import {
   Truck as TruckIcon,
 } from 'lucide-react';
 import { useLocale, useTranslations, useMessages } from 'next-intl';
-import { trucks, type Truck } from '@/lib/mock-data';
+import type { Truck } from '@/lib/mock-data';
 import { numberLocale } from '@/lib/locale-format';
 
 const SORT_IDS = [
@@ -59,7 +59,7 @@ function sortList(list: Truck[], sort: SortId): Truck[] {
   }
 }
 
-export default function TrucksSearchClient() {
+export default function TrucksSearchClient({ trucks }: { trucks: Truck[] }) {
   const t = useTranslations('Trucks');
   const tEnum = useTranslations('VehicleEnums');
   const tCommon = useTranslations('Common');

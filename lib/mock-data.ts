@@ -14,6 +14,7 @@ export type Car = {
   images: string[];
   description: string;
   features: string[];
+  videoUrl?: string;
   featured?: boolean;
 };
 
@@ -112,6 +113,7 @@ export type Truck = {
   images: string[];
   description: string;
   features: string[];
+  videoUrl?: string;
   featured?: boolean;
 };
 
