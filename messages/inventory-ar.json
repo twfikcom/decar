@@ -1,0 +1,58 @@
+{
+  "cars": {
+    "c-001": {
+      "title": "BMW 320d Touring M Sport",
+      "description": "سيارة 320d Touring بحالة ممتازة مع حزمة M Sport ونظام ملاحة احترافي ومصابيح LED. مثالية للعائلة والأعمال.",
+      "features": [
+        "حزمة M Sport",
+        "مصابيح LED",
+        "ملاحة احترافية",
+        "كاميرا خلفية",
+        "تدفئة مقاعد",
+        "حساسات أمامية وخلفية"
+      ]
+    },
+    "c-002": {
+      "title": "Mercedes-Benz GLC 300 4MATIC",
+      "description": "سيارة SUV مريحة بدفع رباعي 4MATIC ونظام MBUX وصندوق خلفي واسع. مناسبة للاستخدام اليومي والسفر.",
+      "features": ["4MATIC", "MBUX", "مساعد حفظ المسار", "دخول بدون مفتاح", "سقف بانوراما", "تجهيز سحب"]
+    },
+    "c-003": {
+      "title": "VW Golf 8 GTI",
+      "description": "GTI رياضية بناقل DSG ونظام IQ.Light ولوحة قيادة رقمية، مسافة قليلة وسجل صيانة كامل.",
+      "features": ["DSG", "IQ.Light", "لوحة رقمية Pro", "تثبيت سرعة تكيفي", "DCC", "حزمة شتاء"]
+    },
+    "c-004": {
+      "title": "Audi A5 Sportback 40 TDI quattro",
+      "description": "Sportback أنيقة بدفع quattro ومصابيح Matrix LED وصوت Bang & Olufsen.",
+      "features": ["quattro", "Matrix LED", "صوت B&O", "Virtual Cockpit", "طقم S line خارجي"]
+    }
+  },
+  "trucks": {
+    "t-001": {
+      "title": "Mercedes-Benz Actros 1845 LS GigaSpace",
+      "description": "مرسيدس أكتروس بحالة ممتازة مع مقصورة GigaSpace. مثالية للنقل الطويل. سجل صيانة لدى الوكيل.",
+      "features": ["تكييف", "تدفئة وقوف", "مبطئ/رتاردير", "ملاحة", "تثبيت سرعة تكيفي", "ثلاجة"]
+    },
+    "t-002": {
+      "title": "Volvo FH 500 Globetrotter XL",
+      "description": "فولفو FH 500 قوية بمقصورة Globetrotter XL الواسعة. راحة قصوى للسائق واستهلاك وقود ممتاز.",
+      "features": ["ناقل I-Shift", "تكييف وقوف", "تعليق هوائي كامل", "مساعد المسار", "مصابيح LED", "جنوط ألومنيوم"]
+    },
+    "t-003": {
+      "title": "Scania R 450 Highline",
+      "description": "سكانيا R 450 شبه جديدة بمقصورة Highline. جودة تصنيع عالية ومحرك 13 لتر موفر.",
+      "features": ["Opticruise", "مبطئ", "مقاعد جلد", "نظام ترفيه فاخر", "زينون"]
+    },
+    "t-004": {
+      "title": "MAN TGX 18.510 XXL",
+      "description": "مان TGX موثوقة بمقصورة XXL كبيرة. مثالية للرحلات الطويلة ومهام النقل الثقيلة.",
+      "features": ["MAN BrakeMatic", "ثلاجة", "تدفئة وقوف", "سريران", "قفل تفاضلي"]
+    },
+    "t-005": {
+      "title": "Ford F-Max 500 Mega",
+      "description": "فورد F-Max المبتكرة تقدم قيمة ممتازة. مقصورة واسعة وأنظمة مساعدة حديثة.",
+      "features": ["محرك Ecotorq", "ConnecTruck", "تكييف أوتوماتيك", "تثبيت سرعة تكيفي"]
+    }
+  }
+}

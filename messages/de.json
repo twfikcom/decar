@@ -1,0 +1,307 @@
+{
+  "Meta": {
+    "title": "Löwe Trucks | Nutzfahrzeuge & PKW",
+    "description": "Premium LKW, Nutzfahrzeuge und Gebrauchtwagen in Deutschland. Service, Wartung und schnelle Beratung."
+  },
+  "Nav": {
+    "companyLegal": "RheinLöwe Nutzfahrzeuge GmbH",
+    "home": "Startseite",
+    "trucks": "LKW",
+    "cars": "PKW",
+    "service": "Wartung",
+    "contact": "Kontakt",
+    "about": "Über uns"
+  },
+  "Lang": {
+    "de": "DE",
+    "en": "EN",
+    "ar": "AR"
+  },
+  "Footer": {
+    "logoAlt": "Löwe Trucks Logo",
+    "tagline": "Wir sind Ihr zuverlässiger Partner in Deutschland für den An- und Verkauf von Premium Nutzfahrzeugen und LKW. Schnelle Bearbeitung, transparente Historien.",
+    "navTitle": "Navigation",
+    "legalTitle": "Rechtliches",
+    "home": "Startseite",
+    "trucks": "LKW & Nutzfahrzeuge",
+    "cars": "PKW / Gebrauchtwagen",
+    "service": "Wartung",
+    "contact": "Kontakt",
+    "about": "Über uns",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "agb": "AGB",
+    "copyright": "RheinLöwe Nutzfahrzeuge GmbH. Alle Rechte vorbehalten."
+  },
+  "Hero": {
+    "badge": "Die Nummer 1 in Deutschland",
+    "titleLine1": "Ihr Spezialist für",
+    "titleHighlight": "Premium LKW",
+    "subtitle": "Gebrauchte und neue Sattelzugmaschinen in Top-Zustand. Transparente Gutachten & schnelle Kaufabwicklung via WhatsApp.",
+    "ctaSearch": "Fahrzeuge suchen",
+    "ctaWhatsapp": "WhatsApp Beratung",
+    "bgAlt": "LKW-Flotte im Hintergrund"
+  },
+  "Home": {
+    "trucksLine1": "Top",
+    "trucksLine2": "Angebote",
+    "trucksLine3": "· LKW",
+    "trucksSubtitle": "Nutzfahrzeuge, getrennt von unserem PKW-Bestand",
+    "allTrucks": "Alle LKW",
+    "allTrucksCta": "Alle LKWs ansehen",
+    "pkwBadge": "PKW",
+    "pkwTitle": "Gebrauchtwagen",
+    "pkwTitleAccent": "PKW",
+    "pkwSubtitle": "Personenwagen, nicht im LKW-Katalog",
+    "allPkw": "Alle PKW",
+    "allPkwCta": "Alle PKW ansehen",
+    "value1": "Zertifizierte Gebrauchtfahrzeuge mit Garantie",
+    "value2": "Einfache & sichere Kaufabwicklung über WhatsApp",
+    "value3": "Unterstützung bei Export und Überführung",
+    "valueHeading": "Europas",
+    "valueHighlight": "Premium",
+    "valueRest": "Partner",
+    "valueBlockImageAlt": "Nutzfahrzeug in dramatischer Beleuchtung"
+  },
+  "HomeHighlight": {
+    "warrantyBar": "Garantie",
+    "warrantyDesc": "Prüfberichte, lückenlose Historie und optionale Garantiepakete, damit Sie Nutzfahrzeuge in Europa mit gutem Gefühl kaufen.",
+    "newArrivalsBar": "Neu eingetroffen: {count} Fahrzeuge",
+    "newArrivalsDesc": "Frisch im Bestand: LKW und PKW, sortiert nach Baujahr. Zur Liste und direkt ins Fahrzeug.",
+    "maintenanceBar": "Wartung & Service",
+    "maintenanceDesc": "Inspektion, Reparatur und Wartung für gängige Nutzfahrzeugmarken aus einer Hand in Deutschland.",
+    "newArrivalsImageAlt": "LKW nebeneinander",
+    "maintenanceImageAlt": "Techniker in der Werkstatt"
+  },
+  "NewArrivals": {
+    "eyebrow": "Bestand",
+    "title": "Neu eingetroffen",
+    "titleAccent": "LKW & PKW",
+    "subtitle": "Die neuesten Fahrzeuge im Katalog: LKW und PKW gemeinsam, sortiert nach Baujahr (neueste zuerst).",
+    "badgeTruck": "LKW",
+    "badgeCar": "PKW",
+    "hint": "Über die LKW- und PKW-Suche filtern Sie weiter und finden mehr Fahrzeuge.",
+    "linkTrucks": "Alle LKW",
+    "linkCars": "Alle PKW"
+  },
+  "CategoryStrip": {
+    "heading": "Finden Sie hier Ihren neuen gebrauchten Lkw",
+    "zugmaschinen": "Sattelzugmaschinen",
+    "aufbau": "LKW mit Aufbau",
+    "kipper": "Kipper",
+    "kasten": "Wechselrahmen/ Fahrgestelle",
+    "gebraucht": "Anhänger/ Sattelauflieger",
+    "search": "Letzte Suchen"
+  },
+  "Trucks": {
+    "breadcrumbHome": "Home",
+    "breadcrumbSearch": "Suche",
+    "title": "LKW & Nutzfahrzeuge",
+    "subtitle": "Filtern Sie nach Marke, Typ und Budget. Suchergebnis in Echtzeit.",
+    "catalogView": "Katalogansicht · LKW",
+    "linkPkw": "Zu PKW & Gebrauchtwagen",
+    "filterTitle": "Filter",
+    "filterOpen": "Filter & Suche",
+    "filterClose": "Filter schließen",
+    "quickSearch": "Schnellsuche",
+    "quickSearchPh": "Marke, Modell, Stichwort…",
+    "brand": "Marke",
+    "vehicleType": "Fahrzeugtyp",
+    "condition": "Zustand",
+    "all": "Alle",
+    "new": "Neu",
+    "used": "Gebraucht",
+    "priceEur": "Preis (EUR)",
+    "priceMin": "Min.",
+    "priceMax": "Max.",
+    "mileageMax": "Max. Kilometerstand",
+    "mileagePh": "z. B. 300000",
+    "filterReset": "Filter zurücksetzen",
+    "sort": "Sortierung",
+    "foundOne": "Fahrzeug gefunden",
+    "foundMany": "Fahrzeuge gefunden",
+    "noResults": "Keine Fahrzeuge gefunden",
+    "noResultsHint": "Bitte Filter lockern oder Suchbegriff ändern.",
+    "showAll": "Alle anzeigen",
+    "year": "Baujahr",
+    "mileage": "Kilometer",
+    "power": "Leistung",
+    "brandLabel": "Marke",
+    "price": "Preis",
+    "sortPriceAsc": "Preis aufsteigend",
+    "sortPriceDesc": "Preis absteigend",
+    "sortYearDesc": "Baujahr (neueste zuerst)",
+    "sortYearAsc": "Baujahr (älteste zuerst)",
+    "sortMileageAsc": "Kilometerstand aufsteigend",
+    "sortMileageDesc": "Kilometerstand absteigend"
+  },
+  "Cars": {
+    "eyebrow": "Personenkraftwagen",
+    "titleLine": "PKW &",
+    "titleAccent": "Gebrauchtwagen",
+    "subtitle": "Unser PKW-Bestand ist klar vom Nutzfahrzeug-Angebot getrennt: gleiche Seriosität, andere Fahrzeugklasse.",
+    "count": "Fahrzeuge (PKW)",
+    "linkTrucks": "Zu den LKW & Nutzfahrzeugen",
+    "badge": "PKW",
+    "price": "Preis"
+  },
+  "Contact": {
+    "title": "Kontakt",
+    "fastTitle": "Schnellste Antwort",
+    "fastText": "Nutzen Sie unseren WhatsApp Service für eine direkte Beratung.",
+    "whatsappBtn": "WhatsApp Starten",
+    "orEmail": "Oder per E-Mail",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail Adresse",
+    "message": "Nachricht",
+    "submit": "Nachricht senden"
+  },
+  "Service": {
+    "heroEyebrow": "Werkstatt & Nutzfahrzeuge",
+    "heroTitle": "Wartung",
+    "heroTitleAccent": "& Nutzfahrzeuge",
+    "heroText": "Wir kümmern uns um Ihre Trucks, von der Planwartung bis zur komplexen Reparatur. Alle gängigen Nutzfahrzeug-Marken, klare Absprachen, schnelle Durchlaufzeiten.",
+    "sectionTitle": "Unsere Leistungen",
+    "sectionText": "Ausgewählte Werkstattleistungen für LKW, Sattelzugmaschinen und Nutzfahrzeuge. Sprechen Sie uns für individuelle Pakete an.",
+    "ctaTitle": "Termin oder Beratung?",
+    "ctaText": "Rufen Sie uns an oder schreiben Sie uns per WhatsApp. Wir melden uns schnell mit einem Vorschlag für Ersatzteile und Zeiten.",
+    "ctaForm": "Kontaktformular",
+    "items": [
+      {
+        "title": "Inspektion & Check",
+        "text": "Sicherheits- und Funktionscheck nach Herstellervorgaben, Licht, Bremsen, Auflieger-Kupplung und Fahrwerk."
+      },
+      {
+        "title": "Motor & Antrieb",
+        "text": "Öl- und Filterservice, Zahnriemen/Steuerkette nach Intervall, Achsen und Differential, ausgelegt für hohe Laufleistung."
+      },
+      {
+        "title": "Bremsen & Retarder",
+        "text": "Scheiben und Beläge, Druckluftbremsanlage, Intarder/Retarder-Prüfung und Einstellung."
+      },
+      {
+        "title": "Diagnose & Elektronik",
+        "text": "Herstellernah OBD, Fehlerspeicher auslesen, Sensorik, AdBlue-System und Assistenzsysteme."
+      },
+      {
+        "title": "Klima & Standheizung",
+        "text": "Kältemittel-Service, Verdichter-Check, Standheizung/Standklima Wartung vor der kalten Jahreszeit."
+      },
+      {
+        "title": "HU / AU Vorbereitung",
+        "text": "Vorab-Prüfung, Mängelbeseitigung und Terminbegleitung, damit Ihr LKW die Prüfung souverän besteht."
+      },
+      {
+        "title": "Planwartung Flotte",
+        "text": "Wartungspläne nach Kilometerstand und Einsatzprofil: weniger Stillstand, planbare Kosten."
+      },
+      {
+        "title": "Reparatur & Instandsetzung",
+        "text": "Mechanik, Hydraulik, Aufbau und Sonderausstattung: transparent kalkuliert mit Ersatzteilqualität."
+      }
+    ]
+  },
+  "TruckDetail": {
+    "back": "Zurück zur Übersicht",
+    "videoTitle": "Fahrzeugvideo",
+    "videoPlaceholder": "Video wird geladen...",
+    "description": "Beschreibung",
+    "featuresTitle": "Ausstattung & Extras",
+    "model": "Modell",
+    "firstReg": "Erstzulassung",
+    "mileage": "Kilometer",
+    "power": "Leistung",
+    "body": "Aufbau",
+    "vat": "MwSt. ausweisbar (19%)",
+    "whatsapp": "WhatsApp Anfrage",
+    "emailRequest": "Kaufanfrage (Email)",
+    "thumbImageAlt": "{title} – Ansicht {n}",
+    "whatsappPrefill": "Hallo TruckMaster, ich interessiere mich für das Fahrzeug: {title} ({price}). Ist der LKW noch verfügbar?"
+  },
+  "CarDetail": {
+    "backList": "Zurück PKW-Übersicht",
+    "linkTrucks": "LKW-Angebot",
+    "videoTitle": "Fahrzeugvideo",
+    "videoPlaceholder": "Video folgt in Kürze",
+    "description": "Beschreibung",
+    "featuresTitle": "Ausstattung",
+    "model": "Modell",
+    "firstReg": "Erstzulassung",
+    "mileage": "Kilometer",
+    "power": "Leistung",
+    "body": "Karosserie",
+    "fuel": "Kraftstoff",
+    "vat": "MwSt. ausweisbar (19%)",
+    "whatsapp": "WhatsApp PKW-Anfrage",
+    "buyRequest": "Kaufanfrage",
+    "thumbImageAlt": "{title} – Bild {n}",
+    "whatsappPrefill": "Hallo, ich interessiere mich für den PKW: {title} ({price}). Ist das Fahrzeug noch verfügbar?"
+  },
+  "About": {
+    "pageTitle": "Über uns",
+    "pageLead": "Firmendaten und Ansprechpartner von RheinLöwe Nutzfahrzeuge GmbH.",
+    "sectionData": "Firmendaten",
+    "labelName": "Name",
+    "labelPosition": "Position",
+    "person1Name": "Moataz Farag",
+    "person1Role": "Gründer, Inhaber und Vorstandsvorsitzender (CEO / Chairman)",
+    "person2Name": "Martine Nakhla",
+    "person2Role": "General Sales & Export Manager (Geschäftsführende Leiterin Vertrieb & Export)",
+    "labelCompanyName": "Firmenname",
+    "companyName": "RheinLöwe Nutzfahrzeuge GmbH",
+    "labelAddress": "Adresse",
+    "addressLine1": "Brinkweg 8",
+    "addressLine2": "59227 Ahlen",
+    "addressLine3": "Deutschland",
+    "labelPlz": "Postleitzahl (PLZ)",
+    "plz": "59227",
+    "labelPhone": "Telefon",
+    "phone1": "+49 162 5340209",
+    "phone2": "+49 162 5330280",
+    "labelLanguages": "Wir sprechen",
+    "languages": "Deutsch, Englisch, Französisch und Arabisch."
+  },
+  "PageMeta": {
+    "aboutTitle": "Über uns | Löwe Trucks",
+    "aboutDescription": "Firmendaten, Adresse und Team von RheinLöwe Nutzfahrzeuge GmbH in Ahlen, Deutschland.",
+    "carsTitle": "PKW & Gebrauchtwagen | Löwe Trucks",
+    "carsDescription": "Gebrauchte und junge Gebrauchtwagen, getrennt von unserem LKW-Angebot.",
+    "serviceTitle": "Wartung | Löwe Trucks",
+    "serviceDescription": "Professionelle LKW-Wartung, Inspektion und Reparatur für Nutzfahrzeuge aller Marken (RheinLöwe Nutzfahrzeuge GmbH).",
+    "newArrivalsTitle": "Neu eingetroffen | Löwe Trucks",
+    "newArrivalsDescription": "Neueste LKW und PKW im Bestand, sortiert nach Baujahr.",
+    "contactTitle": "Kontakt | Löwe Trucks",
+    "contactDescription": "Kontaktieren Sie uns per WhatsApp oder über das Kontaktformular.",
+    "titleSuffix": "| Löwe Trucks"
+  },
+  "VehicleEnums": {
+    "bodyType": {
+      "Limousine": "Limousine",
+      "SUV": "SUV",
+      "Kombi": "Kombi",
+      "Kompakt": "Kompakt",
+      "Coupé": "Coupé"
+    },
+    "fuel": {
+      "Benzin": "Benzin",
+      "Diesel": "Diesel",
+      "Hybrid": "Hybrid",
+      "Elektro": "Elektro"
+    },
+    "truckCategory": {
+      "Sattelzugmaschine": "Sattelzugmaschine",
+      "Festaufbau": "Festaufbau",
+      "Kipper": "Kipper",
+      "Kastenwagen": "Kastenwagen"
+    }
+  },
+  "ServiceCta": {
+    "whatsappLabel": "WhatsApp"
+  },
+  "Common": {
+    "loading": "Laden…",
+    "powerUnit": "PS",
+    "km": "km"
+  }
+}

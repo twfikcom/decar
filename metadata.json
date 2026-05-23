@@ -1,0 +1,8 @@
+{
+  "name": "RheinLöwe Nutzfahrzeuge GmbH",
+  "description": "Ein moderner Marktplatz für LKW und Nutzfahrzeuge in Deutschland.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
