@@ -40,8 +40,9 @@ export default function SocialLinks({ labels }: { labels: SocialLabels }) {
         <a
           key={labelKey}
           href={href}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...(href !== '#'
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
           aria-label={labels[labelKey]}
           className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900 text-zinc-300 transition-all hover:border-orange-500 hover:bg-orange-500 hover:text-white hover:shadow-[0_4px_14px_rgba(249,115,22,0.35)]"
         >
