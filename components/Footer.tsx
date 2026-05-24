@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import SocialLinks from '@/components/SocialLinks';
-import { SITE_LOGO_URL } from '@/lib/site-logo';
+import { SITE_LOGO_URL, SITE_LOGO_FOOTER_IMG_CLASS } from '@/lib/site-logo';
 
 export default async function Footer() {
   const t = await getTranslations('Footer');
@@ -21,7 +21,7 @@ export default async function Footer() {
                   fill
                   unoptimized
                   quality={100}
-                  className="object-contain object-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] [image-rendering:high-quality]"
+                  className={`object-contain object-left [image-rendering:high-quality] ${SITE_LOGO_FOOTER_IMG_CLASS}`}
                   sizes="(max-width: 768px) 480px, 640px"
                 />
               </div>
