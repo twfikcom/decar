@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import SocialLinks from '@/components/SocialLinks';
-import { SITE_LOGO_URL, SITE_LOGO_FOOTER_IMG_CLASS } from '@/lib/site-logo';
+import { SITE_LOGO_URL } from '@/lib/site-logo';
 
 export default async function Footer() {
   const t = await getTranslations('Footer');
@@ -14,16 +14,18 @@ export default async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="mb-6 inline-block">
-              <div className="relative h-12 w-[220px] md:h-14 md:w-[280px] lg:h-16 lg:w-[320px]">
-                <Image
-                  src={SITE_LOGO_URL}
-                  alt={t('logoAlt')}
-                  fill
-                  unoptimized
-                  quality={100}
-                  className={`object-contain object-left [image-rendering:high-quality] ${SITE_LOGO_FOOTER_IMG_CLASS}`}
-                  sizes="(max-width: 768px) 480px, 640px"
-                />
+              <div className="rounded-md border border-zinc-300 bg-white px-4 py-3">
+                <div className="relative h-12 w-[220px] md:h-14 md:w-[280px] lg:h-16 lg:w-[320px]">
+                  <Image
+                    src={SITE_LOGO_URL}
+                    alt={t('logoAlt')}
+                    fill
+                    unoptimized
+                    quality={100}
+                    className="object-contain object-left [image-rendering:high-quality]"
+                    sizes="(max-width: 768px) 480px, 640px"
+                  />
+                </div>
               </div>
             </Link>
 

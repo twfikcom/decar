@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { usePathname } from '@/i18n/navigation';
-import { SITE_LOGO_URL, SITE_LOGO_LOADER_IMG_CLASS } from '@/lib/site-logo';
+import { SITE_LOGO_URL } from '@/lib/site-logo';
 
 export default function HomeLoader() {
   const pathname = usePathname();
@@ -65,7 +65,7 @@ export default function HomeLoader() {
             fill
             unoptimized
             quality={100}
-            className={`object-contain [image-rendering:high-quality] ${SITE_LOGO_LOADER_IMG_CLASS}`}
+            className="object-contain [image-rendering:high-quality]"
             priority
             sizes="(max-width: 768px) 640px, 960px"
           />
