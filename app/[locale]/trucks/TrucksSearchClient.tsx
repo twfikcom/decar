@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import Image from 'next/image';
 import {
   ChevronRight,
@@ -67,6 +67,7 @@ export default function TrucksSearchClient({ trucks }: { trucks: Truck[] }) {
   const tCommon = useTranslations('Common');
   const messages = useMessages();
   const locale = useLocale();
+  const pathname = usePathname();
   const nl = numberLocale(locale);
   const showPrice = showPublicPrices();
   const searchParams = useSearchParams();
@@ -170,6 +171,37 @@ export default function TrucksSearchClient({ trucks }: { trucks: Truck[] }) {
       setSort('year-desc');
     }
   }, [showPrice, sort]);
+
+  /** On narrow screens the filter panel is collapsed; #schnellsuche lives inside it, so the browser scrolls to the wrong place. Open filters then scroll to the anchor. */
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    let cancelled = false;
+    let tid: number | undefined;
+
+    const run = () => {
+      if (tid !== undefined) {
+        window.clearTimeout(tid);
+        tid = undefined;
+      }
+      if (window.location.hash !== '#schnellsuche') return;
+      const narrow = window.matchMedia('(max-width: 1023px)').matches;
+      if (narrow) {
+        setFiltersOpen(true);
+      }
+      tid = window.setTimeout(() => {
+        if (cancelled) return;
+        document.getElementById('schnellsuche')?.scrollIntoView({ block: 'start', behavior: 'auto' });
+      }, narrow ? 150 : 0);
+    };
+
+    run();
+    window.addEventListener('hashchange', run);
+    return () => {
+      cancelled = true;
+      window.removeEventListener('hashchange', run);
+      if (tid) window.clearTimeout(tid);
+    };
+  }, [pathname, searchParams.toString()]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

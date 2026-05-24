@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
@@ -24,17 +23,6 @@ export default async function CarsPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const cars = await getCars(locale);
-  const t = await getTranslations({ locale, namespace: 'Common' });
 
-  return (
-    <Suspense
-      fallback={
-        <div className="flex min-h-screen items-center justify-center bg-slate-50 font-bold uppercase tracking-widest text-slate-500">
-          {t('loading')}
-        </div>
-      }
-    >
-      <CarsSearchClient key={locale} cars={cars} />
-    </Suspense>
-  );
+  return <CarsSearchClient key={locale} cars={cars} />;
 }
