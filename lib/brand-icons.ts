@@ -28,6 +28,9 @@ export function brandIconUrl(slug: string, color = '111827'): string {
   return `https://cdn.simpleicons.org/${slug}/${color}`;
 }
 
+/** Mercedes-Benz mark (PNG on WP admin — clearer than Simple Icons). */
+export const MERCEDES_BRAND_ICON_URL = 'https://admin.xn--lwetrucks-07a.de/pics/mercedes_benz.png';
+
 export function brandFilterHref(basePath: '/trucks' | '/cars', brand: string, hash: string): string {
   return `${basePath}?brand=${encodeURIComponent(brand)}${hash}`;
 }

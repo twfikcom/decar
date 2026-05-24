@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import MercedesBenzIcon from '@/components/icons/MercedesBenzIcon';
 import {
   brandFilterHref,
   brandIconUrl,
+  MERCEDES_BRAND_ICON_URL,
   type BrandConfig,
 } from '@/lib/brand-icons';
 
@@ -26,21 +26,35 @@ function BrandLogo({
   isActive: boolean;
   tone: 'red' | 'emerald';
 }) {
-  const color = isActive ? (tone === 'red' ? 'text-red-600' : 'text-emerald-600') : 'text-zinc-800';
+  const hex = isActive ? (tone === 'red' ? 'DC2626' : '059669') : '111827';
+  const activeGlow =
+    isActive && tone === 'red'
+      ? 'drop-shadow-[0_0_0_2px_rgba(220,38,38,0.35)]'
+      : isActive && tone === 'emerald'
+        ? 'drop-shadow-[0_0_0_2px_rgba(5,150,105,0.4)]'
+        : '';
 
   if (brand.icon.type === 'mercedes-benz') {
-    return <MercedesBenzIcon className={`h-10 w-10 sm:h-12 sm:w-12 ${color}`} />;
+    return (
+      <Image
+        src={MERCEDES_BRAND_ICON_URL}
+        alt=""
+        width={200}
+        height={200}
+        unoptimized
+        className={`h-12 w-auto max-w-[8.75rem] object-contain sm:h-14 sm:max-w-[10.75rem] ${activeGlow}`}
+      />
+    );
   }
 
-  const hex = isActive ? (tone === 'red' ? 'DC2626' : '059669') : '111827';
   return (
     <Image
       src={brandIconUrl(brand.icon.slug, hex)}
       alt=""
-      width={120}
-      height={56}
+      width={140}
+      height={64}
       unoptimized
-      className="h-10 w-auto max-w-[7rem] object-contain sm:h-12 sm:max-w-[8.5rem]"
+      className={`h-12 w-auto max-w-[8.75rem] object-contain sm:h-14 sm:max-w-[10.75rem] ${activeGlow}`}
     />
   );
 }
@@ -87,7 +101,7 @@ export default function BrandIconRow({
                   title={brand.name}
                   aria-label={brand.name}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`group flex min-h-[5.5rem] w-full flex-col items-center justify-center gap-2 rounded-xl border-2 px-3 py-4 transition-all duration-200 sm:min-h-[6.5rem] sm:px-4 ${
+                  className={`group flex min-h-[6.25rem] w-full flex-col items-center justify-center gap-2 rounded-xl border-2 px-3 py-4 transition-all duration-200 sm:min-h-[7.25rem] sm:px-4 ${
                     isActive ? activeBorder : `border-white/80 bg-white/70 ${hoverBorder} hover:-translate-y-0.5`
                   }`}
                 >
