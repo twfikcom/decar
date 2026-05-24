@@ -1,15 +1,9 @@
-/** TruckStore-style category icons (shared across all locales). */
+/** Category strip icons (homepage truck types row). Hosted on WordPress admin — must match next.config `images.remotePatterns`. */
 export const CATEGORY_STRIP_ICON_URLS = {
-  zugmaschinen:
-    'https://www.truckstore.com/_assets/61a59511e2c60f143ce11f5599a9c25a/Images/truck-types/sizeL_Tractor%20units.png',
-  aufbau:
-    'https://twfik.com/tester.png',
-  kipper:
-    'https://www.truckstore.com/_assets/61a59511e2c60f143ce11f5599a9c25a/Images/truck-types/sizeL_Dump%20trucks.png',
-  kasten:
-    'https://www.truckstore.com/_assets/61a59511e2c60f143ce11f5599a9c25a/Images/truck-types/sizeL_Demountable%20bodyChassis.png',
-  allStock:
-    'https://twfik.com/2026-05-22_22-39-28.png',
-  search:
-    'https://www.truckstore.com/_assets/61a59511e2c60f143ce11f5599a9c25a/Images/sizeL_Last_searches.png',
+  zugmaschinen: 'https://admin.xn--lwetrucks-07a.de/pics/1111111111111.webp',
+  aufbau: 'https://admin.xn--lwetrucks-07a.de/pics/1111a.png',
+  kipper: 'https://admin.xn--lwetrucks-07a.de/pics/11111.webp',
+  kasten: 'https://admin.xn--lwetrucks-07a.de/pics/111.webp',
+  allStock: 'https://admin.xn--lwetrucks-07a.de/pics/11.webp',
+  search: 'https://admin.xn--lwetrucks-07a.de/pics/1111111.webp',
 } as const;
