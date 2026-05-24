@@ -1,8 +1,8 @@
 /**
- * Logo file lives on the public site (löwetrucks.de = xn--lwetrucks-07a.de).
- * Punycode URL matches next.config `images.remotePatterns`.
+ * Logo served from WordPress admin host (same as inventory CDN).
+ * Host must match next.config `images.remotePatterns` for `admin.xn--lwetrucks-07a.de`.
  */
-export const SITE_LOGO_URL = 'https://xn--lwetrucks-07a.de/pic/logo241.png';
+export const SITE_LOGO_URL = 'https://admin.xn--lwetrucks-07a.de/pics/logo241.png';
 
 /** Dark translucent plate behind logo on bright gradient header — lifts dark logo parts. */
 export const SITE_LOGO_NAVBAR_WRAP_CLASS =
