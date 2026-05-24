@@ -12,6 +12,8 @@ import HomeCategoryStrip from '@/components/HomeCategoryStrip';
 import HomeHighlightCards from '@/components/HomeHighlightCards';
 import HomeBrandIcons from '@/components/HomeBrandIcons';
 
+export const revalidate = 120;
+
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
