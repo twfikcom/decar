@@ -1,6 +1,6 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { CATEGORY_STRIP_ICON_URLS } from '@/lib/category-strip-icons';
 import { getTrucks } from '@/lib/products';
 import type { Truck } from '@/lib/mock-data';
@@ -23,8 +23,6 @@ export default async function HomeCategoryStrip() {
     labelKey: StripLabelKey;
     count: () => number | null;
     iconSrc: string;
-    /** PNGs from admin often use solid black — blend into the orange card. */
-    iconKnockoutBlack?: boolean;
   }[] = [
     {
       href: `/trucks?category=${encodeURIComponent('Sattelzugmaschine')}`,
@@ -37,7 +35,6 @@ export default async function HomeCategoryStrip() {
       labelKey: 'aufbau',
       count: () => countCategory(trucks, 'Festaufbau'),
       iconSrc: CATEGORY_STRIP_ICON_URLS.aufbau,
-      iconKnockoutBlack: true,
     },
     {
       href: `/trucks?category=${encodeURIComponent('Kipper')}`,
@@ -56,7 +53,6 @@ export default async function HomeCategoryStrip() {
       labelKey: 'trailers',
       count: () => countCategory(trucks, 'Auflieger'),
       iconSrc: CATEGORY_STRIP_ICON_URLS.trailers,
-      iconKnockoutBlack: true,
     },
     {
       href: '/trucks#schnellsuche',
@@ -79,7 +75,7 @@ export default async function HomeCategoryStrip() {
           {t('heading')}
         </h2>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
-          {stripItems.map(({ href, labelKey, count, iconSrc, iconKnockoutBlack }) => {
+          {stripItems.map(({ href, labelKey, count, iconSrc }) => {
             const n = count();
             return (
               <li key={href} className="min-w-0">
@@ -91,15 +87,13 @@ export default async function HomeCategoryStrip() {
                     className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.15)_55%,rgba(0,0,0,0.45)_100%)]"
                     aria-hidden
                   />
-                  <span
-                    className={`relative flex min-h-[4.5rem] flex-1 flex-col items-center justify-center sm:min-h-[5.25rem] ${iconKnockoutBlack ? 'mix-blend-lighten' : ''}`}
-                  >
+                  <span className="relative flex min-h-[4.5rem] flex-1 flex-col items-center justify-center sm:min-h-[5.25rem]">
                     <Image
                       src={iconSrc}
                       alt=""
                       width={200}
                       height={120}
-                      className={`h-auto max-h-[4rem] w-full max-w-[9rem] object-contain object-center transition-transform duration-300 group-hover:scale-105 sm:max-h-[5.5rem] sm:max-w-[10.5rem] ${iconKnockoutBlack ? 'contrast-[1.08] brightness-[1.12] saturate-[1.05] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]' : 'drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]'}`}
+                      className="h-auto max-h-[4rem] w-full max-w-[9rem] object-contain object-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)] transition-transform duration-300 group-hover:scale-105 sm:max-h-[5.5rem] sm:max-w-[10.5rem]"
                       sizes="(max-width: 640px) 144px, 168px"
                     />
                   </span>

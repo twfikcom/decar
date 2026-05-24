@@ -69,26 +69,27 @@ export default function WarrantyShieldTruckIcon({ className, wordmark, textDir =
       {/* Wordmark — HTML for correct Arabic shaping + site fonts */}
       <foreignObject x="8" y="22" width="104" height="34">
         <div
-          xmlns="http://www.w3.org/1999/xhtml"
-          dir={textDir}
-          style={{
-            display: 'flex',
-            height: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'center',
-            fontFamily: 'var(--font-heading), var(--font-arabic), system-ui, sans-serif',
-            fontWeight: 700,
-            fontSize: textDir === 'rtl' ? 22 : 17,
-            letterSpacing: textDir === 'rtl' ? '0.02em' : '0.06em',
-            textTransform: locale === 'en' ? 'uppercase' : 'none',
-            lineHeight: 1,
-            color: '#fb923c',
-            textShadow: '0 1px 0 rgba(0,0,0,0.65), 0 0 18px rgba(234,88,12,0.35)',
-          }}
-        >
-          {wordmark}
-        </div>
+          {...({
+            xmlns: 'http://www.w3.org/1999/xhtml',
+            dir: textDir,
+            style: {
+              display: 'flex',
+              height: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              fontFamily: 'var(--font-heading), var(--font-arabic), system-ui, sans-serif',
+              fontWeight: 700,
+              fontSize: textDir === 'rtl' ? 22 : 17,
+              letterSpacing: textDir === 'rtl' ? '0.02em' : '0.06em',
+              textTransform: locale === 'en' ? 'uppercase' : 'none',
+              lineHeight: 1,
+              color: '#fb923c',
+              textShadow: '0 1px 0 rgba(0,0,0,0.65), 0 0 18px rgba(234,88,12,0.35)',
+            },
+            children: wordmark,
+          } as Record<string, unknown>)}
+        />
       </foreignObject>
 
       {/* Truck front — centered under wordmark */}
