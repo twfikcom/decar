@@ -5,6 +5,8 @@ import { getTranslations } from 'next-intl/server';
 import { getCars } from '@/lib/products';
 import CarsSearchClient from './CarsSearchClient';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({
   params,
 }: {
@@ -32,7 +34,7 @@ export default async function CarsPage({ params }: { params: Promise<{ locale: s
         </div>
       }
     >
-      <CarsSearchClient cars={cars} />
+      <CarsSearchClient key={locale} cars={cars} />
     </Suspense>
   );
 }

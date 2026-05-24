@@ -15,6 +15,26 @@
     });
   }
 
+  /**
+   * Feature checkboxes use the same `value` (feature key) in DE / EN / AR.
+   * When one is toggled, mirror checked state to the other languages.
+   */
+  function initFeatureSyncAcrossLangs() {
+    $(document).on(
+      'change',
+      '.lti-feature-grid input[type="checkbox"][name^="lti_feature_keys_"]',
+      function () {
+        var value = $(this).val();
+        var checked = $(this).is(':checked');
+        $('.lti-feature-grid input[type="checkbox"][name^="lti_feature_keys_"]')
+          .filter(function () {
+            return $(this).val() === value;
+          })
+          .prop('checked', checked);
+      }
+    );
+  }
+
   function initGallery() {
     var $input = $('#lti_gallery_ids');
     var $preview = $('#lti-gallery-preview');
@@ -97,6 +117,7 @@
 
   $(function () {
     initLangTabs();
+    initFeatureSyncAcrossLangs();
     initGallery();
   });
 })(jQuery);

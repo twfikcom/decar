@@ -9,6 +9,7 @@ import { getCarById } from '@/lib/products';
 import { normalizeCarForPage } from '@/lib/inventory-normalize';
 import VehicleGallery from '@/components/VehicleGallery';
 import VehicleVideo from '@/components/VehicleVideo';
+import { showPublicPrices, whatsappDeepLinkWithText } from '@/lib/public-pricing';
 
 export async function generateMetadata({
   params,
@@ -49,6 +50,7 @@ export default async function CarDetailPage({
   const tEnum = await getTranslations('VehicleEnums');
   const tCommon = await getTranslations('Common');
   const nl = numberLocale(locale);
+  const showPrice = showPublicPrices();
 
   const priceStr = new Intl.NumberFormat(nl, {
     style: 'currency',
@@ -56,8 +58,10 @@ export default async function CarDetailPage({
     maximumFractionDigits: 0,
   }).format(carNorm.price);
 
-  const whatsappMessage = encodeURIComponent(t('whatsappPrefill', { title: copy.title, price: priceStr }));
-  const whatsappLink = `https://wa.me/491625330280?text=${whatsappMessage}`;
+  const whatsappPlain = showPrice
+    ? t('whatsappPrefill', { title: copy.title, price: priceStr })
+    : tCommon('whatsappAskPrefill', { title: copy.title });
+  const whatsappLink = whatsappDeepLinkWithText(whatsappPlain);
 
   const bodyLabel = (v: string) => tEnum(`bodyType.${v}` as 'bodyType.Limousine');
   const fuelLabel = (v: string) => tEnum(`fuel.${v}` as 'fuel.Diesel');
@@ -141,8 +145,22 @@ export default async function CarDetailPage({
               </span>
               <h1 className="mb-6 font-heading text-3xl font-black leading-tight text-slate-900 md:text-4xl">{copy.title}</h1>
               <div className="mb-8 border-b-4 border-slate-100 pb-8">
-                <p className="font-heading text-4xl font-black text-emerald-700 drop-shadow-sm lg:text-5xl">{priceStr}</p>
-                <span className="mt-2 block text-xs font-black uppercase tracking-widest text-slate-400">{t('vat')}</span>
+                {showPrice ? (
+                  <>
+                    <p className="font-heading text-4xl font-black text-emerald-700 drop-shadow-sm lg:text-5xl">{priceStr}</p>
+                    <span className="mt-2 block text-xs font-black uppercase tracking-widest text-slate-400">{t('vat')}</span>
+                  </>
+                ) : (
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-700 py-4 font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#065f46] transition hover:brightness-105 active:translate-y-1 active:shadow-none"
+                  >
+                    <MessageCircle className="h-6 w-6" aria-hidden />
+                    {tCommon('askPrice')}
+                  </a>
+                )}
               </div>
 
               <div className="mb-10 grid grid-cols-2 gap-6">
@@ -180,15 +198,18 @@ export default async function CarDetailPage({
               </div>
 
               <div className="space-y-4">
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-700 py-4 font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#065f46] transition active:translate-y-1 active:shadow-none"
-                >
-                  <MessageCircle className="h-6 w-6" aria-hidden />
-                  {t('whatsapp')}
-                </a>
+                {showPrice ? (
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-700 py-4 font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#065f46] transition active:translate-y-1 active:shadow-none"
+                  >
+                    <MessageCircle className="h-6 w-6" aria-hidden />
+                    {t('whatsapp')}
+                  </a>
+                ) : null}
+
                 <Link
                   href="/contact"
                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 py-4 font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#0f172a] transition hover:bg-slate-800 active:translate-y-1 active:shadow-none"

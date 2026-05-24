@@ -12,10 +12,12 @@ import {
   Search,
   SlidersHorizontal,
   X,
+  MessageCircle,
 } from 'lucide-react';
 import { useLocale, useTranslations, useMessages } from 'next-intl';
 import type { Car } from '@/lib/mock-data';
 import { numberLocale } from '@/lib/locale-format';
+import { showPublicPrices, whatsappDeepLinkWithText } from '@/lib/public-pricing';
 import BrandIconRow from '@/components/BrandIconRow';
 import { CAR_BRANDS } from '@/lib/brand-icons';
 
@@ -78,6 +80,7 @@ export default function CarsSearchClient({ cars }: { cars: Car[] }) {
   const messages = useMessages();
   const locale = useLocale();
   const nl = numberLocale(locale);
+  const showPrice = showPublicPrices();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState('');
   const [brands, setBrands] = useState<Record<string, boolean>>({});
@@ -113,17 +116,17 @@ export default function CarsSearchClient({ cars }: { cars: Car[] }) {
   const brandOptions = useMemo(() => {
     const s = new Set(cars.map((c) => c.brand));
     return [...s].sort((a, b) => a.localeCompare(b, locale === 'ar' ? 'ar' : locale));
-  }, [locale]);
+  }, [locale, cars]);
 
   const bodyTypeOptions = useMemo(() => {
     const s = new Set(cars.map((c) => c.bodyType));
     return [...s].sort((a, b) => a.localeCompare(b, locale === 'ar' ? 'ar' : locale));
-  }, [locale]);
+  }, [locale, cars]);
 
   const fuelOptions = useMemo(() => {
     const s = new Set(cars.map((c) => c.fuel));
     return [...s].sort((a, b) => a.localeCompare(b, locale === 'ar' ? 'ar' : locale));
-  }, [locale]);
+  }, [locale, cars]);
 
   const toggleBrand = useCallback((b: string) => {
     setBrands((prev) => ({ ...prev, [b]: !prev[b] }));
@@ -193,6 +196,12 @@ export default function CarsSearchClient({ cars }: { cars: Car[] }) {
     if (cond === 'Neu' || cond === 'Gebraucht') setCondition(cond);
   }, [searchParams, bodyTypeOptions, fuelOptions, brandOptions]);
 
+  useEffect(() => {
+    if (!showPrice && (sort === 'price-asc' || sort === 'price-desc')) {
+      setSort('year-desc');
+    }
+  }, [showPrice, sort]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const minP = priceMin === '' ? null : Number(priceMin);
@@ -218,6 +227,7 @@ export default function CarsSearchClient({ cars }: { cars: Car[] }) {
 
     return sortList(list, sort);
   }, [
+    cars,
     query,
     activeBrandFilters,
     activeBodyTypeFilters,
@@ -362,29 +372,31 @@ export default function CarsSearchClient({ cars }: { cars: Car[] }) {
         </div>
       </fieldset>
 
-      <div>
-        <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">{tf('priceEur')}</p>
-        <div className="grid grid-cols-2 gap-2">
-          <input
-            type="number"
-            inputMode="numeric"
-            min={0}
-            placeholder={tf('priceMin')}
-            value={priceMin}
-            onChange={(e) => setPriceMin(e.target.value)}
-            className="rounded-sm border border-slate-300 px-2 py-2 text-sm font-medium outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/10"
-          />
-          <input
-            type="number"
-            inputMode="numeric"
-            min={0}
-            placeholder={tf('priceMax')}
-            value={priceMax}
-            onChange={(e) => setPriceMax(e.target.value)}
-            className="rounded-sm border border-slate-300 px-2 py-2 text-sm font-medium outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/10"
-          />
+      {showPrice ? (
+        <div>
+          <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">{tf('priceEur')}</p>
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="number"
+              inputMode="numeric"
+              min={0}
+              placeholder={tf('priceMin')}
+              value={priceMin}
+              onChange={(e) => setPriceMin(e.target.value)}
+              className="rounded-sm border border-slate-300 px-2 py-2 text-sm font-medium outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/10"
+            />
+            <input
+              type="number"
+              inputMode="numeric"
+              min={0}
+              placeholder={tf('priceMax')}
+              value={priceMax}
+              onChange={(e) => setPriceMax(e.target.value)}
+              className="rounded-sm border border-slate-300 px-2 py-2 text-sm font-medium outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/10"
+            />
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div>
         <label htmlFor="car-mileage-max" className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-500">
@@ -489,7 +501,7 @@ export default function CarsSearchClient({ cars }: { cars: Car[] }) {
                   onChange={(e) => setSort(e.target.value as SortId)}
                   className="min-w-[220px] rounded-sm border border-slate-300 bg-white py-2 pl-3 pr-8 text-sm font-bold text-slate-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/10"
                 >
-                  {SORT_IDS.map((id) => (
+                  {SORT_IDS.filter((id) => showPrice || !id.startsWith('price')).map((id) => (
                     <option key={id} value={id}>
                       {tf(SORT_LABEL_KEY[id])}
                     </option>
@@ -543,75 +555,155 @@ export default function CarsSearchClient({ cars }: { cars: Car[] }) {
               </div>
             ) : (
               <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
-                {filtered.map((car) => (
-                  <li key={car.id}>
-                    <Link
-                      href={`/cars/${car.id}`}
-                      className="group flex h-full flex-col overflow-hidden rounded-sm border border-slate-200 bg-white shadow-sm transition hover:border-emerald-400 hover:shadow-md"
-                    >
-                      <div className="relative aspect-[16/10] w-full bg-slate-200">
-                        <Image
-                          src={car.images[0]}
-                          alt={carListTitle(car)}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                          className="object-cover transition duration-500 group-hover:scale-[1.02]"
-                        />
-                        <div className="absolute left-3 top-3 flex flex-wrap gap-2">
-                          <span className="bg-emerald-700/95 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white backdrop-blur-sm">
-                            {t('badge')}
-                          </span>
-                          <span className="bg-slate-900/90 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white backdrop-blur-sm">
-                            {car.condition === 'Neu' ? tf('new') : tf('used')}
-                          </span>
+                {filtered.map((car) => {
+                  const titleC = carListTitle(car);
+                  const waC = whatsappDeepLinkWithText(tCommon('whatsappAskPrefill', { title: titleC }));
+                  return (
+                    <li key={car.id}>
+                      {showPrice ? (
+                        <Link
+                          href={`/cars/${car.id}`}
+                          className="group flex h-full flex-col overflow-hidden rounded-sm border border-slate-200 bg-white shadow-sm transition hover:border-emerald-400 hover:shadow-md"
+                        >
+                          <div className="relative aspect-[16/10] w-full bg-slate-200">
+                            <Image
+                              src={car.images[0]}
+                              alt={titleC}
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                              className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                            />
+                            <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+                              <span className="bg-emerald-700/95 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white backdrop-blur-sm">
+                                {t('badge')}
+                              </span>
+                              <span className="bg-slate-900/90 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white backdrop-blur-sm">
+                                {car.condition === 'Neu' ? tf('new') : tf('used')}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex flex-1 flex-col p-4 sm:p-5">
+                            <h3 className="font-heading text-base font-black leading-snug text-slate-900 transition group-hover:text-emerald-800 sm:text-lg">
+                              {titleC}
+                            </h3>
+                            <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 border-t border-slate-100 pt-4 text-sm">
+                              <div>
+                                <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('year')}</dt>
+                                <dd className="font-bold text-slate-900">{car.year}</dd>
+                              </div>
+                              <div>
+                                <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('mileage')}</dt>
+                                <dd className="font-bold text-slate-900">
+                                  {car.mileage.toLocaleString(nl)} {tCommon('km')}
+                                </dd>
+                              </div>
+                              <div>
+                                <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('power')}</dt>
+                                <dd className="font-bold text-slate-900">
+                                  {car.power} {tCommon('powerUnit')}
+                                </dd>
+                              </div>
+                              <div>
+                                <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('brandLabel')}</dt>
+                                <dd className="font-bold text-slate-900">{car.brand}</dd>
+                              </div>
+                            </dl>
+                            <div className="mt-3 flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-600">
+                              <span className="inline-flex items-center gap-1 rounded bg-slate-100 px-2 py-1">
+                                <Fuel className="h-3 w-3" aria-hidden />
+                                {fuelLabel(car.fuel)}
+                              </span>
+                              <span className="rounded bg-slate-100 px-2 py-1">{bodyTypeLabel(car.bodyType)}</span>
+                            </div>
+                            <div className="mt-auto flex items-end justify-between border-t border-slate-100 pt-4">
+                              <div>
+                                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t('price')}</p>
+                                <p className="font-heading text-xl font-black text-slate-900 sm:text-2xl">{formatEur(car.price)}</p>
+                              </div>
+                              <span className="flex h-10 w-10 items-center justify-center rounded-sm border border-slate-200 text-slate-900 transition group-hover:border-emerald-600 group-hover:bg-emerald-600 group-hover:text-white">
+                                <ChevronRight className="h-5 w-5" aria-hidden />
+                              </span>
+                            </div>
+                          </div>
+                        </Link>
+                      ) : (
+                        <div className="group flex h-full flex-col overflow-hidden rounded-sm border border-slate-200 bg-white shadow-sm transition hover:border-emerald-400 hover:shadow-md">
+                          <Link href={`/cars/${car.id}`} className="flex min-h-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
+                            <div className="relative aspect-[16/10] w-full bg-slate-200">
+                              <Image
+                                src={car.images[0]}
+                                alt={titleC}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                              />
+                              <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+                                <span className="bg-emerald-700/95 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white backdrop-blur-sm">
+                                  {t('badge')}
+                                </span>
+                                <span className="bg-slate-900/90 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white backdrop-blur-sm">
+                                  {car.condition === 'Neu' ? tf('new') : tf('used')}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="flex flex-1 flex-col p-4 sm:p-5">
+                              <h3 className="font-heading text-base font-black leading-snug text-slate-900 transition group-hover:text-emerald-800 sm:text-lg">
+                                {titleC}
+                              </h3>
+                              <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 border-t border-slate-100 pt-4 text-sm">
+                                <div>
+                                  <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('year')}</dt>
+                                  <dd className="font-bold text-slate-900">{car.year}</dd>
+                                </div>
+                                <div>
+                                  <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('mileage')}</dt>
+                                  <dd className="font-bold text-slate-900">
+                                    {car.mileage.toLocaleString(nl)} {tCommon('km')}
+                                  </dd>
+                                </div>
+                                <div>
+                                  <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('power')}</dt>
+                                  <dd className="font-bold text-slate-900">
+                                    {car.power} {tCommon('powerUnit')}
+                                  </dd>
+                                </div>
+                                <div>
+                                  <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('brandLabel')}</dt>
+                                  <dd className="font-bold text-slate-900">{car.brand}</dd>
+                                </div>
+                              </dl>
+                              <div className="mt-3 flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-600">
+                                <span className="inline-flex items-center gap-1 rounded bg-slate-100 px-2 py-1">
+                                  <Fuel className="h-3 w-3" aria-hidden />
+                                  {fuelLabel(car.fuel)}
+                                </span>
+                                <span className="rounded bg-slate-100 px-2 py-1">{bodyTypeLabel(car.bodyType)}</span>
+                              </div>
+                            </div>
+                          </Link>
+                          <div className="flex items-center justify-between border-t border-slate-100 px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
+                            <a
+                              href={waC}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 rounded-sm bg-gradient-to-b from-emerald-500 to-emerald-700 px-3 py-2 text-[10px] font-black uppercase tracking-widest text-white shadow-sm transition hover:brightness-105 sm:text-xs"
+                            >
+                              <MessageCircle className="h-4 w-4 shrink-0" aria-hidden />
+                              {tCommon('askPrice')}
+                            </a>
+                            <Link
+                              href={`/cars/${car.id}`}
+                              className="flex h-10 w-10 items-center justify-center rounded-sm border border-slate-200 text-slate-900 transition hover:border-emerald-600 hover:bg-emerald-600 hover:text-white"
+                              aria-label={titleC}
+                            >
+                              <ChevronRight className="h-5 w-5" aria-hidden />
+                            </Link>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex flex-1 flex-col p-4 sm:p-5">
-                        <h3 className="font-heading text-base font-black leading-snug text-slate-900 transition group-hover:text-emerald-800 sm:text-lg">
-                          {carListTitle(car)}
-                        </h3>
-                        <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 border-t border-slate-100 pt-4 text-sm">
-                          <div>
-                            <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('year')}</dt>
-                            <dd className="font-bold text-slate-900">{car.year}</dd>
-                          </div>
-                          <div>
-                            <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('mileage')}</dt>
-                            <dd className="font-bold text-slate-900">
-                              {car.mileage.toLocaleString(nl)} {tCommon('km')}
-                            </dd>
-                          </div>
-                          <div>
-                            <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('power')}</dt>
-                            <dd className="font-bold text-slate-900">
-                              {car.power} {tCommon('powerUnit')}
-                            </dd>
-                          </div>
-                          <div>
-                            <dt className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{tf('brandLabel')}</dt>
-                            <dd className="font-bold text-slate-900">{car.brand}</dd>
-                          </div>
-                        </dl>
-                        <div className="mt-3 flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-600">
-                          <span className="inline-flex items-center gap-1 rounded bg-slate-100 px-2 py-1">
-                            <Fuel className="h-3 w-3" aria-hidden />
-                            {fuelLabel(car.fuel)}
-                          </span>
-                          <span className="rounded bg-slate-100 px-2 py-1">{bodyTypeLabel(car.bodyType)}</span>
-                        </div>
-                        <div className="mt-auto flex items-end justify-between border-t border-slate-100 pt-4">
-                          <div>
-                            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t('price')}</p>
-                            <p className="font-heading text-xl font-black text-slate-900 sm:text-2xl">{formatEur(car.price)}</p>
-                          </div>
-                          <span className="flex h-10 w-10 items-center justify-center rounded-sm border border-slate-200 text-slate-900 transition group-hover:border-emerald-600 group-hover:bg-emerald-600 group-hover:text-white">
-                            <ChevronRight className="h-5 w-5" aria-hidden />
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>

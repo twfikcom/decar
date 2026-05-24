@@ -4,6 +4,8 @@ import { getTranslations } from 'next-intl/server';
 import { getTrucks } from '@/lib/products';
 import TrucksSearchClient from './TrucksSearchClient';
 
+export const dynamic = 'force-dynamic';
+
 export default async function TrucksPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -18,7 +20,7 @@ export default async function TrucksPage({ params }: { params: Promise<{ locale:
         </div>
       }
     >
-      <TrucksSearchClient trucks={trucks} />
+      <TrucksSearchClient key={locale} trucks={trucks} />
     </Suspense>
   );
 }

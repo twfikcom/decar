@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'LTI_VERSION', '1.3.0' );
+define( 'LTI_VERSION', '1.3.1' );
 define( 'LTI_PLUGIN_FILE', __FILE__ );
 define( 'LTI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LTI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

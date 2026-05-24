@@ -315,6 +315,8 @@
   "Common": {
     "loading": "Loading…",
     "powerUnit": "hp",
-    "km": "km"
+    "km": "km",
+    "askPrice": "Ask price",
+    "whatsappAskPrefill": "Hello, I'm interested in: {title}. Could you send the price and availability?"
   }
 }

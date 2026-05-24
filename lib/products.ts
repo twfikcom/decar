@@ -37,14 +37,33 @@ export async function getTruckById(locale: string, id: string): Promise<TruckFro
   return mockTrucks.find((t) => t.id === id);
 }
 
+function pickFeaturedWithFallback<T extends { id: string; year: number; featured?: boolean }>(
+  all: T[],
+  limit: number,
+): T[] {
+  const featured = all.filter((v) => v.featured === true);
+  const rest = all.filter((v) => v.featured !== true);
+  rest.sort((a, b) => b.year - a.year || b.id.localeCompare(a.id));
+  const merged = [...featured, ...rest];
+  const seen = new Set<string>();
+  const out: T[] = [];
+  for (const v of merged) {
+    if (seen.has(v.id)) continue;
+    seen.add(v.id);
+    out.push(v);
+    if (out.length >= limit) break;
+  }
+  return out;
+}
+
 export async function getFeaturedCars(locale: string, limit = 3): Promise<CarFromWP[]> {
   const all = await getCars(locale);
-  return all.filter((c) => c.featured).slice(0, limit);
+  return pickFeaturedWithFallback(all, limit);
 }
 
 export async function getFeaturedTrucks(locale: string, limit = 3): Promise<TruckFromWP[]> {
   const all = await getTrucks(locale);
-  return all.filter((t) => t.featured).slice(0, limit);
+  return pickFeaturedWithFallback(all, limit);
 }
 
 export async function getInventoryCount(): Promise<number> {

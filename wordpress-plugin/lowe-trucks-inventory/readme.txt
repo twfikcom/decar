@@ -4,7 +4,7 @@ Tags: inventory, trucks, cars, rest-api, multilingual
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 
 Manage Cars & Trucks with DE/EN/AR content and expose a REST API for the Next.js frontend.

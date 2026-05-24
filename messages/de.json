@@ -343,6 +343,8 @@
   "Common": {
     "loading": "Laden…",
     "powerUnit": "PS",
-    "km": "km"
+    "km": "km",
+    "askPrice": "Preis anfragen",
+    "whatsappAskPrefill": "Hallo, ich interessiere mich für: {title}. Können Sie mir Preis und Verfügbarkeit mitteilen?"
   }
 }

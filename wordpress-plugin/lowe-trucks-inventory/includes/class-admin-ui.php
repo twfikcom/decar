@@ -200,6 +200,7 @@ class LTI_Admin_UI {
 		}
 
 		echo '<p class="description">' . esc_html__( 'Fill title, description and features for each language on this page. German (DE) is used as fallback when a translation is empty.', 'lowe-trucks-inventory' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Feature checkboxes stay in sync across DE, EN, and AR: changing one language updates the same options in the other tabs.', 'lowe-trucks-inventory' ) . '</p>';
 	}
 
 	private static function render_field( int $post_id, string $key, array $def ): void {

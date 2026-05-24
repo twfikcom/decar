@@ -9,6 +9,7 @@ import { getTruckById } from '@/lib/products';
 import { normalizeTruckForPage } from '@/lib/inventory-normalize';
 import VehicleGallery from '@/components/VehicleGallery';
 import VehicleVideo from '@/components/VehicleVideo';
+import { showPublicPrices, whatsappDeepLinkWithText } from '@/lib/public-pricing';
 
 export async function generateMetadata({
   params,
@@ -48,6 +49,7 @@ export default async function TruckDetailPage({
   const tTrucks = await getTranslations('Trucks');
   const tCommon = await getTranslations('Common');
   const nl = numberLocale(locale);
+  const showPrice = showPublicPrices();
 
   const priceStr = new Intl.NumberFormat(nl, {
     style: 'currency',
@@ -55,8 +57,10 @@ export default async function TruckDetailPage({
     maximumFractionDigits: 0,
   }).format(truckNorm.price);
 
-  const whatsappMessage = encodeURIComponent(t('whatsappPrefill', { title: copy.title, price: priceStr }));
-  const whatsappLink = `https://wa.me/491625330280?text=${whatsappMessage}`;
+  const whatsappPlain = showPrice
+    ? t('whatsappPrefill', { title: copy.title, price: priceStr })
+    : tCommon('whatsappAskPrefill', { title: copy.title });
+  const whatsappLink = whatsappDeepLinkWithText(whatsappPlain);
 
   const condLabel = truckNorm.condition === 'Neu' ? tTrucks('new') : tTrucks('used');
   const categoryLabel = tEnum(`truckCategory.${truckNorm.category}` as 'truckCategory.Sattelzugmaschine');
@@ -131,8 +135,22 @@ export default async function TruckDetailPage({
               </h1>
 
               <div className="mb-10 border-b-4 border-zinc-100 pb-8">
-                <div className="mb-2 font-heading text-4xl font-black text-red-600 drop-shadow-sm lg:text-5xl">{priceStr}</div>
-                <span className="block text-sm font-black uppercase tracking-widest text-zinc-400">{t('vat')}</span>
+                {showPrice ? (
+                  <>
+                    <div className="mb-2 font-heading text-4xl font-black text-red-600 drop-shadow-sm lg:text-5xl">{priceStr}</div>
+                    <span className="block text-sm font-black uppercase tracking-widest text-zinc-400">{t('vat')}</span>
+                  </>
+                ) : (
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full transform-gpu items-center justify-center gap-3 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 py-5 font-black uppercase tracking-widest text-white shadow-[0_8px_0_0_#9a3412] transition-all hover:brightness-105 active:translate-y-[8px] active:shadow-transparent"
+                  >
+                    <MessageCircle className="h-6 w-6" aria-hidden />
+                    {tCommon('askPrice')}
+                  </a>
+                )}
               </div>
 
               <div className="mb-12 grid grid-cols-2 gap-x-6 gap-y-8">
@@ -163,14 +181,16 @@ export default async function TruckDetailPage({
               </div>
 
               <div className="space-y-6">
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex w-full transform-gpu items-center justify-center gap-3 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 py-5 font-black uppercase tracking-widest text-white shadow-[0_8px_0_0_#9a3412] transition-all active:translate-y-[8px] active:shadow-transparent"
-                >
-                  <MessageCircle className="h-6 w-6" /> {t('whatsapp')}
-                </a>
+                {showPrice ? (
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full transform-gpu items-center justify-center gap-3 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 py-5 font-black uppercase tracking-widest text-white shadow-[0_8px_0_0_#9a3412] transition-all active:translate-y-[8px] active:shadow-transparent"
+                  >
+                    <MessageCircle className="h-6 w-6" aria-hidden /> {t('whatsapp')}
+                  </a>
+                ) : null}
 
                 <Link
                   href="/contact"

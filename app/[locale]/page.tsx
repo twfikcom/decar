@@ -1,6 +1,6 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { ArrowRight, CheckCircle, CarFront } from 'lucide-react';
+import { ArrowRight, CheckCircle, CarFront, MessageCircle } from 'lucide-react';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { getFeaturedCars, getFeaturedTrucks } from '@/lib/products';
@@ -11,8 +11,9 @@ import HeroTextAnimation from '@/components/HeroTextAnimation';
 import HomeCategoryStrip from '@/components/HomeCategoryStrip';
 import HomeHighlightCards from '@/components/HomeHighlightCards';
 import HomeBrandIcons from '@/components/HomeBrandIcons';
+import { showPublicPrices, whatsappDeepLinkWithText } from '@/lib/public-pricing';
 
-export const revalidate = 120;
+export const dynamic = 'force-dynamic';
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -38,6 +39,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const valueItems = [t('value1'), t('value2'), t('value3')] as const;
   const bodyLabel = (v: string) => tEnum(`bodyType.${v}` as 'bodyType.Limousine');
   const fuelLabel = (v: string) => tEnum(`fuel.${v}` as 'fuel.Diesel');
+  const showPrice = showPublicPrices();
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -74,52 +76,109 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <HomeBrandIcons kind="trucks" />
 
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-            {featuredTruckRows.map(({ truck, copy }) => (
-              <Link
-                href={`/trucks/${truck.id}`}
-                key={truck.id}
-                className="group flex transform-gpu flex-col overflow-hidden rounded-2xl border-4 border-zinc-200 bg-zinc-50 shadow-[0_15px_30px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-4 hover:rotate-1 hover:border-red-500 hover:shadow-[0_30px_60px_-15px_rgba(220,38,38,0.5)]"
-              >
-                <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-zinc-200 bg-black transition-colors group-hover:border-red-500">
-                  <Image
-                    src={truck.images[0]}
-                    alt={copy.title}
-                    fill
-                    className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
-                  />
-                  <div className="absolute left-4 top-4 flex gap-2 shadow-xl">
-                    <span className="bg-black px-4 py-2 text-sm font-black uppercase tracking-widest text-white">
-                      {truck.brand}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-zinc-50 p-8">
-                  <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-black transition-colors group-hover:text-red-700">
-                    {copy.title}
-                  </h3>
-                  <div className="mb-8 flex flex-wrap gap-x-4 gap-y-3 text-sm font-bold uppercase tracking-widest text-zinc-500">
-                    <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">{truck.year}</span>
-                    <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">
-                      {truck.power} {tCommon('powerUnit')}
-                    </span>
+            {featuredTruckRows.map(({ truck, copy }) => {
+              const waTruck = whatsappDeepLinkWithText(tCommon('whatsappAskPrefill', { title: copy.title }));
+              return showPrice ? (
+                <Link
+                  href={`/trucks/${truck.id}`}
+                  key={truck.id}
+                  className="group flex transform-gpu flex-col overflow-hidden rounded-2xl border-4 border-zinc-200 bg-zinc-50 shadow-[0_15px_30px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-4 hover:rotate-1 hover:border-red-500 hover:shadow-[0_30px_60px_-15px_rgba(220,38,38,0.5)]"
+                >
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-zinc-200 bg-black transition-colors group-hover:border-red-500">
+                    <Image
+                      src={truck.images[0]}
+                      alt={copy.title}
+                      fill
+                      className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
+                    />
+                    <div className="absolute left-4 top-4 flex gap-2 shadow-xl">
+                      <span className="bg-black px-4 py-2 text-sm font-black uppercase tracking-widest text-white">
+                        {truck.brand}
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="mt-auto flex items-center justify-between border-t-2 border-zinc-200 pt-6 transition-colors group-hover:border-red-200">
-                    <span className="font-heading text-3xl font-black text-black drop-shadow-sm">
-                      {new Intl.NumberFormat(nl, {
-                        style: 'currency',
-                        currency: 'EUR',
-                        maximumFractionDigits: 0,
-                      }).format(truck.price)}
-                    </span>
-                    <span className="rounded-xl bg-black p-3 text-white shadow-[0_4px_0_0_#52525b] transition-all group-hover:bg-red-600 group-hover:shadow-[0_4px_0_0_#7f1d1d] active:translate-y-1 active:shadow-none">
+                  <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-zinc-50 p-8">
+                    <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-black transition-colors group-hover:text-red-700">
+                      {copy.title}
+                    </h3>
+                    <div className="mb-8 flex flex-wrap gap-x-4 gap-y-3 text-sm font-bold uppercase tracking-widest text-zinc-500">
+                      <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">{truck.year}</span>
+                      <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">
+                        {truck.power} {tCommon('powerUnit')}
+                      </span>
+                    </div>
+
+                    <div className="mt-auto flex items-center justify-between border-t-2 border-zinc-200 pt-6 transition-colors group-hover:border-red-200">
+                      <span className="font-heading text-3xl font-black text-black drop-shadow-sm">
+                        {new Intl.NumberFormat(nl, {
+                          style: 'currency',
+                          currency: 'EUR',
+                          maximumFractionDigits: 0,
+                        }).format(truck.price)}
+                      </span>
+                      <span className="rounded-xl bg-black p-3 text-white shadow-[0_4px_0_0_#52525b] transition-all group-hover:bg-red-600 group-hover:shadow-[0_4px_0_0_#7f1d1d] active:translate-y-1 active:shadow-none">
+                        <ArrowRight className="h-6 w-6" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ) : (
+                <div
+                  key={truck.id}
+                  className="group flex transform-gpu flex-col overflow-hidden rounded-2xl border-4 border-zinc-200 bg-zinc-50 shadow-[0_15px_30px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-4 hover:rotate-1 hover:border-red-500 hover:shadow-[0_30px_60px_-15px_rgba(220,38,38,0.5)]"
+                >
+                  <Link
+                    href={`/trucks/${truck.id}`}
+                    className="flex min-h-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                  >
+                    <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-zinc-200 bg-black transition-colors group-hover:border-red-500">
+                      <Image
+                        src={truck.images[0]}
+                        alt={copy.title}
+                        fill
+                        className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
+                      />
+                      <div className="absolute left-4 top-4 flex gap-2 shadow-xl">
+                        <span className="bg-black px-4 py-2 text-sm font-black uppercase tracking-widest text-white">
+                          {truck.brand}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-zinc-50 p-8">
+                      <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-black transition-colors group-hover:text-red-700">
+                        {copy.title}
+                      </h3>
+                      <div className="flex flex-wrap gap-x-4 gap-y-3 text-sm font-bold uppercase tracking-widest text-zinc-500">
+                        <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">{truck.year}</span>
+                        <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">
+                          {truck.power} {tCommon('powerUnit')}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                  <div className="flex items-center justify-between border-t-2 border-zinc-200 bg-gradient-to-b from-white to-zinc-50 px-8 pb-8 pt-6">
+                    <a
+                      href={waTruck}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 px-5 py-3 text-sm font-black uppercase tracking-widest text-white shadow-[0_4px_0_0_#9a3412] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none"
+                    >
+                      <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
+                      {tCommon('askPrice')}
+                    </a>
+                    <Link
+                      href={`/trucks/${truck.id}`}
+                      className="rounded-xl bg-black p-3 text-white shadow-[0_4px_0_0_#52525b] transition-all hover:bg-red-600 hover:shadow-[0_4px_0_0_#7f1d1d] active:translate-y-1 active:shadow-none"
+                      aria-label={copy.title}
+                    >
                       <ArrowRight className="h-6 w-6" />
-                    </span>
+                    </Link>
                   </div>
                 </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-16 text-center">
@@ -157,52 +216,110 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <HomeBrandIcons kind="cars" />
 
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-            {featuredCarRows.map(({ car, copy }) => (
-              <Link
-                href={`/cars/${car.id}`}
-                key={car.id}
-                className="group flex flex-col overflow-hidden rounded-2xl border-4 border-slate-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-emerald-500 hover:shadow-[0_24px_50px_rgba(16,185,129,0.18)]"
-              >
-                <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-slate-200 bg-slate-900 transition group-hover:border-emerald-500">
-                  <Image
-                    src={car.images[0]}
-                    alt={copy.title}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute left-4 top-4 flex gap-2">
-                    <span className="bg-emerald-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
-                      {t('pkwBadge')}
-                    </span>
-                    <span className="bg-black/75 px-3 py-1 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm">
-                      {car.brand}
-                    </span>
+            {featuredCarRows.map(({ car, copy }) => {
+              const waCar = whatsappDeepLinkWithText(tCommon('whatsappAskPrefill', { title: copy.title }));
+              return showPrice ? (
+                <Link
+                  href={`/cars/${car.id}`}
+                  key={car.id}
+                  className="group flex flex-col overflow-hidden rounded-2xl border-4 border-slate-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-emerald-500 hover:shadow-[0_24px_50px_rgba(16,185,129,0.18)]"
+                >
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-slate-200 bg-slate-900 transition group-hover:border-emerald-500">
+                    <Image
+                      src={car.images[0]}
+                      alt={copy.title}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute left-4 top-4 flex gap-2">
+                      <span className="bg-emerald-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
+                        {t('pkwBadge')}
+                      </span>
+                      <span className="bg-black/75 px-3 py-1 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm">
+                        {car.brand}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-8">
-                  <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-emerald-800">
-                    {copy.title}
-                  </h3>
-                  <div className="mb-8 flex flex-wrap gap-2 text-sm font-bold uppercase tracking-widest text-slate-600">
-                    <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{car.year}</span>
-                    <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{bodyLabel(car.bodyType)}</span>
-                    <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{fuelLabel(car.fuel)}</span>
+                  <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-8">
+                    <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-emerald-800">
+                      {copy.title}
+                    </h3>
+                    <div className="mb-8 flex flex-wrap gap-2 text-sm font-bold uppercase tracking-widest text-slate-600">
+                      <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{car.year}</span>
+                      <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{bodyLabel(car.bodyType)}</span>
+                      <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{fuelLabel(car.fuel)}</span>
+                    </div>
+                    <div className="mt-auto flex items-center justify-between border-t-2 border-slate-200 pt-6 transition group-hover:border-emerald-200">
+                      <span className="font-heading text-3xl font-black text-slate-900">
+                        {new Intl.NumberFormat(nl, {
+                          style: 'currency',
+                          currency: 'EUR',
+                          maximumFractionDigits: 0,
+                        }).format(car.price)}
+                      </span>
+                      <span className="rounded-xl bg-slate-900 p-3 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-emerald-600 group-hover:shadow-[0_4px_0_0_#065f46] active:translate-y-1 active:shadow-none">
+                        <ArrowRight className="h-6 w-6" />
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-auto flex items-center justify-between border-t-2 border-slate-200 pt-6 transition group-hover:border-emerald-200">
-                    <span className="font-heading text-3xl font-black text-slate-900">
-                      {new Intl.NumberFormat(nl, {
-                        style: 'currency',
-                        currency: 'EUR',
-                        maximumFractionDigits: 0,
-                      }).format(car.price)}
-                    </span>
-                    <span className="rounded-xl bg-slate-900 p-3 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-emerald-600 group-hover:shadow-[0_4px_0_0_#065f46] active:translate-y-1 active:shadow-none">
+                </Link>
+              ) : (
+                <div
+                  key={car.id}
+                  className="group flex flex-col overflow-hidden rounded-2xl border-4 border-slate-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-emerald-500 hover:shadow-[0_24px_50px_rgba(16,185,129,0.18)]"
+                >
+                  <Link
+                    href={`/cars/${car.id}`}
+                    className="flex min-h-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+                  >
+                    <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-slate-200 bg-slate-900 transition group-hover:border-emerald-500">
+                      <Image
+                        src={car.images[0]}
+                        alt={copy.title}
+                        fill
+                        className="object-cover transition duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute left-4 top-4 flex gap-2">
+                        <span className="bg-emerald-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
+                          {t('pkwBadge')}
+                        </span>
+                        <span className="bg-black/75 px-3 py-1 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm">
+                          {car.brand}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-8">
+                      <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-emerald-800">
+                        {copy.title}
+                      </h3>
+                      <div className="flex flex-wrap gap-2 text-sm font-bold uppercase tracking-widest text-slate-600">
+                        <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{car.year}</span>
+                        <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{bodyLabel(car.bodyType)}</span>
+                        <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{fuelLabel(car.fuel)}</span>
+                      </div>
+                    </div>
+                  </Link>
+                  <div className="flex items-center justify-between border-t-2 border-slate-200 bg-gradient-to-b from-white to-slate-50 px-8 pb-8 pt-6">
+                    <a
+                      href={waCar}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-700 px-5 py-3 text-sm font-black uppercase tracking-widest text-white shadow-[0_4px_0_0_#065f46] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none"
+                    >
+                      <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
+                      {tCommon('askPrice')}
+                    </a>
+                    <Link
+                      href={`/cars/${car.id}`}
+                      className="rounded-xl bg-slate-900 p-3 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-emerald-600 group-hover:shadow-[0_4px_0_0_#065f46] active:translate-y-1 active:shadow-none"
+                      aria-label={copy.title}
+                    >
                       <ArrowRight className="h-6 w-6" />
-                    </span>
+                    </Link>
                   </div>
                 </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-16 text-center">
