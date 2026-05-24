@@ -14,8 +14,6 @@ export type VehicleI18n = Partial<Record<SupportedLocale, LocalizedBlock>>;
 export type CarFromWP = Car & { i18n?: VehicleI18n };
 export type TruckFromWP = Truck & { i18n?: VehicleI18n };
 
-export const WP_INVENTORY_CACHE_TAG = 'wp-inventory';
-
 const DEFAULT_REVALIDATE = 60;
 
 function apiBase(): string | null {
@@ -53,7 +51,7 @@ function fetchOptions(): RequestInit {
   }
 
   return {
-    next: { revalidate: seconds, tags: [WP_INVENTORY_CACHE_TAG] },
+    next: { revalidate: seconds },
     headers: { Accept: 'application/json' },
   };
 }

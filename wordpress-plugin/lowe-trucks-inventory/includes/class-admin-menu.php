@@ -152,9 +152,11 @@ class LTI_Admin_Menu {
 				</tbody>
 			</table>
 
+			<p><?php esc_html_e( 'Next.js calls these URLs periodically (see WORDPRESS_REVALIDATE_SECONDS on the frontend). No push or webhook from WordPress is needed.', 'lowe-trucks-inventory' ); ?></p>
+
 			<h2><?php esc_html_e( 'Next.js configuration', 'lowe-trucks-inventory' ); ?></h2>
 			<pre class="lti-code">WORDPRESS_API_URL=<?php echo esc_html( $site ); ?>
-WORDPRESS_REVALIDATE_SECONDS=300</pre>
+WORDPRESS_REVALIDATE_SECONDS=60</pre>
 
 			<p><?php esc_html_e( 'Supported languages:', 'lowe-trucks-inventory' ); ?> <?php echo esc_html( implode( ', ', $langs ) ); ?></p>
 		</div>

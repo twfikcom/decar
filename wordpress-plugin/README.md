@@ -1,14 +1,13 @@
 # Löwe Trucks Inventory — WordPress Plugin
 
-Manage **Cars** and **Trucks** from WordPress with DE/EN/AR content, media gallery, YouTube video, and REST API for the Next.js frontend.
+Manage **Cars** and **Trucks** from WordPress with DE/EN/AR content, media gallery, YouTube video, and **REST API** for the Next.js frontend.
+
+The storefront **pulls inventory automatically** from WordPress on a schedule controlled by `WORDPRESS_REVALIDATE_SECONDS` in Next.js — no webhook or cache-sync screen.
 
 ## Install
 
 1. Upload `lowe-trucks-inventory.zip` via **Plugins → Add New → Upload**
 2. Activate **Löwe Trucks Inventory**
-3. Open **Löwe Inventory → Next.js Sync** and set:
-   - **Frontend URL:** `https://löwetrucks.de`
-   - **Revalidate secret:** same value as `REVALIDATE_SECRET` on Hostinger
 
 ## Add a vehicle
 
@@ -17,7 +16,7 @@ Manage **Cars** and **Trucks** from WordPress with DE/EN/AR content, media galle
 3. **Thumbnail & gallery** — upload gallery images from the media library
 4. **YouTube video URL** — e.g. `https://www.youtube.com/watch?v=...`
 5. **Multilingual content** tabs — title, description, and **Features & options** (checkboxes) for DE / EN / AR
-6. Publish — the site updates within ~60 seconds (or instantly via revalidate webhook)
+6. **Publish** — Next.js will pick up changes after the next fetch (see `WORDPRESS_REVALIDATE_SECONDS`)
 
 ## REST API
 
@@ -30,22 +29,23 @@ Base: `https://admin.löwetrucks.de/wp-json/lowe-trucks/v1/`
 | `GET /cars?lang=ar` | All cars |
 | `GET /cars/{id}?lang=de` | Single car |
 
-## Next.js env (Hostinger)
+## Next.js env
 
 ```env
 WORDPRESS_API_URL=https://admin.löwetrucks.de
 WORDPRESS_REVALIDATE_SECONDS=60
-REVALIDATE_SECRET=your-shared-secret
 APP_URL=https://löwetrucks.de
 ```
+
+- **`WORDPRESS_REVALIDATE_SECONDS=0`** — fetch fresh data on every request (heavier; use if you need near-instant updates without a webhook).
+- **`60`** (default) — Next.js may serve a cached copy for up to 60 seconds after a successful fetch.
 
 Without `WORDPRESS_API_URL`, the site falls back to mock data in `lib/mock-data.ts`.
 
 ## Rebuild plugin zip
 
-From repo root (requires zip CLI):
+From repo root (PowerShell):
 
-```bash
-cd wordpress-plugin/lowe-trucks-inventory
-zip -r ../lowe-trucks-inventory.zip .
+```powershell
+Compress-Archive -Path "wordpress-plugin\lowe-trucks-inventory\*" -DestinationPath "wordpress-plugin\lowe-trucks-inventory.zip" -Force
 ```

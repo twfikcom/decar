@@ -4,7 +4,7 @@ Tags: inventory, trucks, cars, rest-api, multilingual
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 
 Manage Cars & Trucks with DE/EN/AR content and expose a REST API for the Next.js frontend.
@@ -29,11 +29,13 @@ Base URL: `{your-site}/wp-json/lowe-trucks/v1/`
 
 == Next.js ==
 
+The Next.js site pulls these endpoints on its own schedule (`WORDPRESS_REVALIDATE_SECONDS`); no WordPress → Next.js webhook is required.
+
 Set in `.env.local`:
 
 ```
 WORDPRESS_API_URL=https://admin.löwetrucks.de
-WORDPRESS_REVALIDATE_SECONDS=300
+WORDPRESS_REVALIDATE_SECONDS=60
 ```
 
 The frontend falls back to mock data when WordPress is unreachable.
