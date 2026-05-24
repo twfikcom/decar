@@ -8,6 +8,7 @@ type HomeBrandIconsProps = {
 
 export default async function HomeBrandIcons({ kind }: HomeBrandIconsProps) {
   const t = await getTranslations('Home');
+  const tCommon = await getTranslations('Common');
   const isTrucks = kind === 'trucks';
 
   return (
@@ -21,6 +22,7 @@ export default async function HomeBrandIcons({ kind }: HomeBrandIconsProps) {
         hash="#schnellsuche"
         tone={isTrucks ? 'red' : 'emerald'}
         ariaLabel={isTrucks ? t('brandStripTrucksAria') : t('brandStripCarsAria')}
+        scrollMoreLabel={tCommon('brandScrollMore')}
       />
     </div>
   );

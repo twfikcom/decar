@@ -281,6 +281,7 @@ export default function CarsSearchClient({ cars }: { cars: Car[] }) {
           activeBrand={activeBrandFromUrl}
           tone="emerald"
           ariaLabel={t('brandFilterAria')}
+          scrollMoreLabel={tCommon('brandScrollMore')}
         />
       </div>
 

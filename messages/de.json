@@ -355,6 +355,7 @@
     "powerUnit": "PS",
     "km": "km",
     "askPrice": "Preis anfragen",
+    "brandScrollMore": "Weitere Marken anzeigen",
     "whatsappAskPrefill": "Hallo, ich interessiere mich für: {title}. Können Sie mir Preis und Verfügbarkeit mitteilen?"
   }
 }

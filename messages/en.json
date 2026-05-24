@@ -327,6 +327,7 @@
     "powerUnit": "hp",
     "km": "km",
     "askPrice": "Ask price",
+    "brandScrollMore": "Show more brands",
     "whatsappAskPrefill": "Hello, I'm interested in: {title}. Could you send the price and availability?"
   }
 }
