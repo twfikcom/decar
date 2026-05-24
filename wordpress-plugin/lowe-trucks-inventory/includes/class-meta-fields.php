@@ -128,8 +128,11 @@ class LTI_Meta_Fields {
 					break;
 			}
 		}
+
+		$gallery_raw = isset( $_POST['lti_gallery_ids'] ) ? wp_unslash( (string) $_POST['lti_gallery_ids'] ) : '';
+
 		$gallery_ids = array();
-		foreach ( explode( ',', (string) $gallery_raw ) as $part ) {
+		foreach ( explode( ',', $gallery_raw ) as $part ) {
 			$id = absint( trim( $part ) );
 			if ( $id > 0 ) {
 				$gallery_ids[] = $id;

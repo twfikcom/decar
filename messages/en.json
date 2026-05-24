@@ -231,6 +231,16 @@
     "thumbImageAlt": "{title} – view {n}",
     "whatsappPrefill": "Hello TruckMaster, I am interested in the vehicle: {title} ({price}). Is the truck still available?"
   },
+  "VehicleGallery": {
+    "prev": "Previous image",
+    "next": "Next image",
+    "close": "Close",
+    "closeBackdrop": "Close enlarged view",
+    "openFullscreen": "Enlarge image",
+    "counter": "{current} / {total}",
+    "thumbnailsLabel": "Gallery thumbnails",
+    "dialogLabel": "Image gallery"
+  },
   "CarDetail": {
     "backList": "Back to cars",
     "linkTrucks": "Truck offers",

@@ -231,6 +231,16 @@
     "thumbImageAlt": "{title} – عرض {n}",
     "whatsappPrefill": "مرحبًا، أهتم بهذه الشاحنة: {title} ({price}). هل ما زالت متوفرة؟"
   },
+  "VehicleGallery": {
+    "prev": "الصورة السابقة",
+    "next": "الصورة التالية",
+    "close": "إغلاق",
+    "closeBackdrop": "إغلاق العرض المكبّر",
+    "openFullscreen": "تكبير الصورة",
+    "counter": "{current} من {total}",
+    "thumbnailsLabel": "مصغّرات المعرض",
+    "dialogLabel": "معرض الصور"
+  },
   "CarDetail": {
     "backList": "العودة لقائمة السيارات",
     "linkTrucks": "عروض الشاحنات",

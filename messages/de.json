@@ -259,6 +259,16 @@
     "thumbImageAlt": "{title} – Ansicht {n}",
     "whatsappPrefill": "Hallo TruckMaster, ich interessiere mich für das Fahrzeug: {title} ({price}). Ist der LKW noch verfügbar?"
   },
+  "VehicleGallery": {
+    "prev": "Vorheriges Bild",
+    "next": "Nächstes Bild",
+    "close": "Schließen",
+    "closeBackdrop": "Großansicht schließen",
+    "openFullscreen": "Großansicht öffnen",
+    "counter": "{current} von {total}",
+    "thumbnailsLabel": "Galerie-Vorschaubilder",
+    "dialogLabel": "Bildergalerie"
+  },
   "CarDetail": {
     "backList": "Zurück PKW-Übersicht",
     "linkTrucks": "LKW-Angebot",

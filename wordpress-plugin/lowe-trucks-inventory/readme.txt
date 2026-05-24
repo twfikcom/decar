@@ -4,7 +4,7 @@ Tags: inventory, trucks, cars, rest-api, multilingual
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 
 Manage Cars & Trucks with DE/EN/AR content and expose a REST API for the Next.js frontend.
@@ -39,3 +39,8 @@ WORDPRESS_REVALIDATE_SECONDS=60
 ```
 
 The frontend falls back to mock data when WordPress is unreachable.
+
+== Changelog ==
+
+= 1.3.2 =
+* Fix saving gallery image IDs from the vehicle editor (meta was cleared on every save because the POST field was not read).
