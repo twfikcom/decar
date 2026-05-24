@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { usePathname } from '@/i18n/navigation';
+import { SITE_LOGO_URL } from '@/lib/site-logo';
 
 export default function HomeLoader() {
   const pathname = usePathname();
@@ -59,7 +60,7 @@ export default function HomeLoader() {
           className="relative mb-8 h-28 w-[min(92vw,28rem)] md:h-32 md:w-[min(92vw,36rem)]"
         >
           <Image
-            src="https://twfik.com/pics/logossss.webp"
+            src={SITE_LOGO_URL}
             alt="Löwe Trucks"
             fill
             unoptimized

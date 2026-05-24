@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import SocialLinks from '@/components/SocialLinks';
+import { SITE_LOGO_URL } from '@/lib/site-logo';
 
 export default async function Footer() {
   const t = await getTranslations('Footer');
@@ -15,7 +16,7 @@ export default async function Footer() {
             <Link href="/" className="mb-6 inline-block">
               <div className="relative h-12 w-[220px] md:h-14 md:w-[280px] lg:h-16 lg:w-[320px]">
                 <Image
-                  src="https://twfik.com/pics/logossss.webp"
+                  src={SITE_LOGO_URL}
                   alt={t('logoAlt')}
                   fill
                   unoptimized

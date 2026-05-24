@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { SITE_LOGO_URL } from '@/lib/site-logo';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +61,7 @@ export default function Navbar() {
             >
               <div className="relative shrink-0">
                 <Image
-                  src="https://twfik.com/pics/logossss.webp"
+                  src={SITE_LOGO_URL}
                   alt=""
                   width={960}
                   height={330}
