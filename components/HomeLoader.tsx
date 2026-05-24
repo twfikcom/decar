@@ -57,18 +57,21 @@ export default function HomeLoader() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12, transition: { duration: 0.35, ease: 'easeIn' } }}
           transition={{ type: 'spring', stiffness: 120, damping: 18 }}
-          className="relative mb-8 h-28 w-[min(92vw,28rem)] md:h-32 md:w-[min(92vw,36rem)]"
+          className="relative mb-8 flex justify-center px-4"
         >
-          <Image
-            src={SITE_LOGO_URL}
-            alt="Löwe Trucks"
-            fill
-            unoptimized
-            quality={100}
-            className="object-contain [image-rendering:high-quality]"
-            priority
-            sizes="(max-width: 768px) 640px, 960px"
-          />
+          <div className="rounded-md border border-black/50 bg-gradient-to-r from-red-700 via-orange-600 to-red-600 px-2 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] sm:px-2.5 sm:py-2">
+            <Image
+              src={SITE_LOGO_URL}
+              alt="Löwe Trucks"
+              width={960}
+              height={330}
+              unoptimized
+              quality={100}
+              className="block h-12 w-auto max-h-14 object-contain object-center [image-rendering:high-quality] sm:h-14 sm:max-h-16 md:h-16 md:max-h-20"
+              priority
+              sizes="(max-width: 768px) 320px, 400px"
+            />
+          </div>
         </motion.div>
 
         <motion.div
