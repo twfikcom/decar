@@ -1,7 +1,7 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { getInventoryCount } from '@/lib/products';
 import WarrantyShieldTruckIcon from '@/components/icons/WarrantyShieldTruckIcon';
 
@@ -12,6 +12,7 @@ const SERVICE_IMG =
 
 export default async function HomeHighlightCards() {
   const t = await getTranslations('HomeHighlight');
+  const locale = await getLocale();
   const total = await getInventoryCount();
 
   const barRow = (label: string) => (
@@ -34,7 +35,12 @@ export default async function HomeHighlightCards() {
           {/* Warranty — icon only, informational card */}
           <article className="flex flex-col overflow-hidden rounded-sm border border-zinc-800 bg-zinc-950 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
             <div className="relative flex aspect-square items-center justify-center bg-gradient-to-b from-zinc-900 to-black">
-              <WarrantyShieldTruckIcon className="h-[min(52%,220px)] w-[min(52%,220px)] drop-shadow-[0_8px_24px_rgba(249,115,22,0.35)]" />
+              <WarrantyShieldTruckIcon
+                className="h-[min(52%,220px)] w-[min(52%,220px)] drop-shadow-[0_8px_24px_rgba(249,115,22,0.35)]"
+                wordmark={t('warrantyIconWord')}
+                textDir={locale === 'ar' ? 'rtl' : 'ltr'}
+                locale={locale}
+              />
             </div>
             {barRow(t('warrantyBar'))}
             <p className="grow px-4 py-5 text-sm font-medium leading-relaxed text-zinc-300 sm:px-5 sm:text-[15px]">

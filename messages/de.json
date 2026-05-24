@@ -71,6 +71,7 @@
     "valueBlockImageAlt": "Nutzfahrzeug in dramatischer Beleuchtung"
   },
   "HomeHighlight": {
+    "warrantyIconWord": "Garantie",
     "warrantyBar": "Garantie",
     "warrantyDesc": "Prüfberichte, lückenlose Historie und optionale Garantiepakete, damit Sie Nutzfahrzeuge in Europa mit gutem Gefühl kaufen.",
     "newArrivalsBar": "Neu eingetroffen: {count} Fahrzeuge",
@@ -97,7 +98,7 @@
     "aufbau": "LKW mit Aufbau",
     "kipper": "Kipper",
     "kasten": "Wechselrahmen/ Fahrgestelle",
-    "allStock": "Gesamtbestand",
+    "allStock": "Anhänger / Auflieger",
     "search": "Letzte Suchen"
   },
   "Trucks": {

@@ -67,6 +67,7 @@
     "valueBlockImageAlt": "شاحنة بإضاءة جذابة"
   },
   "HomeHighlight": {
+    "warrantyIconWord": "ضمان",
     "warrantyBar": "الضمان",
     "warrantyDesc": "تقارير فحص ووثائق كاملة مع إمكانية باقات ضمان، لشراء شاحنات ومركبات نقل بثقة في أوروبا.",
     "newArrivalsBar": "وصول جديد: {count} مركبة",
@@ -93,7 +94,7 @@
     "aufbau": "شاحنات بصندوق مغلق",
     "kipper": "قلابات",
     "kasten": "فانات مغلقة",
-    "allStock": "المخزون بالكامل",
+    "allStock": "مقطورات / أنصاف مقطورات",
     "search": "بحث متقدم"
   },
   "Trucks": {

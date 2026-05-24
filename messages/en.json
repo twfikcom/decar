@@ -67,6 +67,7 @@
     "valueBlockImageAlt": "Commercial vehicle in dramatic lighting"
   },
   "HomeHighlight": {
+    "warrantyIconWord": "Warranty",
     "warrantyBar": "Warranty",
     "warrantyDesc": "Inspection reports, full documentation and optional warranty packages, so you can buy commercial vehicles with confidence across Europe.",
     "newArrivalsBar": "New arrivals: {count} vehicles",
@@ -93,7 +94,7 @@
     "aufbau": "Trucks with body",
     "kipper": "Dump trucks",
     "kasten": "Demountable body / Chassis",
-    "allStock": "All trucks",
+    "allStock": "Trailers/ Semitrailers",
     "search": "Last searches"
   },
   "Trucks": {
@@ -305,7 +306,7 @@
       "Festaufbau": "Trucks with body",
       "Kipper": "Dump trucks",
       "Kastenwagen": "Demountable body / Chassis",
-      "Auflieger": "Trailers"
+      "Auflieger": "Trailers/ Semitrailers"
     }
   },
   "ServiceCta": {

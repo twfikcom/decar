@@ -49,9 +49,9 @@ export default async function HomeCategoryStrip() {
       iconSrc: CATEGORY_STRIP_ICON_URLS.kasten,
     },
     {
-      href: '/trucks',
+      href: `/trucks?category=${encodeURIComponent('Auflieger')}`,
       labelKey: 'allStock',
-      count: () => trucks.length,
+      count: () => countCategory(trucks, 'Auflieger'),
       iconSrc: CATEGORY_STRIP_ICON_URLS.allStock,
     },
     {
