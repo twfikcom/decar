@@ -78,7 +78,7 @@ export default async function TruckDetailPage({
                 <VehicleGallery
                   images={truckNorm.images}
                   alt={copy.title}
-                  thumbAlt={(n) => t('thumbImageAlt', { title: copy.title, n })}
+                  thumbAlts={truckNorm.images.map((_, i) => t('thumbImageAlt', { title: copy.title, n: i + 1 }))}
                 />
                 <div className="pointer-events-none absolute left-6 top-6 flex gap-2">
                   <span className="rounded-lg border border-red-500 bg-red-600 px-5 py-2 text-sm font-black uppercase tracking-widest text-white shadow-[0_4px_10px_rgba(220,38,38,0.5)]">

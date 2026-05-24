@@ -88,7 +88,7 @@ export default async function CarDetailPage({
                 <VehicleGallery
                   images={carNorm.images}
                   alt={copy.title}
-                  thumbAlt={(n) => t('thumbImageAlt', { title: copy.title, n })}
+                  thumbAlts={carNorm.images.map((_, i) => t('thumbImageAlt', { title: copy.title, n: i + 1 }))}
                   activeBorderClass="border-emerald-500"
                   idleBorderClass="border-slate-200 hover:border-emerald-300"
                 />

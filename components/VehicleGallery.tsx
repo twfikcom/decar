@@ -6,7 +6,8 @@ import Image from 'next/image';
 type VehicleGalleryProps = {
   images: string[];
   alt: string;
-  thumbAlt: (index: number) => string;
+  /** Per-thumbnail alt strings (must be serializable from Server Components — no functions). */
+  thumbAlts: string[];
   activeBorderClass?: string;
   idleBorderClass?: string;
 };
@@ -14,11 +15,18 @@ type VehicleGalleryProps = {
 export default function VehicleGallery({
   images,
   alt,
-  thumbAlt,
+  thumbAlts,
   activeBorderClass = 'border-orange-500 hover:scale-105',
   idleBorderClass = 'border-zinc-200 hover:scale-105 hover:border-orange-300',
 }: VehicleGalleryProps) {
-  const safeImages = images.filter(Boolean);
+  const entries = images
+    .map((src, i) => ({
+      src,
+      thumbLabel: thumbAlts[i]?.trim() ? thumbAlts[i] : `${alt} (${i + 1})`,
+    }))
+    .filter((e) => Boolean(e.src));
+  const safeImages = entries.map((e) => e.src);
+  const thumbLabels = entries.map((e) => e.thumbLabel);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeImage = safeImages[activeIndex] ?? safeImages[0];
 
@@ -45,10 +53,10 @@ export default function VehicleGallery({
               className={`relative h-24 w-40 shrink-0 cursor-pointer overflow-hidden rounded-xl border-4 shadow-sm transition-all ${
                 idx === activeIndex ? activeBorderClass : idleBorderClass
               }`}
-              aria-label={thumbAlt(idx + 1)}
+              aria-label={thumbLabels[idx]}
               aria-pressed={idx === activeIndex}
             >
-              <Image src={img} alt={thumbAlt(idx + 1)} fill className="object-cover" sizes="160px" />
+              <Image src={img} alt={thumbLabels[idx]} fill className="object-cover" sizes="160px" />
             </button>
           ))}
         </div>
