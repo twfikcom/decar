@@ -170,13 +170,13 @@
     "phone2": "+49 162 5330280",
     "emailsTitle": "عناوين البريد الإلكتروني",
     "emails": [
-      { "email": "ceo@company.com", "note": "للإدارة العليا." },
-      { "email": "sales@company.com", "note": "للمبيعات وعروض السيارات." },
-      { "email": "service@company.com", "note": "للصيانة والحجوزات وخدمة الورشة." },
-      { "email": "parts@company.com", "note": "لقطع الغيار." },
-      { "email": "support@company.com", "note": "للدعم الفني وخدمة العملاء." },
-      { "email": "info@company.com", "note": "إيميل عام لاستقبال أي استفسارات." },
-      { "email": "accounts@company.com", "note": "للحسابات والفواتير والمدفوعات." }
+      { "email": "ceo@löwetrucks.de", "note": "للإدارة العليا." },
+      { "email": "sales@löwetrucks.de", "note": "للمبيعات وعروض السيارات." },
+      { "email": "service@löwetrucks.de", "note": "للصيانة والحجوزات وخدمة الورشة." },
+      { "email": "parts@löwetrucks.de", "note": "لقطع الغيار." },
+      { "email": "support@löwetrucks.de", "note": "للدعم الفني وخدمة العملاء." },
+      { "email": "info@löwetrucks.de", "note": "إيميل عام لاستقبال أي استفسارات." },
+      { "email": "accounts@löwetrucks.de", "note": "للحسابات والفواتير والمدفوعات." }
     ],
     "copyEmail": "نسخ",
     "copiedEmail": "تم النسخ",

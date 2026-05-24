@@ -174,13 +174,13 @@
     "phone2": "+49 162 5330280",
     "emailsTitle": "E-Mail-Adressen",
     "emails": [
-      { "email": "ceo@company.com", "note": "Geschäftsführung." },
-      { "email": "sales@company.com", "note": "Vertrieb und Fahrzeugangebote." },
-      { "email": "service@company.com", "note": "Wartung, Termine und Werkstattservice." },
-      { "email": "parts@company.com", "note": "Ersatzteile." },
-      { "email": "support@company.com", "note": "Technischer Support und Kundendienst." },
-      { "email": "info@company.com", "note": "Allgemeine Anfragen." },
-      { "email": "accounts@company.com", "note": "Buchhaltung, Rechnungen und Zahlungen." }
+      { "email": "ceo@löwetrucks.de", "note": "Geschäftsführung." },
+      { "email": "sales@löwetrucks.de", "note": "Vertrieb und Fahrzeugangebote." },
+      { "email": "service@löwetrucks.de", "note": "Wartung, Termine und Werkstattservice." },
+      { "email": "parts@löwetrucks.de", "note": "Ersatzteile." },
+      { "email": "support@löwetrucks.de", "note": "Technischer Support und Kundendienst." },
+      { "email": "info@löwetrucks.de", "note": "Allgemeine Anfragen." },
+      { "email": "accounts@löwetrucks.de", "note": "Buchhaltung, Rechnungen und Zahlungen." }
     ],
     "copyEmail": "Kopieren",
     "copiedEmail": "Kopiert",

@@ -40,13 +40,13 @@ export default function ContactEmailRows({ emails, copyLabel, copiedLabel }: Pro
               <div className="min-w-0 flex-1">
                 <a
                   href={`mailto:${row.email}`}
-                  className="block truncate font-mono text-[11px] font-semibold tracking-tight text-zinc-900 hover:text-red-700 sm:text-xs"
+                  className="block truncate font-mono text-xs font-semibold tracking-tight text-zinc-900 hover:text-red-700 sm:text-sm"
                   dir="ltr"
                   title={row.email}
                 >
                   {row.email}
                 </a>
-                <p className="mt-0.5 text-[10px] font-medium leading-snug text-zinc-500 sm:text-[11px]">{row.note}</p>
+                <p className="mt-0.5 text-[11px] font-medium leading-snug text-zinc-500 sm:text-xs">{row.note}</p>
               </div>
               <button
                 type="button"
