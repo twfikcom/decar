@@ -13,6 +13,7 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { withSeo } from '@/lib/seo';
 
 const SERVICE_ICONS = [ShieldCheck, Gauge, CircleDot, Cpu, Snowflake, Truck, CalendarClock, Wrench] as const;
 
@@ -22,11 +23,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'PageMeta' });
-  return {
+  return withSeo(locale, 'service', {
     title: t('serviceTitle'),
     description: t('serviceDescription'),
-  };
+  });
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ locale: string }> }) {

@@ -22,8 +22,16 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'Meta' });
   return {
     metadataBase: getSiteUrl(),
-    title: t('title'),
+    title: {
+      default: t('title'),
+      template: `%s`,
+    },
     description: t('description'),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true },
+    },
   };
 }
 

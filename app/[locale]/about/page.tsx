@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Building2, MapPin, Phone, Languages, User } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { withSeo } from '@/lib/seo';
 
 export async function generateMetadata({
   params,
@@ -10,10 +11,10 @@ export async function generateMetadata({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'PageMeta' });
-  return {
+  return withSeo(locale, 'about', {
     title: t('aboutTitle'),
     description: t('aboutDescription'),
-  };
+  });
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -8,6 +8,7 @@ import { getLocalizedCar, getLocalizedTruck } from '@/lib/vehicle-i18n';
 import { numberLocale } from '@/lib/locale-format';
 import type { Car, Truck } from '@/lib/mock-data';
 import { showPublicPrices, whatsappDeepLinkWithText } from '@/lib/public-pricing';
+import { withSeo } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -41,11 +42,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'PageMeta' });
-  return {
+  return withSeo(locale, 'new-arrivals', {
     title: t('newArrivalsTitle'),
     description: t('newArrivalsDescription'),
-  };
+  });
 }
 
 export default async function NewArrivalsPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -295,6 +295,8 @@
     "newArrivalsDescription": "Latest trucks and passenger cars in our stock, sorted by model year.",
     "contactTitle": "Contact | Löwe Trucks",
     "contactDescription": "Reach us via WhatsApp or the contact form.",
+    "trucksListTitle": "Trucks & commercial vehicles | Löwe Trucks",
+    "trucksListDescription": "Used and new trucks in Germany — filter by brand, body type, mileage and price.",
     "titleSuffix": "| Löwe Trucks"
   },
   "VehicleEnums": {

@@ -1,8 +1,10 @@
+import type { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { ArrowRight, CheckCircle, CarFront, MessageCircle } from 'lucide-react';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
+import { withSeo } from '@/lib/seo';
 import { getFeaturedCars, getFeaturedTrucks } from '@/lib/products';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedCar, getLocalizedTruck } from '@/lib/vehicle-i18n';
@@ -14,6 +16,16 @@ import HomeBrandIcons from '@/components/HomeBrandIcons';
 import { showPublicPrices, whatsappDeepLinkWithText } from '@/lib/public-pricing';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'Meta' });
+  return withSeo(locale, '', {
+    title: t('title'),
+    description: t('description'),
+  });
+}
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -10,6 +10,7 @@ import { normalizeCarForPage } from '@/lib/inventory-normalize';
 import VehicleGallery from '@/components/VehicleGallery';
 import VehicleVideo from '@/components/VehicleVideo';
 import { showPublicPrices, whatsappDeepLinkWithText } from '@/lib/public-pricing';
+import { withSeo } from '@/lib/seo';
 
 export async function generateMetadata({
   params,
@@ -23,10 +24,10 @@ export async function generateMetadata({
   const carNorm = normalizeCarForPage(car);
   const copy = await getLocalizedCar(locale, carNorm);
   const tMeta = await getTranslations({ locale, namespace: 'PageMeta' });
-  return {
+  return withSeo(locale, `cars/${id}`, {
     title: `${copy.title} ${tMeta('titleSuffix')}`,
     description: String(copy.description ?? '').slice(0, 160),
-  };
+  });
 }
 
 export default async function CarDetailPage({

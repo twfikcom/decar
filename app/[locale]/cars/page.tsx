@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { setRequestLocale } from 'next-intl/server';
-import { getTranslations } from 'next-intl/server';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getCars } from '@/lib/products';
 import CarsSearchClient from './CarsSearchClient';
+import { withSeo } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,11 +12,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'PageMeta' });
-  return {
+  return withSeo(locale, 'cars', {
     title: t('carsTitle'),
     description: t('carsDescription'),
-  };
+  });
 }
 
 export default async function CarsPage({ params }: { params: Promise<{ locale: string }> }) {

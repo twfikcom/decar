@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { MessageCircle, MapPin, Phone, Mail } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import ContactEmailRows from '@/components/ContactEmailRows';
+import { withSeo } from '@/lib/seo';
 
 type ContactEmailRow = { email: string; note: string };
 
@@ -11,11 +12,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'PageMeta' });
-  return {
+  return withSeo(locale, 'contact', {
     title: t('contactTitle'),
     description: t('contactDescription'),
-  };
+  });
 }
 
 const WHATSAPP_NUMBER = '491625330280';

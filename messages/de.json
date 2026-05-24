@@ -323,6 +323,8 @@
     "newArrivalsDescription": "Neueste LKW und PKW im Bestand, sortiert nach Baujahr.",
     "contactTitle": "Kontakt | Löwe Trucks",
     "contactDescription": "Kontaktieren Sie uns per WhatsApp oder über das Kontaktformular.",
+    "trucksListTitle": "LKW & Nutzfahrzeuge | Löwe Trucks",
+    "trucksListDescription": "Gebrauchte und neue LKW und Nutzfahrzeuge in Deutschland — nach Marke, Aufbau, Kilometerstand und Preis filtern.",
     "titleSuffix": "| Löwe Trucks"
   },
   "VehicleEnums": {
