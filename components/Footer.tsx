@@ -13,19 +13,18 @@ export default async function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="mb-6 inline-block">
-              <div className="rounded-md border border-zinc-300 bg-white px-4 py-3">
-                <div className="relative h-12 w-[220px] md:h-14 md:w-[280px] lg:h-16 lg:w-[320px]">
-                  <Image
-                    src={SITE_LOGO_URL}
-                    alt={t('logoAlt')}
-                    fill
-                    unoptimized
-                    quality={100}
-                    className="object-contain object-left [image-rendering:high-quality]"
-                    sizes="(max-width: 768px) 480px, 640px"
-                  />
-                </div>
+            <Link href="/" className="mb-6 inline-block w-fit max-w-full">
+              <div className="rounded-md border border-black/50 bg-gradient-to-r from-red-700 via-orange-600 to-red-600 px-2 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] sm:px-2.5 sm:py-2">
+                <Image
+                  src={SITE_LOGO_URL}
+                  alt={t('logoAlt')}
+                  width={960}
+                  height={330}
+                  unoptimized
+                  quality={100}
+                  className="block h-10 w-auto max-h-12 object-contain object-center [image-rendering:high-quality] sm:h-12 sm:max-h-14 md:h-14 md:max-h-16"
+                  sizes="(max-width: 768px) 260px, 320px"
+                />
               </div>
             </Link>
 
