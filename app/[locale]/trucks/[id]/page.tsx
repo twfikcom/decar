@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedTruck } from '@/lib/vehicle-i18n';
 import { getTruckById } from '@/lib/products';
+import { normalizeTruckForPage } from '@/lib/inventory-normalize';
 import VehicleGallery from '@/components/VehicleGallery';
 import VehicleVideo from '@/components/VehicleVideo';
 
@@ -18,11 +19,12 @@ export async function generateMetadata({
   const truck = await getTruckById(locale, id);
   if (!truck) return {};
   setRequestLocale(locale);
-  const copy = await getLocalizedTruck(locale, truck);
+  const truckNorm = normalizeTruckForPage(truck);
+  const copy = await getLocalizedTruck(locale, truckNorm);
   const tMeta = await getTranslations({ locale, namespace: 'PageMeta' });
   return {
     title: `${copy.title} ${tMeta('titleSuffix')}`,
-    description: copy.description.slice(0, 160),
+    description: String(copy.description ?? '').slice(0, 160),
   };
 }
 
@@ -39,7 +41,8 @@ export default async function TruckDetailPage({
     notFound();
   }
 
-  const copy = await getLocalizedTruck(locale, truck);
+  const truckNorm = normalizeTruckForPage(truck);
+  const copy = await getLocalizedTruck(locale, truckNorm);
   const t = await getTranslations('TruckDetail');
   const tEnum = await getTranslations('VehicleEnums');
   const tTrucks = await getTranslations('Trucks');
@@ -50,13 +53,13 @@ export default async function TruckDetailPage({
     style: 'currency',
     currency: 'EUR',
     maximumFractionDigits: 0,
-  }).format(truck.price);
+  }).format(truckNorm.price);
 
   const whatsappMessage = encodeURIComponent(t('whatsappPrefill', { title: copy.title, price: priceStr }));
   const whatsappLink = `https://wa.me/491625330280?text=${whatsappMessage}`;
 
-  const condLabel = truck.condition === 'Neu' ? tTrucks('new') : tTrucks('used');
-  const categoryLabel = tEnum(`truckCategory.${truck.category}` as 'truckCategory.Sattelzugmaschine');
+  const condLabel = truckNorm.condition === 'Neu' ? tTrucks('new') : tTrucks('used');
+  const categoryLabel = tEnum(`truckCategory.${truckNorm.category}` as 'truckCategory.Sattelzugmaschine');
 
   return (
     <div className="min-h-screen bg-zinc-100 py-12 md:py-20">
@@ -73,7 +76,7 @@ export default async function TruckDetailPage({
             <div className="rounded-3xl border-4 border-zinc-200 bg-white p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)]">
               <div className="relative">
                 <VehicleGallery
-                  images={truck.images}
+                  images={truckNorm.images}
                   alt={copy.title}
                   thumbAlt={(n) => t('thumbImageAlt', { title: copy.title, n })}
                 />
@@ -86,7 +89,7 @@ export default async function TruckDetailPage({
             </div>
 
             <VehicleVideo
-              videoUrl={truck.videoUrl}
+              videoUrl={truckNorm.videoUrl}
               title={copy.title}
               heading={t('videoTitle')}
               placeholder={t('videoPlaceholder')}
@@ -119,7 +122,7 @@ export default async function TruckDetailPage({
             <div className="sticky top-40 transform-gpu rounded-3xl border-4 border-zinc-200 bg-white p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-10">
               <div className="mb-4">
                 <span className="mb-4 inline-block rounded-md bg-black px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
-                  {truck.brand}
+                  {truckNorm.brand}
                 </span>
               </div>
 
@@ -135,22 +138,22 @@ export default async function TruckDetailPage({
               <div className="mb-12 grid grid-cols-2 gap-x-6 gap-y-8">
                 <div>
                   <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('model')}</p>
-                  <p className="font-black text-lg text-black">{truck.model}</p>
+                  <p className="font-black text-lg text-black">{truckNorm.model}</p>
                 </div>
                 <div>
                   <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('firstReg')}</p>
-                  <p className="font-black text-lg text-black">{truck.year}</p>
+                  <p className="font-black text-lg text-black">{truckNorm.year}</p>
                 </div>
                 <div>
                   <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('mileage')}</p>
                   <p className="font-black text-lg text-black">
-                    {truck.mileage.toLocaleString(nl)} {tCommon('km')}
+                    {truckNorm.mileage.toLocaleString(nl)} {tCommon('km')}
                   </p>
                 </div>
                 <div>
                   <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('power')}</p>
                   <p className="font-black text-lg text-black">
-                    {truck.power} {tCommon('powerUnit')}
+                    {truckNorm.power} {tCommon('powerUnit')}
                   </p>
                 </div>
                 <div className="col-span-2">

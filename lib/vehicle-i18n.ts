@@ -1,6 +1,7 @@
 import { getMessages } from 'next-intl/server';
 import type { Car, Truck } from '@/lib/mock-data';
 import { localizedFromVehicle, type CarFromWP, type TruckFromWP } from '@/lib/wordpress-api';
+import { normalizeLocalizedBlock } from '@/lib/inventory-normalize';
 
 export type LocalizedVehicle = {
   title: string;
@@ -23,14 +24,14 @@ export async function getLocalizedCar(locale: string, car: Car | CarFromWP): Pro
   }
 
   if (locale === 'de') {
-    return { title: car.title, description: car.description, features: car.features };
+    return normalizeLocalizedBlock({ title: car.title, description: car.description, features: car.features });
   }
 
   const messages = await getMessages();
   const inv = messages.Inventory as InventoryBlock | undefined;
   const block = inv?.cars?.[car.id];
-  if (block) return block;
-  return { title: car.title, description: car.description, features: car.features };
+  if (block) return normalizeLocalizedBlock(block);
+  return normalizeLocalizedBlock({ title: car.title, description: car.description, features: car.features });
 }
 
 export async function getLocalizedTruck(locale: string, truck: Truck | TruckFromWP): Promise<LocalizedVehicle> {
@@ -39,12 +40,12 @@ export async function getLocalizedTruck(locale: string, truck: Truck | TruckFrom
   }
 
   if (locale === 'de') {
-    return { title: truck.title, description: truck.description, features: truck.features };
+    return normalizeLocalizedBlock({ title: truck.title, description: truck.description, features: truck.features });
   }
 
   const messages = await getMessages();
   const inv = messages.Inventory as InventoryBlock | undefined;
   const block = inv?.trucks?.[truck.id];
-  if (block) return block;
-  return { title: truck.title, description: truck.description, features: truck.features };
+  if (block) return normalizeLocalizedBlock(block);
+  return normalizeLocalizedBlock({ title: truck.title, description: truck.description, features: truck.features });
 }

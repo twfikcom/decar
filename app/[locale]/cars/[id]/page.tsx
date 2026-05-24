@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedCar } from '@/lib/vehicle-i18n';
 import { getCarById } from '@/lib/products';
+import { normalizeCarForPage } from '@/lib/inventory-normalize';
 import VehicleGallery from '@/components/VehicleGallery';
 import VehicleVideo from '@/components/VehicleVideo';
 
@@ -18,11 +19,12 @@ export async function generateMetadata({
   const car = await getCarById(locale, id);
   if (!car) return {};
   setRequestLocale(locale);
-  const copy = await getLocalizedCar(locale, car);
+  const carNorm = normalizeCarForPage(car);
+  const copy = await getLocalizedCar(locale, carNorm);
   const tMeta = await getTranslations({ locale, namespace: 'PageMeta' });
   return {
     title: `${copy.title} ${tMeta('titleSuffix')}`,
-    description: copy.description.slice(0, 160),
+    description: String(copy.description ?? '').slice(0, 160),
   };
 }
 
@@ -39,7 +41,8 @@ export default async function CarDetailPage({
     notFound();
   }
 
-  const copy = await getLocalizedCar(locale, car);
+  const carNorm = normalizeCarForPage(car);
+  const copy = await getLocalizedCar(locale, carNorm);
   const t = await getTranslations('CarDetail');
   const tCars = await getTranslations('Cars');
   const tTrucks = await getTranslations('Trucks');
@@ -51,7 +54,7 @@ export default async function CarDetailPage({
     style: 'currency',
     currency: 'EUR',
     maximumFractionDigits: 0,
-  }).format(car.price);
+  }).format(carNorm.price);
 
   const whatsappMessage = encodeURIComponent(t('whatsappPrefill', { title: copy.title, price: priceStr }));
   const whatsappLink = `https://wa.me/491625330280?text=${whatsappMessage}`;
@@ -83,7 +86,7 @@ export default async function CarDetailPage({
             <div className="rounded-3xl border-4 border-slate-200 bg-white p-4 shadow-lg">
               <div className="relative">
                 <VehicleGallery
-                  images={car.images}
+                  images={carNorm.images}
                   alt={copy.title}
                   thumbAlt={(n) => t('thumbImageAlt', { title: copy.title, n })}
                   activeBorderClass="border-emerald-500"
@@ -94,14 +97,14 @@ export default async function CarDetailPage({
                     {tCars('badge')}
                   </span>
                   <span className="rounded-lg bg-black/80 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm">
-                    {car.condition === 'Neu' ? tTrucks('new') : tTrucks('used')}
+                    {carNorm.condition === 'Neu' ? tTrucks('new') : tTrucks('used')}
                   </span>
                 </div>
               </div>
             </div>
 
             <VehicleVideo
-              videoUrl={car.videoUrl}
+              videoUrl={carNorm.videoUrl}
               title={copy.title}
               heading={t('videoTitle')}
               placeholder={t('videoPlaceholder')}
@@ -134,7 +137,7 @@ export default async function CarDetailPage({
           <div className="lg:col-span-1">
             <div className="sticky top-36 rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-xl md:p-10">
               <span className="mb-3 inline-block rounded-md bg-slate-900 px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
-                {car.brand}
+                {carNorm.brand}
               </span>
               <h1 className="mb-6 font-heading text-3xl font-black leading-tight text-slate-900 md:text-4xl">{copy.title}</h1>
               <div className="mb-8 border-b-4 border-slate-100 pb-8">
@@ -145,34 +148,34 @@ export default async function CarDetailPage({
               <div className="mb-10 grid grid-cols-2 gap-6">
                 <div>
                   <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('model')}</p>
-                  <p className="font-black text-lg text-slate-900">{car.model}</p>
+                  <p className="font-black text-lg text-slate-900">{carNorm.model}</p>
                 </div>
                 <div>
                   <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('firstReg')}</p>
-                  <p className="font-black text-lg text-slate-900">{car.year}</p>
+                  <p className="font-black text-lg text-slate-900">{carNorm.year}</p>
                 </div>
                 <div>
                   <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('mileage')}</p>
                   <p className="font-black text-lg text-slate-900">
-                    {car.mileage.toLocaleString(nl)} {tCommon('km')}
+                    {carNorm.mileage.toLocaleString(nl)} {tCommon('km')}
                   </p>
                 </div>
                 <div>
                   <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('power')}</p>
                   <p className="font-black text-lg text-slate-900">
-                    {car.power} {tCommon('powerUnit')}
+                    {carNorm.power} {tCommon('powerUnit')}
                   </p>
                 </div>
                 <div className="col-span-2">
                   <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('body')}</p>
-                  <p className="font-black text-lg text-slate-900">{bodyLabel(car.bodyType)}</p>
+                  <p className="font-black text-lg text-slate-900">{bodyLabel(carNorm.bodyType)}</p>
                 </div>
                 <div className="col-span-2">
                   <p className="mb-1 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400">
                     <Fuel className="h-3.5 w-3.5" aria-hidden />
                     {t('fuel')}
                   </p>
-                  <p className="font-black text-lg text-slate-900">{fuelLabel(car.fuel)}</p>
+                  <p className="font-black text-lg text-slate-900">{fuelLabel(carNorm.fuel)}</p>
                 </div>
               </div>
 

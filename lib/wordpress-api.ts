@@ -1,5 +1,6 @@
 import { domainToASCII } from 'node:url';
 import type { Car, Truck } from '@/lib/mock-data';
+import { normalizeLocalizedBlock } from '@/lib/inventory-normalize';
 
 export type SupportedLocale = 'de' | 'en' | 'ar';
 
@@ -101,10 +102,10 @@ export function localizedFromVehicle<T extends CarFromWP | TruckFromWP>(
 ): LocalizedBlock {
   const lang = normalizeLang(locale);
   const fromI18n = vehicle.i18n?.[lang];
-  if (fromI18n) return fromI18n;
-  return {
+  if (fromI18n) return normalizeLocalizedBlock(fromI18n);
+  return normalizeLocalizedBlock({
     title: vehicle.title,
     description: vehicle.description,
     features: vehicle.features,
-  };
+  });
 }
