@@ -75,8 +75,8 @@ export default async function TruckDetailPage({
           <ArrowLeft className="mr-3 h-5 w-5" /> {t('back')}
         </Link>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
-          <div className="space-y-10 lg:col-span-2">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:items-start">
+          <div className="lg:col-span-2 lg:row-start-1">
             <div className="rounded-3xl border-4 border-zinc-200 bg-white p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)]">
               <div className="relative">
                 <VehicleGallery
@@ -91,39 +91,10 @@ export default async function TruckDetailPage({
                 </div>
               </div>
             </div>
-
-            <VehicleVideo
-              videoUrl={truckNorm.videoUrl}
-              title={copy.title}
-              heading={t('videoTitle')}
-              placeholder={t('videoPlaceholder')}
-            />
-
-            <div className="rounded-3xl border-4 border-zinc-200 bg-white p-8 shadow-[0_15px_30px_rgba(0,0,0,0.1)] md:p-12">
-              <h2 className="mb-6 font-heading text-3xl font-black text-black">{t('description')}</h2>
-              <p className="mb-12 max-w-none text-lg font-medium leading-relaxed text-zinc-600">{copy.description}</p>
-
-              <h2 className="mb-8 border-b-4 border-zinc-100 pb-4 font-heading text-3xl font-black text-black">
-                {t('featuresTitle')}
-              </h2>
-              <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {copy.features.map((feature, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-4 rounded-xl border-2 border-zinc-100 bg-zinc-50 p-4 text-lg font-bold text-black shadow-sm"
-                  >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-100">
-                      <Check className="h-5 w-5 text-red-600" />
-                    </div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
 
-          <div className="lg:col-span-1">
-            <div className="sticky top-40 transform-gpu rounded-3xl border-4 border-zinc-200 bg-white p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-10">
+          <aside className="lg:col-start-3 lg:row-span-3 lg:row-start-1 lg:self-start">
+            <div className="transform-gpu rounded-3xl border-4 border-zinc-200 bg-white p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-10 lg:sticky lg:top-40">
               <div className="mb-4">
                 <span className="mb-4 inline-block rounded-md bg-black px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
                   {truckNorm.brand}
@@ -194,7 +165,7 @@ export default async function TruckDetailPage({
 
                 <Link
                   href="/contact"
-                  className="flex w-full transform-gpu items-center justify-center gap-3 rounded-xl bg-black py-5 font-black uppercase tracking-widest text-white shadow-[0_8px_0_0_#3f3f46] transition-all hover:bg-zinc-800 active:translate-y-[8px] active:shadow-transparent"
+                  className="flex w-full transform-gpu flex-col items-center justify-center gap-0 rounded-xl bg-black px-2 py-4 text-center text-sm font-black uppercase leading-snug tracking-wide text-white shadow-[0_8px_0_0_#3f3f46] transition-all hover:bg-zinc-800 active:translate-y-[8px] active:shadow-transparent max-lg:min-h-[3.25rem] max-lg:whitespace-pre-line max-lg:text-[0.7rem] max-lg:leading-tight lg:flex-row lg:gap-3 lg:whitespace-normal lg:py-5 lg:text-base lg:tracking-widest"
                 >
                   {t('emailRequest')}
                 </Link>
@@ -209,6 +180,37 @@ export default async function TruckDetailPage({
                 </div>
               </div>
             </div>
+          </aside>
+
+          <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2">
+            <VehicleVideo
+              videoUrl={truckNorm.videoUrl}
+              title={copy.title}
+              heading={t('videoTitle')}
+              placeholder={t('videoPlaceholder')}
+            />
+          </div>
+
+          <div className="rounded-3xl border-4 border-zinc-200 bg-white p-8 shadow-[0_15px_30px_rgba(0,0,0,0.1)] md:p-12 lg:col-span-2 lg:col-start-1 lg:row-start-3">
+            <h2 className="mb-6 font-heading text-3xl font-black text-black">{t('description')}</h2>
+            <p className="mb-12 max-w-none text-lg font-medium leading-relaxed text-zinc-600">{copy.description}</p>
+
+            <h2 className="mb-8 border-b-4 border-zinc-100 pb-4 font-heading text-3xl font-black text-black">
+              {t('featuresTitle')}
+            </h2>
+            <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {copy.features.map((feature, i) => (
+                <li
+                  key={i}
+                  className="flex items-center gap-4 rounded-xl border-2 border-zinc-100 bg-zinc-50 p-4 text-lg font-bold text-black shadow-sm"
+                >
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-100">
+                    <Check className="h-5 w-5 text-red-600" />
+                  </div>
+                  {feature}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

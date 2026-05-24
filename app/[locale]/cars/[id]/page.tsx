@@ -85,8 +85,8 @@ export default async function CarDetailPage({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
-          <div className="space-y-10 lg:col-span-2">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:items-start">
+          <div className="lg:col-span-2 lg:row-start-1">
             <div className="rounded-3xl border-4 border-slate-200 bg-white p-4 shadow-lg">
               <div className="relative">
                 <VehicleGallery
@@ -106,40 +106,10 @@ export default async function CarDetailPage({
                 </div>
               </div>
             </div>
-
-            <VehicleVideo
-              videoUrl={carNorm.videoUrl}
-              title={copy.title}
-              heading={t('videoTitle')}
-              placeholder={t('videoPlaceholder')}
-              iconClassName="h-8 w-8 text-emerald-600"
-              frameClassName="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border-4 border-slate-900 bg-slate-900"
-            />
-
-            <div className="rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-lg md:p-12">
-              <h2 className="mb-4 font-heading text-3xl font-black text-slate-900">{t('description')}</h2>
-              <p className="mb-10 text-lg font-medium leading-relaxed text-slate-600">{copy.description}</p>
-              <h2 className="mb-6 border-b-4 border-slate-100 pb-4 font-heading text-3xl font-black text-slate-900">
-                {t('featuresTitle')}
-              </h2>
-              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {copy.features.map((feature, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 rounded-xl border-2 border-slate-100 bg-slate-50 p-4 font-bold text-slate-900"
-                  >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                      <Check className="h-5 w-5 text-emerald-700" aria-hidden />
-                    </div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
 
-          <div className="lg:col-span-1">
-            <div className="sticky top-36 rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-xl md:p-10">
+          <aside className="lg:col-start-3 lg:row-span-3 lg:row-start-1 lg:self-start">
+            <div className="rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-xl md:p-10 lg:sticky lg:top-36">
               <span className="mb-3 inline-block rounded-md bg-slate-900 px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
                 {carNorm.brand}
               </span>
@@ -212,7 +182,7 @@ export default async function CarDetailPage({
 
                 <Link
                   href="/contact"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 py-4 font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#0f172a] transition hover:bg-slate-800 active:translate-y-1 active:shadow-none"
+                  className="flex w-full flex-col items-center justify-center gap-0 rounded-xl bg-slate-900 px-2 py-4 text-center text-sm font-black uppercase leading-snug tracking-wide text-white shadow-[0_6px_0_0_#0f172a] transition hover:bg-slate-800 active:translate-y-1 active:shadow-none max-lg:min-h-[3.25rem] max-lg:text-[0.7rem] max-lg:leading-tight lg:flex-row lg:gap-2 lg:py-4 lg:text-base lg:tracking-widest"
                 >
                   {t('buyRequest')}
                 </Link>
@@ -227,6 +197,38 @@ export default async function CarDetailPage({
                 </div>
               </div>
             </div>
+          </aside>
+
+          <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2">
+            <VehicleVideo
+              videoUrl={carNorm.videoUrl}
+              title={copy.title}
+              heading={t('videoTitle')}
+              placeholder={t('videoPlaceholder')}
+              iconClassName="h-8 w-8 text-emerald-600"
+              frameClassName="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border-4 border-slate-900 bg-slate-900"
+            />
+          </div>
+
+          <div className="rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-lg md:p-12 lg:col-span-2 lg:col-start-1 lg:row-start-3">
+            <h2 className="mb-4 font-heading text-3xl font-black text-slate-900">{t('description')}</h2>
+            <p className="mb-10 text-lg font-medium leading-relaxed text-slate-600">{copy.description}</p>
+            <h2 className="mb-6 border-b-4 border-slate-100 pb-4 font-heading text-3xl font-black text-slate-900">
+              {t('featuresTitle')}
+            </h2>
+            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {copy.features.map((feature, i) => (
+                <li
+                  key={i}
+                  className="flex items-center gap-3 rounded-xl border-2 border-slate-100 bg-slate-50 p-4 font-bold text-slate-900"
+                >
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-100">
+                    <Check className="h-5 w-5 text-emerald-700" aria-hidden />
+                  </div>
+                  {feature}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
