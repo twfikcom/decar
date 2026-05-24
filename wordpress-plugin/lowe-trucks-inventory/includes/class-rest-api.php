@@ -204,9 +204,7 @@ class LTI_REST_API {
 		}
 
 		$category = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'category' );
-		if ( '' === $category ) {
-			$category = 'Sattelzugmaschine';
-		}
+		$category = LTI_Vocabulary::validate_truck_category( $category );
 
 		$condition = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'condition' );
 		if ( ! in_array( $condition, array( 'Neu', 'Gebraucht' ), true ) ) {

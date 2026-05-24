@@ -93,7 +93,8 @@
     "aufbau": "Trucks with body",
     "kipper": "Dump trucks",
     "kasten": "Demountable body / Chassis",
-    "gebraucht": "Trailers",
+    "auflieger": "Trailers",
+    "allStock": "All trucks",
     "search": "Last searches"
   },
   "Trucks": {
@@ -276,10 +277,11 @@
       "Elektro": "Electric"
     },
     "truckCategory": {
-      "Sattelzugmaschine": "Tractor unit",
-      "Festaufbau": "Rigid truck",
-      "Kipper": "Tipper",
-      "Kastenwagen": "Box van"
+      "Sattelzugmaschine": "Tractor units",
+      "Festaufbau": "Trucks with body",
+      "Kipper": "Dump trucks",
+      "Kastenwagen": "Demountable body / Chassis",
+      "Auflieger": "Trailers"
     }
   },
   "ServiceCta": {

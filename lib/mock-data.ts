@@ -109,7 +109,7 @@ export type Truck = {
   price: number; // in EUR
   power: number; // in PS (HP)
   condition: "Neu" | "Gebraucht";
-  category: "Sattelzugmaschine" | "Festaufbau" | "Kipper" | "Kastenwagen";
+  category: "Sattelzugmaschine" | "Festaufbau" | "Kipper" | "Kastenwagen" | "Auflieger";
   images: string[];
   description: string;
   features: string[];

@@ -4,7 +4,7 @@ Tags: inventory, trucks, cars, rest-api, multilingual
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 
 Manage Cars & Trucks with DE/EN/AR content and expose a REST API for the Next.js frontend.
@@ -15,7 +15,7 @@ Manage Cars & Trucks with DE/EN/AR content and expose a REST API for the Next.js
 2. Activate the plugin in WordPress admin.
 3. Go to **Löwe Inventory** in the sidebar.
 4. Add trucks under **Add Truck** and cars under **Add Car**.
-5. Fill shared specs once, then title/description/features in DE, EN, and AR tabs.
+5. Fill shared specs once, then title/description/features in DE, EN, and AR tabs. **Truck category** and **brand** are predefined lists (category labels follow your WordPress user language). Cars use a separate predefined brand list.
 6. Set **Vehicle ID** (e.g. `t-001`, `c-001`) — used in Next.js URLs.
 
 == REST API ==

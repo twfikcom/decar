@@ -3,7 +3,7 @@
  * Plugin Name: Löwe Trucks Inventory
  * Plugin URI:  https://github.com/twfikcom/decar
  * Description: Manage Cars & Trucks inventory with DE/EN/AR content and REST API for the Next.js frontend.
- * Version:     1.2.0
+ * Version:     1.3.0
  * Author:      Löwe Trucks
  * Text Domain: lowe-trucks-inventory
  * Requires at least: 6.0
@@ -14,13 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'LTI_VERSION', '1.2.0' );
+define( 'LTI_VERSION', '1.3.0' );
 define( 'LTI_PLUGIN_FILE', __FILE__ );
 define( 'LTI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LTI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 require_once LTI_PLUGIN_DIR . 'includes/class-post-types.php';
 require_once LTI_PLUGIN_DIR . 'includes/class-feature-options.php';
+require_once LTI_PLUGIN_DIR . 'includes/class-vocabulary.php';
 require_once LTI_PLUGIN_DIR . 'includes/class-meta-fields.php';
 require_once LTI_PLUGIN_DIR . 'includes/class-admin-ui.php';
 require_once LTI_PLUGIN_DIR . 'includes/class-admin-menu.php';

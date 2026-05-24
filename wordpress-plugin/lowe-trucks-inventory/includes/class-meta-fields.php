@@ -16,7 +16,6 @@ class LTI_Meta_Fields {
 	public static function shared_field_defs(): array {
 		return array(
 			'external_id' => array( 'type' => 'text', 'label' => 'Vehicle ID (slug for Next.js, e.g. t-001)' ),
-			'brand'       => array( 'type' => 'text', 'label' => 'Brand' ),
 			'model'       => array( 'type' => 'text', 'label' => 'Model' ),
 			'year'        => array( 'type' => 'number', 'label' => 'Year' ),
 			'mileage'     => array( 'type' => 'number', 'label' => 'Mileage (km)' ),
@@ -29,17 +28,33 @@ class LTI_Meta_Fields {
 	}
 
 	public static function truck_field_defs(): array {
+		$cat_labels = array();
+		foreach ( LTI_Vocabulary::truck_category_slugs() as $slug ) {
+			$cat_labels[ $slug ] = LTI_Vocabulary::truck_category_label( $slug );
+		}
+
 		return array(
-			'category' => array(
+			'brand'    => array(
 				'type'    => 'select',
-				'label'   => 'Truck category',
-				'options' => array( 'Sattelzugmaschine', 'Festaufbau', 'Kipper', 'Kastenwagen' ),
+				'label'   => __( 'Brand (truck)', 'lowe-trucks-inventory' ),
+				'options' => LTI_Vocabulary::truck_brands(),
+			),
+			'category' => array(
+				'type'            => 'select',
+				'label'           => __( 'Truck category', 'lowe-trucks-inventory' ),
+				'options'         => LTI_Vocabulary::truck_category_slugs(),
+				'option_labels'   => $cat_labels,
 			),
 		);
 	}
 
 	public static function car_field_defs(): array {
 		return array(
+			'brand'     => array(
+				'type'    => 'select',
+				'label'   => __( 'Brand (car)', 'lowe-trucks-inventory' ),
+				'options' => LTI_Vocabulary::car_brands(),
+			),
 			'body_type' => array(
 				'type'    => 'select',
 				'label'   => 'Body type',
@@ -103,11 +118,16 @@ class LTI_Meta_Fields {
 					update_post_meta( $post_id, $meta_key, esc_url_raw( $raw ) );
 					break;
 				default:
-					update_post_meta( $post_id, $meta_key, sanitize_text_field( $raw ) );
+					$clean = sanitize_text_field( $raw );
+					if ( 'category' === $key ) {
+						$clean = LTI_Vocabulary::validate_truck_category( $clean );
+					} elseif ( 'brand' === $key ) {
+						$clean = LTI_Vocabulary::validate_brand( $post->post_type, $clean );
+					}
+					update_post_meta( $post_id, $meta_key, $clean );
+					break;
 			}
 		}
-
-		$gallery_raw = isset( $_POST['lti_gallery_ids'] ) ? wp_unslash( $_POST['lti_gallery_ids'] ) : '';
 		$gallery_ids = array();
 		foreach ( explode( ',', (string) $gallery_raw ) as $part ) {
 			$id = absint( trim( $part ) );

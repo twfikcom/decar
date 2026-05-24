@@ -14,9 +14,10 @@ The storefront **pulls inventory automatically** from WordPress on a schedule co
 1. **Löwe Inventory → Add Truck** or **Add Car**
 2. Set **Featured Image** (sidebar) — main thumbnail on the website (`aspect-[4/3]`)
 3. **Thumbnail & gallery** — upload gallery images from the media library
-4. **YouTube video URL** — e.g. `https://www.youtube.com/watch?v=...`
-5. **Multilingual content** tabs — title, description, and **Features & options** (checkboxes) for DE / EN / AR
-6. **Publish** — Next.js will pick up changes after the next fetch (see `WORDPRESS_REVALIDATE_SECONDS`)
+4. **Type-specific fields** — truck **category** (five predefined types with DE/EN/AR labels in the editor) and **brand** from the truck list; cars use **brand** from the car list plus body type and fuel.
+5. **YouTube video URL** — e.g. `https://www.youtube.com/watch?v=...`
+6. **Multilingual content** tabs — title, description, and **Features & options** (checkboxes) for DE / EN / AR
+7. **Publish** — Next.js will pick up changes after the next fetch (see `WORDPRESS_REVALIDATE_SECONDS`)
 
 ## REST API
 

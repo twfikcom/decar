@@ -97,7 +97,8 @@
     "aufbau": "LKW mit Aufbau",
     "kipper": "Kipper",
     "kasten": "Wechselrahmen/ Fahrgestelle",
-    "gebraucht": "Anhänger/ Sattelauflieger",
+    "auflieger": "Anhänger / Auflieger",
+    "allStock": "Gesamtbestand",
     "search": "Letzte Suchen"
   },
   "Trucks": {
@@ -307,7 +308,8 @@
       "Sattelzugmaschine": "Sattelzugmaschine",
       "Festaufbau": "Festaufbau",
       "Kipper": "Kipper",
-      "Kastenwagen": "Kastenwagen"
+      "Kastenwagen": "Kastenwagen",
+      "Auflieger": "Anhänger / Auflieger"
     }
   },
   "ServiceCta": {

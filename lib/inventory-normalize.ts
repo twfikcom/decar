@@ -11,6 +11,7 @@ const TRUCK_CATEGORIES: readonly Truck['category'][] = [
   'Festaufbau',
   'Kipper',
   'Kastenwagen',
+  'Auflieger',
 ];
 
 const CAR_BODY: readonly Car['bodyType'][] = ['Limousine', 'SUV', 'Kombi', 'Kompakt', 'Coupé'];

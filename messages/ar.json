@@ -93,7 +93,8 @@
     "aufbau": "شاحنات بصندوق مغلق",
     "kipper": "قلابات",
     "kasten": "فانات مغلقة",
-    "gebraucht": "المخزون بالكامل",
+    "auflieger": "مقطورات وأنصاف مقطورات",
+    "allStock": "المخزون بالكامل",
     "search": "بحث متقدم"
   },
   "Trucks": {
@@ -276,10 +277,11 @@
       "Elektro": "كهرباء"
     },
     "truckCategory": {
-      "Sattelzugmaschine": "وحدة جر",
-      "Festaufbau": "شاحنة صلبة",
-      "Kipper": "قلاب",
-      "Kastenwagen": "فان صندوق"
+      "Sattelzugmaschine": "رؤوس تريلات أو قاطرات",
+      "Festaufbau": "شاحنات بصندوق مغلق",
+      "Kipper": "قلابات",
+      "Kastenwagen": "فانات مغلقة",
+      "Auflieger": "مقطورات وأنصاف مقطورات"
     }
   },
   "ServiceCta": {

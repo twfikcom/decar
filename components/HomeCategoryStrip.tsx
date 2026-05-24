@@ -11,11 +11,7 @@ function countCategory(trucks: Truck[], cat: Cat) {
   return trucks.filter((t) => t.category === cat).length;
 }
 
-function countCondition(trucks: Truck[], c: Truck['condition']) {
-  return trucks.filter((t) => t.condition === c).length;
-}
-
-type StripLabelKey = 'zugmaschinen' | 'aufbau' | 'kipper' | 'kasten' | 'gebraucht' | 'search';
+type StripLabelKey = 'zugmaschinen' | 'aufbau' | 'kipper' | 'kasten' | 'auflieger' | 'allStock' | 'search';
 
 export default async function HomeCategoryStrip() {
   const t = await getTranslations('CategoryStrip');
@@ -53,10 +49,16 @@ export default async function HomeCategoryStrip() {
       iconSrc: CATEGORY_STRIP_ICON_URLS.kasten,
     },
     {
-      href: '/trucks?condition=Gebraucht',
-      labelKey: 'gebraucht',
-      count: () => countCondition(trucks, 'Gebraucht'),
-      iconSrc: CATEGORY_STRIP_ICON_URLS.gebraucht,
+      href: `/trucks?category=${encodeURIComponent('Auflieger')}`,
+      labelKey: 'auflieger',
+      count: () => countCategory(trucks, 'Auflieger'),
+      iconSrc: CATEGORY_STRIP_ICON_URLS.auflieger,
+    },
+    {
+      href: '/trucks',
+      labelKey: 'allStock',
+      count: () => trucks.length,
+      iconSrc: CATEGORY_STRIP_ICON_URLS.allStock,
     },
     {
       href: '/trucks#schnellsuche',
@@ -78,7 +80,7 @@ export default async function HomeCategoryStrip() {
         >
           {t('heading')}
         </h2>
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-7">
           {stripItems.map(({ href, labelKey, count, iconSrc }) => {
             const n = count();
             return (

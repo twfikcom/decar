@@ -221,13 +221,15 @@ class LTI_Admin_UI {
 				break;
 
 			case 'select':
+				$option_labels = $def['option_labels'] ?? array();
 				printf( '<select id="%1$s" name="%2$s" class="widefat">', esc_attr( $input_id ), esc_attr( $input_name ) );
 				foreach ( $def['options'] as $option ) {
+					$opt_label = $option_labels[ $option ] ?? $option;
 					printf(
 						'<option value="%1$s" %2$s>%3$s</option>',
 						esc_attr( $option ),
 						selected( $value, $option, false ),
-						esc_html( $option )
+						esc_html( $opt_label )
 					);
 				}
 				echo '</select>';
