@@ -17,6 +17,7 @@ export default function Navbar() {
     { labelKey: 'home' as const, href: '/' },
     { labelKey: 'trucks' as const, href: '/trucks' },
     { labelKey: 'cars' as const, href: '/cars' },
+    { labelKey: 'parts' as const, href: '/parts' },
     { labelKey: 'service' as const, href: '/service' },
     { labelKey: 'about' as const, href: '/about' },
     { labelKey: 'contact' as const, href: '/contact' },

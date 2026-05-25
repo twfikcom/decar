@@ -11,6 +11,7 @@ class LTI_Meta_Fields {
 	public static function init(): void {
 		add_action( 'save_post_' . LTI_Post_Types::TRUCK, array( __CLASS__, 'save_vehicle' ), 10, 2 );
 		add_action( 'save_post_' . LTI_Post_Types::CAR, array( __CLASS__, 'save_vehicle' ), 10, 2 );
+		add_action( 'save_post_' . LTI_Post_Types::PART, array( __CLASS__, 'save_part' ), 10, 2 );
 	}
 
 	public static function shared_field_defs(): array {
@@ -78,6 +79,10 @@ class LTI_Meta_Fields {
 
 	public static function is_vehicle_post( WP_Post $post ): bool {
 		return in_array( $post->post_type, array( LTI_Post_Types::TRUCK, LTI_Post_Types::CAR ), true );
+	}
+
+	public static function is_part_post( WP_Post $post ): bool {
+		return LTI_Post_Types::PART === $post->post_type;
 	}
 
 	public static function save_vehicle( int $post_id, WP_Post $post ): void {
@@ -166,6 +171,47 @@ class LTI_Meta_Fields {
 		if ( empty( $external_id ) ) {
 			$prefix = LTI_Post_Types::TRUCK === $post->post_type ? 't-' : 'c-';
 			update_post_meta( $post_id, self::meta_key( 'external_id' ), $prefix . $post_id );
+		}
+	}
+
+	public static function save_part( int $post_id, WP_Post $post ): void {
+		if ( LTI_Post_Types::PART !== $post->post_type ) {
+			return;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['lti_part_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['lti_part_nonce'] ) ), 'lti_save_part' ) ) {
+			return;
+		}
+
+		$ext = isset( $_POST['lti_external_id'] ) ? sanitize_text_field( wp_unslash( (string) $_POST['lti_external_id'] ) ) : '';
+		update_post_meta( $post_id, self::meta_key( 'external_id' ), $ext );
+
+		foreach ( self::LANGS as $lang ) {
+			foreach ( array( 'title', 'description' ) as $field ) {
+				$input_key = 'lti_' . $field . '_' . $lang;
+				$raw       = isset( $_POST[ $input_key ] ) ? wp_unslash( $_POST[ $input_key ] ) : '';
+
+				if ( 'description' === $field ) {
+					$value = wp_kses_post( $raw );
+				} else {
+					$value = sanitize_text_field( $raw );
+				}
+
+				update_post_meta( $post_id, self::lang_meta_key( $field, $lang ), $value );
+			}
+		}
+
+		$external_id = get_post_meta( $post_id, self::meta_key( 'external_id' ), true );
+		if ( empty( $external_id ) ) {
+			update_post_meta( $post_id, self::meta_key( 'external_id' ), 'p-' . $post_id );
 		}
 	}
 

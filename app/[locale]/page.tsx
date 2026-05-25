@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { ArrowRight, CheckCircle, CarFront, MessageCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, CarFront, MessageCircle, Package } from 'lucide-react';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { withSeo } from '@/lib/seo';
-import { getFeaturedCars, getFeaturedTrucks } from '@/lib/products';
+import { getFeaturedCars, getFeaturedParts, getFeaturedTrucks } from '@/lib/products';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedCar, getLocalizedTruck } from '@/lib/vehicle-i18n';
 import HeroSlider from '@/components/HeroSlider';
@@ -14,6 +14,12 @@ import HomeCategoryStrip from '@/components/HomeCategoryStrip';
 import HomeHighlightCards from '@/components/HomeHighlightCards';
 import HomeBrandIcons from '@/components/HomeBrandIcons';
 import { showPublicPrices, whatsappDeepLinkWithText } from '@/lib/public-pricing';
+
+function excerptFromHtml(html: string, max = 140): string {
+  const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (text.length <= max) return text;
+  return `${text.slice(0, max - 1).trimEnd()}…`;
+}
 
 export const dynamic = 'force-dynamic';
 
@@ -36,6 +42,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const nl = numberLocale(locale);
   const featuredTrucks = await getFeaturedTrucks(locale, 3);
   const featuredCars = await getFeaturedCars(locale, 3);
+  const featuredParts = await getFeaturedParts(locale, 3);
   const featuredTruckRows = await Promise.all(
     featuredTrucks.map(async (truck) => ({
       truck,
@@ -340,6 +347,99 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               className="inline-flex items-center gap-3 rounded-xl bg-emerald-600 px-8 py-5 text-lg font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#065f46] transition hover:translate-y-[2px] hover:bg-emerald-500 hover:shadow-[0_4px_0_0_#047857] active:translate-y-[6px] active:shadow-none"
             >
               {t('allPkwCta')} <ArrowRight className="h-6 w-6" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y-4 border-amber-500/45 bg-gradient-to-b from-amber-50 via-orange-50/80 to-amber-100/90 py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end md:mb-16">
+            <div>
+              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-amber-600/35 bg-amber-100/80 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-amber-900">
+                <Package className="h-4 w-4" aria-hidden />
+                {t('partsBadge')}
+              </div>
+              <h2 className="font-heading text-4xl font-black tracking-tight text-amber-950 drop-shadow-sm md:text-5xl">
+                {t('partsTitle')} <span className="text-orange-600">{t('partsTitleAccent')}</span>
+              </h2>
+              <p className="mt-2 text-sm font-bold uppercase tracking-widest text-amber-800/80">{t('partsSubtitle')}</p>
+            </div>
+            <Link
+              href="/parts"
+              className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-orange-700 transition hover:translate-x-1 hover:text-orange-600"
+            >
+              {t('allParts')} <ArrowRight className="h-5 w-5" />
+            </Link>
+          </div>
+
+          {featuredParts.length === 0 ? (
+            <p className="mb-10 text-center text-base font-bold text-amber-900/80">{t('partsEmpty')}</p>
+          ) : (
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+              {featuredParts.map((part) => {
+                const waPart = whatsappDeepLinkWithText(tCommon('whatsappAskPrefill', { title: part.title }));
+                const excerpt = excerptFromHtml(part.description);
+                return (
+                  <div
+                    key={part.id}
+                    className="group flex flex-col overflow-hidden rounded-2xl border-4 border-amber-200/90 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.2)]"
+                  >
+                    <Link
+                      href="/parts"
+                      className="flex min-h-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                    >
+                      <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-amber-200 bg-amber-950 transition group-hover:border-orange-500">
+                        <Image
+                          src={part.imageUrl}
+                          alt={part.title}
+                          fill
+                          className="object-cover transition duration-700 group-hover:scale-110"
+                          unoptimized
+                        />
+                        <div className="absolute left-4 top-4 flex gap-2">
+                          <span className="bg-orange-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
+                            {t('partsBadge')}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-amber-50/60 p-8">
+                        <h3 className="mb-3 line-clamp-2 font-heading text-2xl font-black leading-tight text-amber-950 transition group-hover:text-orange-800">
+                          {part.title}
+                        </h3>
+                        <p className="line-clamp-3 text-sm font-semibold leading-relaxed text-amber-900/85">{excerpt}</p>
+                      </div>
+                    </Link>
+                    <div className="flex items-center justify-between border-t-2 border-amber-200 bg-gradient-to-b from-white to-amber-50/60 px-8 pb-8 pt-6">
+                      <a
+                        href={waPart}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 px-5 py-3 text-sm font-black uppercase tracking-widest text-white shadow-[0_4px_0_0_#9a3412] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none"
+                      >
+                        <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
+                        {tCommon('askPrice')}
+                      </a>
+                      <Link
+                        href="/parts"
+                        className="rounded-xl bg-amber-950 p-3 text-white shadow-[0_4px_0_0_#78350f] transition group-hover:bg-orange-600 group-hover:shadow-[0_4px_0_0_#9a3412] active:translate-y-1 active:shadow-none"
+                        aria-label={t('allParts')}
+                      >
+                        <ArrowRight className="h-6 w-6" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="mt-16 text-center">
+            <Link
+              href="/parts"
+              className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 px-8 py-5 text-lg font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#9a3412] transition hover:translate-y-[2px] hover:from-orange-500 hover:to-amber-500 hover:shadow-[0_4px_0_0_#c2410c] active:translate-y-[6px] active:shadow-none"
+            >
+              {t('allPartsCta')} <ArrowRight className="h-6 w-6" />
             </Link>
           </div>
         </div>

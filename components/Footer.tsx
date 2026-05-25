@@ -57,6 +57,11 @@ export default async function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/parts" className="hover:text-orange-500 hover:pl-2 transition-all flex items-center">
+                  {t('parts')}
+                </Link>
+              </li>
+              <li>
                 <Link href="/service" className="hover:text-orange-500 hover:pl-2 transition-all flex items-center">
                   {t('service')}
                 </Link>

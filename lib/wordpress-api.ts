@@ -15,6 +15,14 @@ export type VehicleI18n = Partial<Record<SupportedLocale, LocalizedBlock>>;
 export type CarFromWP = Car & { i18n?: VehicleI18n };
 export type TruckFromWP = Truck & { i18n?: VehicleI18n };
 
+/** Spare part row for the single `/parts` listing (no per-item page). */
+export type PartFromWP = {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+};
+
 const DEFAULT_REVALIDATE = 60;
 
 function apiBase(): string | null {
@@ -94,6 +102,10 @@ export async function fetchTrucksFromWordPress(locale: string): Promise<TruckFro
 
 export async function fetchTruckFromWordPress(locale: string, id: string): Promise<TruckFromWP | null> {
   return fetchWp<TruckFromWP>(`trucks/${encodeURIComponent(id)}`, locale);
+}
+
+export async function fetchPartsFromWordPress(locale: string): Promise<PartFromWP[] | null> {
+  return fetchWp<PartFromWP[]>('parts', locale);
 }
 
 export function localizedFromVehicle<T extends CarFromWP | TruckFromWP>(

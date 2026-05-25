@@ -18,7 +18,7 @@ class LTI_Admin_UI {
 			return;
 		}
 
-		if ( ! $post || ! LTI_Meta_Fields::is_vehicle_post( $post ) ) {
+		if ( ! $post || ( ! LTI_Meta_Fields::is_vehicle_post( $post ) && ! LTI_Meta_Fields::is_part_post( $post ) ) ) {
 			return;
 		}
 
@@ -73,6 +73,24 @@ class LTI_Admin_UI {
 			__( 'Multilingual content (DE / EN / AR)', 'lowe-trucks-inventory' ),
 			array( __CLASS__, 'render_multilingual_box' ),
 			array( LTI_Post_Types::TRUCK, LTI_Post_Types::CAR ),
+			'normal',
+			'high'
+		);
+
+		add_meta_box(
+			'lti_part_external',
+			__( 'Spare part: ID & photo', 'lowe-trucks-inventory' ),
+			array( __CLASS__, 'render_part_external_box' ),
+			LTI_Post_Types::PART,
+			'normal',
+			'high'
+		);
+
+		add_meta_box(
+			'lti_part_multilingual',
+			__( 'Spare part text (DE / EN / AR)', 'lowe-trucks-inventory' ),
+			array( __CLASS__, 'render_part_multilingual_box' ),
+			LTI_Post_Types::PART,
 			'normal',
 			'high'
 		);
@@ -201,6 +219,71 @@ class LTI_Admin_UI {
 
 		echo '<p class="description">' . esc_html__( 'Fill title, description and features for each language on this page. German (DE) is used as fallback when a translation is empty.', 'lowe-trucks-inventory' ) . '</p>';
 		echo '<p class="description">' . esc_html__( 'Feature checkboxes stay in sync across DE, EN, and AR: changing one language updates the same options in the other tabs.', 'lowe-trucks-inventory' ) . '</p>';
+	}
+
+	public static function render_part_external_box( WP_Post $post ): void {
+		wp_nonce_field( 'lti_save_part', 'lti_part_nonce' );
+		$ext = LTI_Meta_Fields::get_meta_value( $post->ID, 'external_id' );
+
+		echo '<p><label for="lti_external_id"><strong>' . esc_html__( 'Part ID (optional)', 'lowe-trucks-inventory' ) . '</strong></label>';
+		printf(
+			'<input type="text" class="widefat" id="lti_external_id" name="lti_external_id" value="%s" placeholder="p-001">',
+			esc_attr( (string) $ext )
+		);
+		echo '</p>';
+		echo '<p class="description">' . esc_html__( 'Leave blank to auto-generate (p-{number}). The Next.js site shows all parts on one page only — no separate URL per part.', 'lowe-trucks-inventory' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Use the Featured Image box (right sidebar) as the part photo on the website.', 'lowe-trucks-inventory' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'The post title above is for your reference in the admin list.', 'lowe-trucks-inventory' ) . '</p>';
+	}
+
+	public static function render_part_multilingual_box( WP_Post $post ): void {
+		$lang_labels = array(
+			'de' => 'Deutsch',
+			'en' => 'English',
+			'ar' => 'العربية',
+		);
+
+		echo '<div class="lti-lang-tabs">';
+		foreach ( LTI_Meta_Fields::LANGS as $index => $lang ) {
+			$active = 0 === $index ? ' is-active' : '';
+			printf(
+				'<button type="button" class="lti-lang-tab%s" data-lang="%s">%s</button>',
+				esc_attr( $active ),
+				esc_attr( $lang ),
+				esc_html( strtoupper( $lang ) . ' — ' . $lang_labels[ $lang ] )
+			);
+		}
+		echo '</div>';
+
+		foreach ( LTI_Meta_Fields::LANGS as $index => $lang ) {
+			$active = 0 === $index ? ' is-active' : '';
+			echo '<div class="lti-lang-panel' . esc_attr( $active ) . '" data-lang-panel="' . esc_attr( $lang ) . '">';
+
+			$title = LTI_Meta_Fields::get_lang_value( $post->ID, 'title', $lang );
+			$desc  = LTI_Meta_Fields::get_lang_value( $post->ID, 'description', $lang );
+
+			echo '<p><label><strong>' . esc_html__( 'Title', 'lowe-trucks-inventory' ) . '</strong></label>';
+			printf(
+				'<input type="text" class="widefat" name="lti_title_%1$s" value="%2$s" placeholder="%3$s">',
+				esc_attr( $lang ),
+				esc_attr( $title ),
+				esc_attr__( 'Short headline for this language', 'lowe-trucks-inventory' )
+			);
+			echo '</p>';
+
+			echo '<p><label><strong>' . esc_html__( 'Description', 'lowe-trucks-inventory' ) . '</strong></label>';
+			printf(
+				'<textarea class="widefat" rows="8" name="lti_description_%1$s" placeholder="%2$s">%3$s</textarea>',
+				esc_attr( $lang ),
+				esc_attr__( 'Explain the part, compatibility, condition…', 'lowe-trucks-inventory' ),
+				esc_textarea( $desc )
+			);
+			echo '</p>';
+
+			echo '</div>';
+		}
+
+		echo '<p class="description">' . esc_html__( 'German (DE) is used as fallback when a translation is empty.', 'lowe-trucks-inventory' ) . '</p>';
 	}
 
 	private static function render_field( int $post_id, string $key, array $def ): void {

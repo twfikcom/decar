@@ -1,15 +1,17 @@
-import { cars as mockCars, trucks as mockTrucks, type Car, type Truck } from '@/lib/mock-data';
+import { cars as mockCars, spareParts as mockSpareParts, trucks as mockTrucks, type Car, type Truck } from '@/lib/mock-data';
 import {
   fetchCarFromWordPress,
   fetchCarsFromWordPress,
+  fetchPartsFromWordPress,
   fetchTruckFromWordPress,
   fetchTrucksFromWordPress,
   isWordPressConfigured,
   type CarFromWP,
+  type PartFromWP,
   type TruckFromWP,
 } from '@/lib/wordpress-api';
 
-export type { Car, Truck, CarFromWP, TruckFromWP };
+export type { Car, Truck, CarFromWP, TruckFromWP, PartFromWP };
 
 export async function getCars(locale: string): Promise<CarFromWP[]> {
   if (!isWordPressConfigured()) return mockCars;
@@ -21,6 +23,18 @@ export async function getTrucks(locale: string): Promise<TruckFromWP[]> {
   if (!isWordPressConfigured()) return mockTrucks;
   const remote = await fetchTrucksFromWordPress(locale);
   return remote ?? [];
+}
+
+export async function getParts(locale: string): Promise<PartFromWP[]> {
+  if (!isWordPressConfigured()) return mockSpareParts;
+  const remote = await fetchPartsFromWordPress(locale);
+  return remote ?? [];
+}
+
+/** First N spare parts for homepage preview (same order as API / listing). */
+export async function getFeaturedParts(locale: string, limit = 3): Promise<PartFromWP[]> {
+  const all = await getParts(locale);
+  return all.slice(0, limit);
 }
 
 export async function getCarById(locale: string, id: string): Promise<CarFromWP | undefined> {

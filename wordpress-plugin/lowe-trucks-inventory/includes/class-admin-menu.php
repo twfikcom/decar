@@ -64,6 +64,22 @@ class LTI_Admin_Menu {
 
 		add_submenu_page(
 			'lti-dashboard',
+			__( 'All spare parts', 'lowe-trucks-inventory' ),
+			__( 'Spare parts', 'lowe-trucks-inventory' ),
+			'edit_posts',
+			'edit.php?post_type=' . LTI_Post_Types::PART
+		);
+
+		add_submenu_page(
+			'lti-dashboard',
+			__( 'Add spare part', 'lowe-trucks-inventory' ),
+			__( 'Add spare part', 'lowe-trucks-inventory' ),
+			'edit_posts',
+			'post-new.php?post_type=' . LTI_Post_Types::PART
+		);
+
+		add_submenu_page(
+			'lti-dashboard',
 			__( 'REST API', 'lowe-trucks-inventory' ),
 			__( 'REST API', 'lowe-trucks-inventory' ),
 			'edit_posts',
@@ -80,11 +96,12 @@ class LTI_Admin_Menu {
 	public static function render_dashboard(): void {
 		$trucks = self::count_posts( LTI_Post_Types::TRUCK );
 		$cars   = self::count_posts( LTI_Post_Types::CAR );
+		$parts  = self::count_posts( LTI_Post_Types::PART );
 		$base   = rest_url( 'lowe-trucks/v1/' );
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Löwe Trucks Inventory', 'lowe-trucks-inventory' ); ?></h1>
-			<p><?php esc_html_e( 'Manage trucks and cars with German, English, and Arabic content from a single edit screen.', 'lowe-trucks-inventory' ); ?></p>
+			<p><?php esc_html_e( 'Manage trucks, cars, and spare parts with German, English, and Arabic content from a single edit screen.', 'lowe-trucks-inventory' ); ?></p>
 
 			<div class="lti-dashboard-cards">
 				<div class="lti-card">
@@ -110,6 +127,19 @@ class LTI_Admin_Menu {
 							<?php esc_html_e( 'View all', 'lowe-trucks-inventory' ); ?>
 						</a>
 					</p>
+				</div>
+				<div class="lti-card">
+					<h2><?php esc_html_e( 'Spare parts', 'lowe-trucks-inventory' ); ?></h2>
+					<p class="lti-count"><?php echo esc_html( (string) $parts ); ?></p>
+					<p>
+						<a class="button button-primary" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . LTI_Post_Types::PART ) ); ?>">
+							<?php esc_html_e( 'Add spare part', 'lowe-trucks-inventory' ); ?>
+						</a>
+						<a class="button" href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . LTI_Post_Types::PART ) ); ?>">
+							<?php esc_html_e( 'View all', 'lowe-trucks-inventory' ); ?>
+						</a>
+					</p>
+					<p class="description"><?php esc_html_e( 'Image + text only; listed on the Next.js Parts page (no per-part URL).', 'lowe-trucks-inventory' ); ?></p>
 				</div>
 			</div>
 		</div>
@@ -148,6 +178,10 @@ class LTI_Admin_Menu {
 					<tr>
 						<td><code><?php echo esc_html( $base ); ?>cars/c-001?lang=de</code></td>
 						<td><?php esc_html_e( 'Single car by external ID', 'lowe-trucks-inventory' ); ?></td>
+					</tr>
+					<tr>
+						<td><code><?php echo esc_html( $base ); ?>parts?lang=en</code></td>
+						<td><?php esc_html_e( 'List spare parts (image + localized title/description for the Parts page)', 'lowe-trucks-inventory' ); ?></td>
 					</tr>
 				</tbody>
 			</table>

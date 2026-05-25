@@ -83,6 +83,17 @@ class LTI_REST_API {
 				),
 			)
 		);
+
+		register_rest_route(
+			'lowe-trucks/v1',
+			'/parts',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( __CLASS__, 'list_parts' ),
+				'permission_callback' => '__return_true',
+				'args'                => self::lang_args(),
+			)
+		);
 	}
 
 	private static function lang_args(): array {
@@ -114,6 +125,27 @@ class LTI_REST_API {
 
 	public static function get_car( WP_REST_Request $request ) {
 		return self::get_vehicle( LTI_Post_Types::CAR, $request, 'format_car' );
+	}
+
+	public static function list_parts( WP_REST_Request $request ) {
+		$lang = self::normalize_lang( (string) $request->get_param( 'lang' ) );
+
+		$query = new WP_Query(
+			array(
+				'post_type'      => LTI_Post_Types::PART,
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+			)
+		);
+
+		$items = array();
+		foreach ( $query->posts as $post ) {
+			$items[] = self::format_part( $post, $lang );
+		}
+
+		return rest_ensure_response( $items );
 	}
 
 	private static function list_vehicles( string $post_type, WP_REST_Request $request, string $formatter ) {
@@ -284,5 +316,36 @@ class LTI_REST_API {
 			$block[ $lang ] = LTI_Meta_Fields::get_localized_block( $post_id, $lang, $post_type );
 		}
 		return $block;
+	}
+
+	private static function resolve_part_external_id( WP_Post $post ): string {
+		$id = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'external_id' );
+		if ( '' !== $id ) {
+			return $id;
+		}
+		return 'p-' . $post->ID;
+	}
+
+	private static function part_primary_image_url( WP_Post $post ): string {
+		$thumb_id = get_post_thumbnail_id( $post->ID );
+		if ( $thumb_id ) {
+			$url = wp_get_attachment_image_url( $thumb_id, 'large' );
+			if ( $url ) {
+				return $url;
+			}
+		}
+
+		return 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1200&q=80';
+	}
+
+	private static function format_part( WP_Post $post, string $lang ): array {
+		$localized = LTI_Meta_Fields::get_localized_block( $post->ID, $lang, $post->post_type );
+
+		return array(
+			'id'          => self::resolve_part_external_id( $post ),
+			'title'       => $localized['title'],
+			'description' => $localized['description'],
+			'imageUrl'    => self::part_primary_image_url( $post ),
+		);
 	}
 }

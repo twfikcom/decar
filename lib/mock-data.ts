@@ -212,6 +212,33 @@ export const trucks: Truck[] = [
   }
 ];
 
+/** Spare parts — all shown on a single page (no per-item route). */
+export type SparePart = {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+};
+
+export const spareParts: SparePart[] = [
+  {
+    id: 'p-demo-1',
+    title: 'Kupplungssatz · MAN TGX',
+    description:
+      '<p>Neuwertiger Kupplungssatz, passend für ausgewählte MAN TGX Baujahre. Lieferung innerhalb Deutschlands möglich.</p>',
+    imageUrl:
+      'https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'p-demo-2',
+    title: 'Luftfeder · Hinterachse',
+    description:
+      '<p>Gebrauchte Luftfeder, geprüft und funktionsfähig. Bitte Fahrgestellnummer für Kompatibilität mit angeben.</p>',
+    imageUrl:
+      'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80',
+  },
+];
+
 export const testimonials = [
   {
     id: "rev-1",

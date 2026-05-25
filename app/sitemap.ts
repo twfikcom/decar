@@ -4,7 +4,7 @@ import { getSiteOrigin } from '@/lib/site-url';
 import { localizedUrlPath } from '@/lib/seo';
 import { getCars, getTrucks } from '@/lib/products';
 
-const STATIC_SEGMENTS = ['', 'about', 'contact', 'service', 'cars', 'trucks', 'new-arrivals'] as const;
+const STATIC_SEGMENTS = ['', 'about', 'contact', 'service', 'cars', 'trucks', 'parts', 'new-arrivals'] as const;
 
 function abs(path: string): string {
   const base = getSiteOrigin().replace(/\/$/, '');

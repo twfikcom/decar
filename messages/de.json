@@ -8,6 +8,7 @@
     "home": "Startseite",
     "trucks": "LKW",
     "cars": "PKW",
+    "parts": "Ersatzteile",
     "service": "Wartung",
     "contact": "Kontakt",
     "about": "Über uns"
@@ -25,6 +26,7 @@
     "home": "Startseite",
     "trucks": "LKW & Nutzfahrzeuge",
     "cars": "PKW / Gebrauchtwagen",
+    "parts": "Ersatzteile",
     "service": "Wartung",
     "contact": "Kontakt",
     "about": "Über uns",
@@ -58,6 +60,13 @@
     "pkwSubtitle": "Personenwagen, nicht im LKW-Katalog",
     "allPkw": "Alle PKW",
     "allPkwCta": "Alle PKW ansehen",
+    "partsBadge": "Teile",
+    "partsTitle": "Ersatzteile &",
+    "partsTitleAccent": "Zubehör",
+    "partsSubtitle": "Auswahl aus dem Teile-Bereich — Preis auf Anfrage per WhatsApp.",
+    "allParts": "Alle Ersatzteile",
+    "allPartsCta": "Zum Teile-Bereich",
+    "partsEmpty": "Aktuell keine Teile in der Vorschau — im Katalog nachsehen.",
     "brandStripTrucks": "Marken · LKW",
     "brandStripCars": "Marken · PKW",
     "brandStripTrucksAria": "LKW nach Marke filtern",
@@ -69,6 +78,14 @@
     "valueHighlight": "Premium",
     "valueRest": "Partner",
     "valueBlockImageAlt": "Nutzfahrzeug in dramatischer Beleuchtung"
+  },
+  "Parts": {
+    "heroEyebrow": "Ersatzteile",
+    "heroTitle": "Teile &",
+    "heroTitleAccent": "Zubehör",
+    "heroText": "Alle Einträge auf einer Seite — ohne separate Unterseiten. Fragen Sie uns bequem per WhatsApp zu Preis und Lieferung.",
+    "empty": "Derzeit sind keine Ersatzteile eingetragen.",
+    "noDescription": "Keine Beschreibung hinterlegt."
   },
   "HomeHighlight": {
     "warrantyIconWord": "Garantie",
@@ -325,6 +342,8 @@
     "contactDescription": "Kontaktieren Sie uns per WhatsApp oder über das Kontaktformular.",
     "trucksListTitle": "LKW & Nutzfahrzeuge | Löwe Trucks",
     "trucksListDescription": "Gebrauchte und neue LKW und Nutzfahrzeuge in Deutschland — nach Marke, Aufbau, Kilometerstand und Preis filtern.",
+    "partsTitle": "Ersatzteile | Löwe Trucks",
+    "partsDescription": "Ersatzteile und Zubehör mit Bild und Beschreibung — Preis und Verfügbarkeit per WhatsApp anfragen.",
     "titleSuffix": "| Löwe Trucks"
   },
   "VehicleEnums": {

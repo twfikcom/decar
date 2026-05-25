@@ -8,6 +8,7 @@
     "home": "الرئيسية",
     "trucks": "الشاحنات",
     "cars": "الملاكي",
+    "parts": "قطع الغيار",
     "service": "الصيانة",
     "contact": "اتصل بنا",
     "about": "من نحن"
@@ -21,6 +22,7 @@
     "home": "الرئيسية",
     "trucks": "شاحنات النقل",
     "cars": "ملاكي مستعملة",
+    "parts": "قطع الغيار",
     "service": "الصيانة",
     "contact": "اتصل بنا",
     "about": "من نحن",
@@ -54,6 +56,13 @@
     "pkwSubtitle": "معتمدة وبأسعار واضحة",
     "allPkw": "كل الملاكي",
     "allPkwCta": "عرض كل الملاكي",
+    "partsBadge": "قطع",
+    "partsTitle": "قطع غيار و",
+    "partsTitleAccent": "إكسسوارات",
+    "partsSubtitle": "من مخزون القطع — السعر عبر واتساب.",
+    "allParts": "كل قطع الغيار",
+    "allPartsCta": "الدخول لقسم قطع الغيار",
+    "partsEmpty": "لا توجد قطع في المعاينة حالياً — تصفح القائمة الكاملة.",
     "brandStripTrucks": "الماركات · شاحنات",
     "brandStripCars": "الماركات · ملاكي",
     "brandStripTrucksAria": "تصفية الشاحنات حسب الماركة",
@@ -65,6 +74,14 @@
     "valueHighlight": "مميز",
     "valueRest": "في أوروبا",
     "valueBlockImageAlt": "شاحنة بإضاءة جذابة"
+  },
+  "Parts": {
+    "heroEyebrow": "قطع الغيار",
+    "heroTitle": "قطع و",
+    "heroTitleAccent": "إكسسوارات",
+    "heroText": "كل العناصر في صفحة واحدة دون روابط تفصيلية لكل قطعة. تواصل معنا عبر واتساب للسعر والتوريد.",
+    "empty": "لا توجد قطع غيار مدرجة حالياً.",
+    "noDescription": "لا يوجد وصف."
   },
   "HomeHighlight": {
     "warrantyIconWord": "ضمان",
@@ -297,6 +314,8 @@
     "contactDescription": "تواصل معنا عبر واتساب أو نموذج الاتصال.",
     "trucksListTitle": "الشاحنات والمركبات التجارية | لوفه تراكس",
     "trucksListDescription": "شاحنات جديدة ومستعملة في ألمانيا — تصفية حسب الماركة والهيكل والمسافة والسعر.",
+    "partsTitle": "قطع الغيار | لوفه تراكس",
+    "partsDescription": "قطع غيار وملحقات مع صورة ووصف — اسأل عن السعر والتوفر عبر واتساب.",
     "titleSuffix": "| لوفه تراكس"
   },
   "VehicleEnums": {

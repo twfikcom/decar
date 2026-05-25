@@ -173,6 +173,9 @@ class LTI_Feature_Options {
 	}
 
 	public static function groups_for_post_type( string $post_type ): array {
+		if ( LTI_Post_Types::PART === $post_type ) {
+			return array();
+		}
 		return LTI_Post_Types::TRUCK === $post_type ? self::truck_groups() : self::car_groups();
 	}
 }

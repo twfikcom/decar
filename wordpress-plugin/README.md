@@ -1,6 +1,6 @@
 # Löwe Trucks Inventory — WordPress Plugin
 
-Manage **Cars** and **Trucks** from WordPress with DE/EN/AR content, media gallery, YouTube video, and **REST API** for the Next.js frontend.
+Manage **Cars**, **Trucks**, and **Spare parts** from WordPress with DE/EN/AR content, media gallery, YouTube video (vehicles), and **REST API** for the Next.js frontend.
 
 The storefront **pulls inventory automatically** from WordPress on a schedule controlled by `WORDPRESS_REVALIDATE_SECONDS` in Next.js — no webhook or cache-sync screen.
 
@@ -29,6 +29,14 @@ Base: `https://admin.löwetrucks.de/wp-json/lowe-trucks/v1/`
 | `GET /trucks/{id}?lang=en` | Single truck |
 | `GET /cars?lang=ar` | All cars |
 | `GET /cars/{id}?lang=de` | Single car |
+| `GET /parts?lang=en` | Spare parts for the Next.js `/parts` page (image + title + description; no per-part URL) |
+
+## Add a spare part
+
+1. **Löwe Inventory → Add spare part**
+2. **Featured Image** (sidebar) — shown on the website
+3. **Spare part text** — title and description in DE / EN / AR
+4. **Publish** — items appear together on the Next.js Parts page only
 
 ## Next.js env
 

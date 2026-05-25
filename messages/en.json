@@ -8,6 +8,7 @@
     "home": "Home",
     "trucks": "Trucks",
     "cars": "Cars",
+    "parts": "Parts",
     "service": "Maintenance",
     "contact": "Contact",
     "about": "About us"
@@ -21,6 +22,7 @@
     "home": "Home",
     "trucks": "Trucks & commercial vehicles",
     "cars": "Cars / used cars",
+    "parts": "Spare parts",
     "service": "Maintenance",
     "contact": "Contact",
     "about": "About us",
@@ -54,6 +56,13 @@
     "pkwSubtitle": "Passenger cars, not in the truck catalogue",
     "allPkw": "All cars",
     "allPkwCta": "View all cars",
+    "partsBadge": "Parts",
+    "partsTitle": "Spare parts &",
+    "partsTitleAccent": "accessories",
+    "partsSubtitle": "From our parts range — ask for price on WhatsApp.",
+    "allParts": "All spare parts",
+    "allPartsCta": "Go to spare parts",
+    "partsEmpty": "No parts in preview right now — open the full catalogue.",
     "brandStripTrucks": "Brands · Trucks",
     "brandStripCars": "Brands · PKW",
     "brandStripTrucksAria": "Filter trucks by brand",
@@ -65,6 +74,14 @@
     "valueHighlight": "premium",
     "valueRest": "partner",
     "valueBlockImageAlt": "Commercial vehicle in dramatic lighting"
+  },
+  "Parts": {
+    "heroEyebrow": "Spare parts",
+    "heroTitle": "Parts &",
+    "heroTitleAccent": "accessories",
+    "heroText": "Everything on one page — no separate detail URLs. Ask us on WhatsApp for price and delivery.",
+    "empty": "No spare parts are listed yet.",
+    "noDescription": "No description provided."
   },
   "HomeHighlight": {
     "warrantyIconWord": "Warranty",
@@ -297,6 +314,8 @@
     "contactDescription": "Reach us via WhatsApp or the contact form.",
     "trucksListTitle": "Trucks & commercial vehicles | Löwe Trucks",
     "trucksListDescription": "Used and new trucks in Germany — filter by brand, body type, mileage and price.",
+    "partsTitle": "Spare parts | Löwe Trucks",
+    "partsDescription": "Spare parts and accessories with photo and description — ask for price and availability via WhatsApp.",
     "titleSuffix": "| Löwe Trucks"
   },
   "VehicleEnums": {

@@ -8,6 +8,7 @@ class LTI_Post_Types {
 
 	public const TRUCK = 'lt_truck';
 	public const CAR   = 'lt_car';
+	public const PART  = 'lt_part';
 
 	public static function init(): void {
 		add_action( 'init', array( __CLASS__, 'register' ) );
@@ -46,6 +47,29 @@ class LTI_Post_Types {
 					'add_new_item'  => __( 'Add New Car', 'lowe-trucks-inventory' ),
 					'edit_item'     => __( 'Edit Car', 'lowe-trucks-inventory' ),
 					'search_items'  => __( 'Search Cars', 'lowe-trucks-inventory' ),
+				),
+				'public'              => false,
+				'show_ui'             => true,
+				'show_in_menu'        => false,
+				'show_in_rest'        => false,
+				'capability_type'     => 'post',
+				'map_meta_cap'        => true,
+				'hierarchical'        => false,
+				'supports'            => array( 'title', 'thumbnail' ),
+				'has_archive'         => false,
+				'rewrite'             => false,
+			)
+		);
+
+		register_post_type(
+			self::PART,
+			array(
+				'labels'              => array(
+					'name'          => __( 'Spare parts', 'lowe-trucks-inventory' ),
+					'singular_name' => __( 'Spare part', 'lowe-trucks-inventory' ),
+					'add_new_item'  => __( 'Add spare part', 'lowe-trucks-inventory' ),
+					'edit_item'     => __( 'Edit spare part', 'lowe-trucks-inventory' ),
+					'search_items'  => __( 'Search spare parts', 'lowe-trucks-inventory' ),
 				),
 				'public'              => false,
 				'show_ui'             => true,
