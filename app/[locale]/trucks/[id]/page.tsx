@@ -94,15 +94,15 @@ export default async function TruckDetailPage({
             </div>
           </div>
 
-          <aside className="lg:col-start-3 lg:row-span-3 lg:row-start-1 lg:self-start">
-            <div className="transform-gpu rounded-3xl border-4 border-zinc-200 bg-white p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-10 lg:sticky lg:top-40">
+          <aside className="min-w-0 lg:col-start-3 lg:row-span-3 lg:row-start-1 lg:self-start">
+            <div className="min-w-0 max-w-full transform-gpu overflow-hidden rounded-3xl border-4 border-zinc-200 bg-white p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-10 lg:sticky lg:top-40">
               <div className="mb-4">
                 <span className="mb-4 inline-block rounded-md bg-black px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
                   {truckNorm.brand}
                 </span>
               </div>
 
-              <h1 className="mb-6 font-heading text-3xl font-black leading-tight text-black drop-shadow-sm md:text-4xl">
+              <h1 className="mb-6 min-w-0 max-w-full break-words font-heading text-3xl font-black leading-tight text-black drop-shadow-sm [overflow-wrap:anywhere] md:text-4xl">
                 {copy.title}
               </h1>
 

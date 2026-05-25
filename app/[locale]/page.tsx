@@ -383,7 +383,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 return (
                   <div
                     key={part.id}
-                    className="group flex flex-col overflow-hidden rounded-2xl border-4 border-amber-200/90 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.2)]"
+                    className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border-4 border-amber-200/90 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.2)]"
                   >
                     <Link
                       href="/parts"
@@ -403,8 +403,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                           </span>
                         </div>
                       </div>
-                      <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-amber-50/60 p-8">
-                        <h3 className="mb-3 line-clamp-2 font-heading text-2xl font-black leading-tight text-amber-950 transition group-hover:text-orange-800">
+                      <div className="flex min-w-0 flex-1 flex-col bg-gradient-to-b from-white to-amber-50/60 p-8">
+                        <h3 className="mb-3 min-w-0 max-w-full break-words font-heading text-2xl font-black leading-tight text-amber-950 [overflow-wrap:anywhere] transition group-hover:text-orange-800 line-clamp-2">
                           {part.title}
                         </h3>
                         <p className="line-clamp-3 text-sm font-semibold leading-relaxed text-amber-900/85">{excerpt}</p>

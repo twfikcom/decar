@@ -109,12 +109,14 @@ export default async function CarDetailPage({
             </div>
           </div>
 
-          <aside className="lg:col-start-3 lg:row-span-3 lg:row-start-1 lg:self-start">
-            <div className="rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-xl md:p-10 lg:sticky lg:top-36">
+          <aside className="min-w-0 lg:col-start-3 lg:row-span-3 lg:row-start-1 lg:self-start">
+            <div className="min-w-0 max-w-full overflow-hidden rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-xl md:p-10 lg:sticky lg:top-36">
               <span className="mb-3 inline-block rounded-md bg-slate-900 px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
                 {carNorm.brand}
               </span>
-              <h1 className="mb-6 font-heading text-3xl font-black leading-tight text-slate-900 md:text-4xl">{copy.title}</h1>
+              <h1 className="mb-6 min-w-0 max-w-full break-words font-heading text-3xl font-black leading-tight text-slate-900 [overflow-wrap:anywhere] md:text-4xl">
+                {copy.title}
+              </h1>
               <div className="mb-8 border-b-4 border-slate-100 pb-8">
                 {showPrice ? (
                   <>

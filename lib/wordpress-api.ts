@@ -65,16 +65,28 @@ function fetchOptions(): RequestInit {
   };
 }
 
-async function fetchWp<T>(path: string, locale: string): Promise<T | null> {
+type FetchWpCache = 'default' | 'no-store';
+
+async function fetchWp<T>(path: string, locale: string, cache: FetchWpCache = 'default'): Promise<T | null> {
   const base = apiBase();
   if (!base) return null;
 
   const lang = normalizeLang(locale);
   const url = `${base}/wp-json/lowe-trucks/v1/${path}${path.includes('?') ? '&' : '?'}lang=${lang}`;
 
+  const init: RequestInit =
+    cache === 'no-store'
+      ? {
+          cache: 'no-store',
+          headers: { Accept: 'application/json' },
+        }
+      : {
+          ...fetchOptions(),
+        };
+
   try {
     const res = await fetch(url, {
-      ...fetchOptions(),
+      ...init,
       signal: AbortSignal.timeout(15000),
     });
     if (!res.ok) return null;
@@ -104,8 +116,9 @@ export async function fetchTruckFromWordPress(locale: string, id: string): Promi
   return fetchWp<TruckFromWP>(`trucks/${encodeURIComponent(id)}`, locale);
 }
 
+/** Always fresh: avoids stale empty RSC when navigating client-side or switching locale. */
 export async function fetchPartsFromWordPress(locale: string): Promise<PartFromWP[] | null> {
-  return fetchWp<PartFromWP[]>('parts', locale);
+  return fetchWp<PartFromWP[]>('parts', locale, 'no-store');
 }
 
 export function localizedFromVehicle<T extends CarFromWP | TruckFromWP>(

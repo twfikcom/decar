@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { unstable_noStore as noStore } from 'next/cache';
 import { MessageCircle } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { withSeo } from '@/lib/seo';
 import { getParts } from '@/lib/products';
 import { whatsappDeepLinkWithText } from '@/lib/public-pricing';
+
+/** Parts depend on locale + live CMS; avoid static shell / stale flight on client navigation. */
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({
   params,
@@ -21,6 +25,7 @@ export async function generateMetadata({
 }
 
 export default async function PartsPage({ params }: { params: Promise<{ locale: string }> }) {
+  noStore();
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('Parts');
@@ -34,7 +39,7 @@ export default async function PartsPage({ params }: { params: Promise<{ locale: 
       <div className="border-b-[8px] border-red-600 bg-gradient-to-r from-zinc-900 via-zinc-800 to-black px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <p className="mb-3 text-xs font-black uppercase tracking-[0.35em] text-orange-400">{t('heroEyebrow')}</p>
-          <h1 className="font-heading text-4xl font-black tracking-tight text-white sm:text-5xl">
+          <h1 className="max-w-full break-words font-heading text-4xl font-black tracking-tight text-white sm:text-5xl">
             {heroAccent ? (
               <>
                 <span className="text-white">{t('heroTitle')}</span>{' '}
@@ -58,7 +63,7 @@ export default async function PartsPage({ params }: { params: Promise<{ locale: 
               return (
                 <li
                   key={part.id}
-                  className="flex flex-col overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[0_8px_0_0_rgba(0,0,0,0.85)]"
+                  className="flex min-w-0 flex-col overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[0_8px_0_0_rgba(0,0,0,0.85)]"
                 >
                   <div className="relative aspect-[4/3] w-full bg-zinc-200">
                     <Image
@@ -70,8 +75,10 @@ export default async function PartsPage({ params }: { params: Promise<{ locale: 
                       unoptimized
                     />
                   </div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <h2 className="font-heading text-xl font-black text-zinc-900">{part.title}</h2>
+                  <div className="flex min-w-0 flex-1 flex-col p-5">
+                    <h2 className="min-w-0 max-w-full break-words font-heading text-xl font-black text-zinc-900">
+                      {part.title}
+                    </h2>
                     <div
                       className="mt-3 flex-1 text-sm leading-relaxed text-zinc-700 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_ul]:my-2 [&_ul]:list-disc [&_ul]:ps-5 [&_a]:text-orange-600 [&_a]:underline"
                       dangerouslySetInnerHTML={{ __html: part.description || `<p>${t('noDescription')}</p>` }}
