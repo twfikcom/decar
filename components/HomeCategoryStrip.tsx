@@ -81,30 +81,30 @@ export default async function HomeCategoryStrip() {
               <li key={href} className="min-w-0">
                 <Link
                   href={href}
-                  className="group relative flex aspect-square min-h-[140px] flex-col items-center justify-between overflow-hidden rounded-sm border border-white/10 p-3 text-center shadow-[0_8px_24px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] outline-none ring-orange-400/0 transition-[transform,box-shadow,background-position] duration-700 ease-out focus-visible:ring-2 focus-visible:ring-orange-400 sm:min-h-[160px] sm:p-4 active:translate-y-0.5 bg-[length:220%_220%] bg-[position:0%_50%] hover:bg-[position:100%_50%] hover:shadow-[0_12px_28px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] bg-[linear-gradient(128deg,#fdba74_0%,#fb923c_14%,#f97316_28%,#ea580c_40%,#dc2626_55%,#991b1b_68%,#292524_82%,#0a0a0a_100%)]"
+                  className="group relative grid aspect-square min-h-[156px] w-full grid-rows-[1fr_auto_auto] overflow-hidden rounded-sm border border-white/10 p-2 text-center shadow-[0_8px_24px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)] outline-none ring-orange-400/0 transition-[transform,box-shadow,background-position] duration-700 ease-out focus-visible:ring-2 focus-visible:ring-orange-400 sm:min-h-[172px] sm:p-2.5 active:translate-y-0.5 bg-[length:220%_220%] bg-[position:0%_50%] hover:bg-[position:100%_50%] hover:shadow-[0_12px_28px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] bg-[linear-gradient(128deg,#fdba74_0%,#fb923c_14%,#f97316_28%,#ea580c_40%,#dc2626_55%,#991b1b_68%,#292524_82%,#0a0a0a_100%)]"
                 >
                   <span
                     className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.15)_55%,rgba(0,0,0,0.45)_100%)]"
                     aria-hidden
                   />
-                  <span className="relative flex min-h-[4.5rem] flex-1 flex-col items-center justify-center sm:min-h-[5.25rem]">
+                  <span className="relative flex min-h-0 w-full items-center justify-center px-0.5 pt-0.5">
                     <Image
                       src={iconSrc}
                       alt=""
-                      width={200}
-                      height={120}
-                      className="h-auto max-h-[4rem] w-full max-w-[9rem] object-contain object-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)] transition-transform duration-300 group-hover:scale-105 sm:max-h-[5.5rem] sm:max-w-[10.5rem]"
-                      sizes="(max-width: 640px) 144px, 168px"
+                      width={360}
+                      height={216}
+                      className="max-h-full max-w-[92%] h-auto w-auto object-contain object-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] transition-transform duration-300 group-hover:scale-[1.03]"
+                      sizes="(max-width: 640px) 44vw, (max-width: 1024px) 30vw, 220px"
                     />
                   </span>
                   {n !== null ? (
-                    <span className="relative font-heading text-2xl font-black tabular-nums text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] sm:text-3xl">
+                    <span className="relative shrink-0 font-heading text-xl font-black tabular-nums leading-none text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] sm:text-2xl">
                       {n}
                     </span>
                   ) : (
-                    <span className="relative h-8 sm:h-9" aria-hidden />
+                    <span className="relative h-6 shrink-0 sm:h-7" aria-hidden />
                   )}
-                  <span className="relative line-clamp-3 text-[11px] font-bold leading-tight text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] sm:text-xs md:text-[13px]">
+                  <span className="relative line-clamp-3 shrink-0 px-0.5 pb-0.5 text-[10px] font-bold leading-tight text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] sm:text-[11px] md:text-xs">
                     {t(labelKey)}
                   </span>
                 </Link>
