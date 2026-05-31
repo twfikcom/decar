@@ -21,6 +21,16 @@ function excerptFromHtml(html: string, max = 140): string {
   return `${text.slice(0, max - 1).trimEnd()}…`;
 }
 
+/** Shared card + section CTA buttons (PKW section style) on the homepage. */
+const homeAskPriceBtn =
+  'inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 px-2.5 py-2 text-[10px] font-black uppercase leading-tight tracking-wide text-white shadow-[0_4px_0_0_#9a3412] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none sm:flex-none sm:gap-2 sm:px-5 sm:py-3 sm:text-sm sm:tracking-widest';
+
+const homeCardArrowBtn =
+  'shrink-0 rounded-xl bg-slate-900 p-2.5 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-red-600 group-hover:shadow-[0_4px_0_0_#7f1d1d] active:translate-y-1 active:shadow-none sm:p-3';
+
+const homeSectionCtaBtn =
+  'inline-flex max-w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-xs font-black uppercase leading-tight tracking-wide text-white shadow-[0_6px_0_0_#7f1d1d] transition hover:translate-y-[2px] hover:bg-orange-600 hover:shadow-[0_4px_0_0_#9a3412] active:translate-y-[6px] active:shadow-none sm:gap-3 sm:px-8 sm:py-5 sm:text-lg sm:tracking-widest';
+
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -177,19 +187,19 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       </div>
                     </div>
                   </Link>
-                  <div className="flex items-center justify-between border-t-2 border-zinc-200 bg-gradient-to-b from-white to-zinc-50 px-8 pb-8 pt-6">
+                  <div className="flex items-center justify-between gap-2 border-t-2 border-zinc-200 bg-gradient-to-b from-white to-zinc-50 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
                     <a
                       href={waTruck}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 px-5 py-3 text-sm font-black uppercase tracking-widest text-white shadow-[0_4px_0_0_#9a3412] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none"
+                      className={homeAskPriceBtn}
                     >
-                      <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
+                      <MessageCircle className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
                       {tCommon('askPrice')}
                     </a>
                     <Link
                       href={`/trucks/${truck.id}`}
-                      className="rounded-xl bg-black p-3 text-white shadow-[0_4px_0_0_#52525b] transition-all hover:bg-red-600 hover:shadow-[0_4px_0_0_#7f1d1d] active:translate-y-1 active:shadow-none"
+                      className={homeCardArrowBtn}
                       aria-label={copy.title}
                     >
                       <ArrowRight className="h-6 w-6" />
@@ -201,11 +211,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
 
           <div className="mt-16 text-center">
-            <Link
-              href="/trucks"
-              className="inline-flex items-center gap-3 rounded-xl bg-red-600 px-8 py-5 text-lg font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#7f1d1d] transition-all hover:translate-y-[2px] hover:bg-orange-600 hover:shadow-[0_4px_0_0_#9a3412] active:translate-y-[6px] active:shadow-none"
-            >
-              {t('allTrucksCta')} <ArrowRight className="h-6 w-6" />
+            <Link href="/trucks" className={homeSectionCtaBtn}>
+              {t('allTrucksCta')} <ArrowRight className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             </Link>
           </div>
         </div>
@@ -319,20 +326,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                     </div>
                   </Link>
                   <div className="flex items-center justify-between gap-2 border-t-2 border-slate-200 bg-gradient-to-b from-white to-slate-50 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
-                    <a
-                      href={waCar}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 px-2.5 py-2 text-[10px] font-black uppercase leading-tight tracking-wide text-white shadow-[0_4px_0_0_#9a3412] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none sm:flex-none sm:gap-2 sm:px-5 sm:py-3 sm:text-sm sm:tracking-widest"
-                    >
+                    <a href={waCar} target="_blank" rel="noopener noreferrer" className={homeAskPriceBtn}>
                       <MessageCircle className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
                       {tCommon('askPrice')}
                     </a>
-                    <Link
-                      href={`/cars/${car.id}`}
-                      className="shrink-0 rounded-xl bg-slate-900 p-2.5 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-red-600 group-hover:shadow-[0_4px_0_0_#7f1d1d] active:translate-y-1 active:shadow-none sm:p-3"
-                      aria-label={copy.title}
-                    >
+                    <Link href={`/cars/${car.id}`} className={homeCardArrowBtn} aria-label={copy.title}>
                       <ArrowRight className="h-6 w-6" />
                     </Link>
                   </div>
@@ -342,10 +340,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
 
           <div className="mt-16 text-center">
-            <Link
-              href="/cars"
-              className="inline-flex max-w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-xs font-black uppercase leading-tight tracking-wide text-white shadow-[0_6px_0_0_#7f1d1d] transition hover:translate-y-[2px] hover:bg-orange-600 hover:shadow-[0_4px_0_0_#9a3412] active:translate-y-[6px] active:shadow-none sm:gap-3 sm:px-8 sm:py-5 sm:text-lg sm:tracking-widest"
-            >
+            <Link href="/cars" className={homeSectionCtaBtn}>
               {t('allPkwCta')} <ArrowRight className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             </Link>
           </div>
@@ -410,21 +405,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                         <p className="line-clamp-3 text-sm font-semibold leading-relaxed text-amber-900/85">{excerpt}</p>
                       </div>
                     </Link>
-                    <div className="flex items-center justify-between border-t-2 border-amber-200 bg-gradient-to-b from-white to-amber-50/60 px-8 pb-8 pt-6">
-                      <a
-                        href={waPart}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 px-5 py-3 text-sm font-black uppercase tracking-widest text-white shadow-[0_4px_0_0_#9a3412] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none"
-                      >
-                        <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
+                    <div className="flex items-center justify-between gap-2 border-t-2 border-amber-200 bg-gradient-to-b from-white to-amber-50/60 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
+                      <a href={waPart} target="_blank" rel="noopener noreferrer" className={homeAskPriceBtn}>
+                        <MessageCircle className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
                         {tCommon('askPrice')}
                       </a>
-                      <Link
-                        href="/parts"
-                        className="rounded-xl bg-amber-950 p-3 text-white shadow-[0_4px_0_0_#78350f] transition group-hover:bg-orange-600 group-hover:shadow-[0_4px_0_0_#9a3412] active:translate-y-1 active:shadow-none"
-                        aria-label={t('allParts')}
-                      >
+                      <Link href="/parts" className={homeCardArrowBtn} aria-label={t('allParts')}>
                         <ArrowRight className="h-6 w-6" />
                       </Link>
                     </div>
@@ -435,11 +421,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           )}
 
           <div className="mt-16 text-center">
-            <Link
-              href="/parts"
-              className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 px-8 py-5 text-lg font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#9a3412] transition hover:translate-y-[2px] hover:from-orange-500 hover:to-amber-500 hover:shadow-[0_4px_0_0_#c2410c] active:translate-y-[6px] active:shadow-none"
-            >
-              {t('allPartsCta')} <ArrowRight className="h-6 w-6" />
+            <Link href="/parts" className={homeSectionCtaBtn}>
+              {t('allPartsCta')} <ArrowRight className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             </Link>
           </div>
         </div>
