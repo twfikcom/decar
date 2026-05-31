@@ -72,9 +72,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   return (
     <div className="flex min-h-screen flex-col">
-      <section className="relative flex min-h-[min(100dvh,920px)] w-full flex-col overflow-hidden border-b-[8px] border-orange-600 bg-black">
+      <section className="relative flex w-full flex-col overflow-hidden border-b-[8px] border-orange-600 bg-black sm:min-h-[min(100dvh,920px)]">
         <HeroSlider />
-        <div className="relative z-20 flex flex-1 flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 md:py-32 lg:px-8">
+        <div className="relative z-20 flex flex-col justify-start px-4 pb-10 pt-16 max-sm:flex-none sm:flex-1 sm:justify-center sm:px-6 sm:py-24 md:py-32 lg:px-8">
           <div className="mx-auto w-full max-w-7xl transform-gpu">
             <HeroTextAnimation />
           </div>

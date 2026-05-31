@@ -80,12 +80,12 @@ function HeroContent({ animated }: { animated: boolean }) {
 
       <Paragraph
         {...itemProps}
-        className="mb-8 max-w-2xl text-base font-medium leading-relaxed text-zinc-300 drop-shadow-md sm:mb-10 sm:text-xl md:mb-12 md:text-2xl"
+        className="mb-6 max-w-2xl text-base font-medium leading-relaxed text-zinc-300 drop-shadow-md sm:mb-10 sm:text-xl md:mb-12 md:text-2xl"
       >
         {t('subtitle')}
       </Paragraph>
 
-      <Item {...itemProps} className="flex flex-col gap-3 sm:flex-row sm:gap-6">
+      <Item {...itemProps} className="flex flex-col gap-2.5 sm:flex-row sm:gap-6">
         <Link
           href="/trucks"
           className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-red-600 to-red-800 px-5 py-3 text-sm font-black uppercase leading-tight tracking-wide text-white shadow-[0_6px_0_0_#7f1d1d,0_12px_24px_rgba(220,38,38,0.35)] transition-all hover:translate-y-[3px] hover:shadow-[0_3px_0_0_#7f1d1d,0_8px_16px_rgba(220,38,38,0.45)] active:translate-y-[6px] active:shadow-none sm:gap-3 sm:px-10 sm:py-5 sm:text-xl sm:tracking-wider sm:shadow-[0_8px_0_0_#7f1d1d,0_15px_30px_rgba(220,38,38,0.4)] sm:hover:translate-y-[4px] sm:active:translate-y-[8px]"
