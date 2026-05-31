@@ -16,8 +16,8 @@ export default async function HomeHighlightCards() {
   const total = await getInventoryCount();
 
   const barRow = (label: string) => (
-    <div className="flex items-center justify-between gap-3 bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 px-4 py-3 sm:px-5">
-      <span className="text-left text-sm font-black uppercase tracking-wide text-white sm:text-[13px]">
+    <div className="flex items-center justify-between gap-3 bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 px-4 py-2.5 sm:px-5 sm:py-3">
+      <span className="text-left text-xs font-black uppercase tracking-wide text-white sm:text-sm">
         {label}
       </span>
       <ChevronRight
@@ -43,7 +43,7 @@ export default async function HomeHighlightCards() {
               />
             </div>
             {barRow(t('warrantyBar'))}
-            <p className="grow px-4 py-5 text-sm font-medium leading-relaxed text-zinc-300 sm:px-5 sm:text-[15px]">
+            <p className="grow px-4 py-4 text-sm font-medium leading-relaxed text-zinc-300 sm:px-5 sm:py-5 sm:text-base">
               {t('warrantyDesc')}
             </p>
           </article>
@@ -63,7 +63,7 @@ export default async function HomeHighlightCards() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>
             {barRow(t('newArrivalsBar', { count: total }))}
-            <p className="grow px-4 py-5 text-sm font-medium leading-relaxed text-zinc-300 sm:px-5 sm:text-[15px]">
+            <p className="grow px-4 py-4 text-sm font-medium leading-relaxed text-zinc-300 sm:px-5 sm:py-5 sm:text-base">
               {t('newArrivalsDesc')}
             </p>
           </Link>
@@ -83,7 +83,7 @@ export default async function HomeHighlightCards() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
             </div>
             {barRow(t('maintenanceBar'))}
-            <p className="grow px-4 py-5 text-sm font-medium leading-relaxed text-zinc-300 sm:px-5 sm:text-[15px]">
+            <p className="grow px-4 py-4 text-sm font-medium leading-relaxed text-zinc-300 sm:px-5 sm:py-5 sm:text-base">
               {t('maintenanceDesc')}
             </p>
           </Link>

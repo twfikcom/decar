@@ -64,13 +64,13 @@ export default async function HomeCategoryStrip() {
 
   return (
     <section
-      className="border-b-[8px] border-orange-600 bg-zinc-950 px-4 py-10 sm:px-6 lg:px-8"
+      className="border-b-[8px] border-orange-600 bg-zinc-950 px-4 py-8 sm:px-6 sm:py-10 lg:px-8"
       aria-labelledby="category-strip-heading"
     >
       <div className="mx-auto max-w-7xl">
         <h2
           id="category-strip-heading"
-          className="mb-8 text-center font-sans text-lg font-bold leading-snug text-zinc-100 sm:text-xl md:text-2xl"
+          className="mb-6 text-center font-sans text-base font-bold leading-snug text-zinc-100 sm:mb-8 sm:text-xl md:text-2xl"
         >
           {t('heading')}
         </h2>
@@ -99,13 +99,13 @@ export default async function HomeCategoryStrip() {
                   </span>
                   <div className="relative z-10 flex w-full min-w-0 flex-col items-center justify-end gap-0 px-0.5 pb-0.5 max-sm:gap-0 max-sm:pb-1 sm:gap-0.5 sm:pb-1">
                     {n !== null ? (
-                      <span className="font-heading text-sm font-black tabular-nums leading-none text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] sm:text-xl lg:text-2xl">
+                      <span className="font-heading text-base font-black tabular-nums leading-none text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] sm:text-xl lg:text-2xl">
                         {n}
                       </span>
                     ) : (
                       <span className="h-3 shrink-0 sm:h-6" aria-hidden />
                     )}
-                    <span className="line-clamp-2 w-full text-[8px] font-bold leading-[1.1] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.95)] sm:line-clamp-3 sm:text-[10px] sm:leading-tight md:text-xs">
+                    <span className="line-clamp-2 w-full text-[11px] font-bold leading-[1.15] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.95)] sm:line-clamp-3 sm:text-xs sm:leading-tight">
                       {t(labelKey)}
                     </span>
                   </div>

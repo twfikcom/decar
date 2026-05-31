@@ -31,6 +31,27 @@ const homeCardArrowBtn =
 const homeSectionCtaBtn =
   'inline-flex max-w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-xs font-black uppercase leading-tight tracking-wide text-white shadow-[0_6px_0_0_#7f1d1d] transition hover:translate-y-[2px] hover:bg-orange-600 hover:shadow-[0_4px_0_0_#9a3412] active:translate-y-[6px] active:shadow-none sm:gap-3 sm:px-8 sm:py-5 sm:text-lg sm:tracking-widest';
 
+/** Mobile type scale aligned with Hero (badge 11px, h1 3xl, body base, btn sm). */
+const homeSectionTitle = 'font-heading text-2xl font-black tracking-tight drop-shadow-sm sm:text-4xl md:text-5xl';
+const homeSectionSubtitle = 'mt-2 text-xs font-bold uppercase tracking-wider text-zinc-500 sm:text-sm sm:tracking-widest';
+const homeSectionNavLink =
+  'inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wide transition sm:gap-2 sm:text-sm sm:tracking-widest';
+const homeCardBody = 'flex flex-1 flex-col bg-gradient-to-b from-white to-zinc-50 p-5 sm:p-8';
+const homeCardBodySlate = 'flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-5 sm:p-8';
+const homeCardBodyAmber = 'flex min-w-0 flex-1 flex-col bg-gradient-to-b from-white to-amber-50/60 p-5 sm:p-8';
+const homeCardExcerpt = 'line-clamp-3 text-sm font-semibold leading-relaxed sm:text-base';
+const homeCardTitle =
+  'mb-3 line-clamp-2 font-heading text-lg font-black leading-tight sm:mb-4 sm:text-2xl';
+const homeCardTags =
+  'flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider sm:gap-x-4 sm:gap-y-3 sm:text-sm sm:tracking-widest';
+const homeBrandBadge =
+  'font-black uppercase tracking-wider text-white sm:tracking-widest';
+const homeBrandBadgeTruck = `bg-black px-2.5 py-1 text-xs ${homeBrandBadge} sm:px-4 sm:py-2 sm:text-sm`;
+const homeBrandBadgeCar = `bg-orange-600 px-2.5 py-1 text-xs ${homeBrandBadge} shadow-lg sm:px-3 sm:py-1 sm:text-xs`;
+const homeCardPrice = 'font-heading text-xl font-black drop-shadow-sm sm:text-3xl';
+const homeEyebrowBadge =
+  'mb-2 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-wider';
+
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -83,28 +104,28 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       <HomeCategoryStrip />
 
-      <section className="bg-zinc-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] py-24 [background-size:16px_16px]">
+      <section className="bg-zinc-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] py-12 [background-size:16px_16px] sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end md:mb-16">
+          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:mb-14 sm:gap-6 sm:flex-row sm:items-end md:mb-16">
             <div>
-              <h2 className="font-heading text-4xl font-black tracking-tight text-black drop-shadow-sm md:text-5xl">
+              <h2 className={`text-black ${homeSectionTitle}`}>
                 <span className="text-black">{t('trucksLine1')}</span>{' '}
                 <span className="text-red-600">{t('trucksLine2')}</span>{' '}
                 <span className="text-zinc-500">{t('trucksLine3')}</span>
               </h2>
-              <p className="mt-2 text-sm font-bold uppercase tracking-widest text-zinc-500">{t('trucksSubtitle')}</p>
+              <p className={homeSectionSubtitle}>{t('trucksSubtitle')}</p>
             </div>
             <Link
               href="/trucks"
-              className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-red-600 transition-all hover:translate-x-1 hover:text-orange-600"
+              className={`text-red-600 hover:translate-x-1 hover:text-orange-600 ${homeSectionNavLink}`}
             >
-              {t('allTrucks')} <ArrowRight className="h-5 w-5" />
+              {t('allTrucks')} <ArrowRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
             </Link>
           </div>
 
           <HomeBrandIcons kind="trucks" />
 
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
             {featuredTruckRows.map(({ truck, copy }) => {
               const waTruck = whatsappDeepLinkWithText(tCommon('whatsappAskPrefill', { title: copy.title }));
               return showPrice ? (
@@ -121,25 +142,23 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
                     />
                     <div className="absolute left-4 top-4 flex gap-2 shadow-xl">
-                      <span className="bg-black px-4 py-2 text-sm font-black uppercase tracking-widest text-white">
-                        {truck.brand}
-                      </span>
+                      <span className={homeBrandBadgeTruck}>{truck.brand}</span>
                     </div>
                   </div>
 
-                  <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-zinc-50 p-8">
-                    <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-black transition-colors group-hover:text-red-700">
+                  <div className={homeCardBody}>
+                    <h3 className={`text-black transition-colors group-hover:text-red-700 ${homeCardTitle}`}>
                       {copy.title}
                     </h3>
-                    <div className="mb-8 flex flex-wrap gap-x-4 gap-y-3 text-sm font-bold uppercase tracking-widest text-zinc-500">
+                    <div className={`mb-6 text-zinc-500 sm:mb-8 ${homeCardTags}`}>
                       <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">{truck.year}</span>
                       <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">
                         {truck.power} {tCommon('powerUnit')}
                       </span>
                     </div>
 
-                    <div className="mt-auto flex items-center justify-between border-t-2 border-zinc-200 pt-6 transition-colors group-hover:border-red-200">
-                      <span className="font-heading text-3xl font-black text-black drop-shadow-sm">
+                    <div className="mt-auto flex items-center justify-between border-t-2 border-zinc-200 pt-4 transition-colors group-hover:border-red-200 sm:pt-6">
+                      <span className={`text-black ${homeCardPrice}`}>
                         {new Intl.NumberFormat(nl, {
                           style: 'currency',
                           currency: 'EUR',
@@ -169,17 +188,15 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                         className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
                       />
                       <div className="absolute left-4 top-4 flex gap-2 shadow-xl">
-                        <span className="bg-black px-4 py-2 text-sm font-black uppercase tracking-widest text-white">
-                          {truck.brand}
-                        </span>
+                        <span className={homeBrandBadgeTruck}>{truck.brand}</span>
                       </div>
                     </div>
 
-                    <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-zinc-50 p-8">
-                      <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-black transition-colors group-hover:text-red-700">
+                    <div className={homeCardBody}>
+                      <h3 className={`text-black transition-colors group-hover:text-red-700 ${homeCardTitle}`}>
                         {copy.title}
                       </h3>
-                      <div className="flex flex-wrap gap-x-4 gap-y-3 text-sm font-bold uppercase tracking-widest text-zinc-500">
+                      <div className={`text-zinc-500 ${homeCardTags}`}>
                         <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">{truck.year}</span>
                         <span className="rounded-sm bg-zinc-200 px-3 py-1 text-black">
                           {truck.power} {tCommon('powerUnit')}
@@ -210,7 +227,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             })}
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-10 text-center sm:mt-16">
             <Link href="/trucks" className={homeSectionCtaBtn}>
               {t('allTrucksCta')} <ArrowRight className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             </Link>
@@ -218,30 +235,30 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      <section className="border-y-4 border-orange-600/40 bg-gradient-to-b from-slate-100 to-slate-200 py-24">
+      <section className="border-y-4 border-orange-600/40 bg-gradient-to-b from-slate-100 to-slate-200 py-12 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end md:mb-16">
+          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:mb-14 sm:gap-6 sm:flex-row sm:items-end md:mb-16">
             <div>
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-orange-600/40 bg-orange-50 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-orange-900">
-                <CarFront className="h-4 w-4" aria-hidden />
+              <div className={`border-orange-600/40 bg-orange-50 text-orange-900 ${homeEyebrowBadge}`}>
+                <CarFront className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" aria-hidden />
                 {t('pkwBadge')}
               </div>
-              <h2 className="font-heading text-4xl font-black tracking-tight text-slate-900 drop-shadow-sm md:text-5xl">
+              <h2 className={`text-slate-900 ${homeSectionTitle}`}>
                 {t('pkwTitle')} <span className="text-orange-600">{t('pkwTitleAccent')}</span>
               </h2>
-              <p className="mt-2 text-sm font-bold uppercase tracking-widest text-slate-500">{t('pkwSubtitle')}</p>
+              <p className={`${homeSectionSubtitle} text-slate-500`}>{t('pkwSubtitle')}</p>
             </div>
             <Link
               href="/cars"
-              className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-red-600 transition hover:translate-x-1 hover:text-orange-600"
+              className={`text-red-600 hover:translate-x-1 hover:text-orange-600 ${homeSectionNavLink}`}
             >
-              {t('allPkw')} <ArrowRight className="h-5 w-5" />
+              {t('allPkw')} <ArrowRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
             </Link>
           </div>
 
           <HomeBrandIcons kind="cars" />
 
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
             {featuredCarRows.map(({ car, copy }) => {
               const waCar = whatsappDeepLinkWithText(tCommon('whatsappAskPrefill', { title: copy.title }));
               return showPrice ? (
@@ -258,25 +275,23 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       className="object-cover transition duration-700 group-hover:scale-110"
                     />
                     <div className="absolute left-4 top-4 flex gap-2">
-                      <span className="bg-orange-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
-                        {t('pkwBadge')}
-                      </span>
-                      <span className="bg-black/75 px-3 py-1 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm">
+                      <span className={homeBrandBadgeCar}>{t('pkwBadge')}</span>
+                      <span className="bg-black/75 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-white backdrop-blur-sm sm:px-3 sm:tracking-widest">
                         {car.brand}
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-8">
-                    <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-orange-800">
+                  <div className={homeCardBodySlate}>
+                    <h3 className={`text-slate-900 transition group-hover:text-orange-800 ${homeCardTitle}`}>
                       {copy.title}
                     </h3>
-                    <div className="mb-8 flex flex-wrap gap-2 text-sm font-bold uppercase tracking-widest text-slate-600">
+                    <div className={`mb-6 text-slate-600 sm:mb-8 ${homeCardTags}`}>
                       <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{car.year}</span>
                       <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{bodyLabel(car.bodyType)}</span>
                       <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{fuelLabel(car.fuel)}</span>
                     </div>
-                    <div className="mt-auto flex items-center justify-between border-t-2 border-slate-200 pt-6 transition group-hover:border-orange-200">
-                      <span className="font-heading text-3xl font-black text-slate-900">
+                    <div className="mt-auto flex items-center justify-between border-t-2 border-slate-200 pt-4 transition group-hover:border-orange-200 sm:pt-6">
+                      <span className={`text-slate-900 ${homeCardPrice}`}>
                         {new Intl.NumberFormat(nl, {
                           style: 'currency',
                           currency: 'EUR',
@@ -306,19 +321,17 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                         className="object-cover transition duration-700 group-hover:scale-110"
                       />
                       <div className="absolute left-4 top-4 flex gap-2">
-                        <span className="bg-orange-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
-                          {t('pkwBadge')}
-                        </span>
-                        <span className="bg-black/75 px-3 py-1 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm">
+                        <span className={homeBrandBadgeCar}>{t('pkwBadge')}</span>
+                        <span className="bg-black/75 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-white backdrop-blur-sm sm:px-3 sm:tracking-widest">
                           {car.brand}
                         </span>
                       </div>
                     </div>
-                    <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-8">
-                      <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-orange-800">
+                    <div className={homeCardBodySlate}>
+                      <h3 className={`text-slate-900 transition group-hover:text-orange-800 ${homeCardTitle}`}>
                         {copy.title}
                       </h3>
-                      <div className="flex flex-wrap gap-2 text-sm font-bold uppercase tracking-widest text-slate-600">
+                      <div className={`text-slate-600 ${homeCardTags}`}>
                         <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{car.year}</span>
                         <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{bodyLabel(car.bodyType)}</span>
                         <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{fuelLabel(car.fuel)}</span>
@@ -339,7 +352,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             })}
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-10 text-center sm:mt-16">
             <Link href="/cars" className={homeSectionCtaBtn}>
               {t('allPkwCta')} <ArrowRight className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             </Link>
@@ -347,31 +360,31 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      <section className="border-y-4 border-amber-500/45 bg-gradient-to-b from-amber-50 via-orange-50/80 to-amber-100/90 py-24">
+      <section className="border-y-4 border-amber-500/45 bg-gradient-to-b from-amber-50 via-orange-50/80 to-amber-100/90 py-12 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end md:mb-16">
+          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:mb-14 sm:gap-6 sm:flex-row sm:items-end md:mb-16">
             <div>
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-amber-600/35 bg-amber-100/80 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-amber-900">
-                <Package className="h-4 w-4" aria-hidden />
+              <div className={`border-amber-600/35 bg-amber-100/80 text-amber-900 ${homeEyebrowBadge}`}>
+                <Package className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" aria-hidden />
                 {t('partsBadge')}
               </div>
-              <h2 className="font-heading text-4xl font-black tracking-tight text-amber-950 drop-shadow-sm md:text-5xl">
+              <h2 className={`text-amber-950 ${homeSectionTitle}`}>
                 {t('partsTitle')} <span className="text-orange-600">{t('partsTitleAccent')}</span>
               </h2>
-              <p className="mt-2 text-sm font-bold uppercase tracking-widest text-amber-800/80">{t('partsSubtitle')}</p>
+              <p className={`${homeSectionSubtitle} text-amber-800/80`}>{t('partsSubtitle')}</p>
             </div>
             <Link
               href="/parts"
-              className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-orange-700 transition hover:translate-x-1 hover:text-orange-600"
+              className={`text-orange-700 hover:translate-x-1 hover:text-orange-600 ${homeSectionNavLink}`}
             >
-              {t('allParts')} <ArrowRight className="h-5 w-5" />
+              {t('allParts')} <ArrowRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
             </Link>
           </div>
 
           {featuredParts.length === 0 ? (
-            <p className="mb-10 text-center text-base font-bold text-amber-900/80">{t('partsEmpty')}</p>
+            <p className="mb-8 text-center text-sm font-bold text-amber-900/80 sm:mb-10 sm:text-base">{t('partsEmpty')}</p>
           ) : (
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
               {featuredParts.map((part) => {
                 const waPart = whatsappDeepLinkWithText(tCommon('whatsappAskPrefill', { title: part.title }));
                 const excerpt = excerptFromHtml(part.description);
@@ -393,16 +406,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                           unoptimized
                         />
                         <div className="absolute left-4 top-4 flex gap-2">
-                          <span className="bg-orange-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
-                            {t('partsBadge')}
-                          </span>
+                          <span className={homeBrandBadgeCar}>{t('partsBadge')}</span>
                         </div>
                       </div>
-                      <div className="flex min-w-0 flex-1 flex-col bg-gradient-to-b from-white to-amber-50/60 p-8">
-                        <h3 className="mb-3 min-w-0 max-w-full break-words font-heading text-2xl font-black leading-tight text-amber-950 [overflow-wrap:anywhere] transition group-hover:text-orange-800 line-clamp-2">
+                      <div className={homeCardBodyAmber}>
+                        <h3
+                          className={`min-w-0 max-w-full break-words text-amber-950 [overflow-wrap:anywhere] transition group-hover:text-orange-800 line-clamp-2 ${homeCardTitle}`}
+                        >
                           {part.title}
                         </h3>
-                        <p className="line-clamp-3 text-sm font-semibold leading-relaxed text-amber-900/85">{excerpt}</p>
+                        <p className={`text-amber-900/85 ${homeCardExcerpt}`}>{excerpt}</p>
                       </div>
                     </Link>
                     <div className="flex items-center justify-between gap-2 border-t-2 border-amber-200 bg-gradient-to-b from-white to-amber-50/60 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
@@ -420,7 +433,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </div>
           )}
 
-          <div className="mt-16 text-center">
+          <div className="mt-10 text-center sm:mt-16">
             <Link href="/parts" className={homeSectionCtaBtn}>
               {t('allPartsCta')} <ArrowRight className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             </Link>
@@ -430,10 +443,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       <HomeHighlightCards />
 
-      <section className="relative overflow-hidden bg-black py-32 text-white">
+      <section className="relative overflow-hidden bg-black py-16 text-white sm:py-32">
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/20 blur-[120px]" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-10 sm:gap-16 lg:grid-cols-2">
             <div className="perspective-1000">
               <div className="relative aspect-square transform-gpu rounded-3xl border-2 border-zinc-800 bg-gradient-to-tr from-zinc-900 to-zinc-800 p-4 shadow-[0_20px_50px_rgba(220,38,38,0.3)] transition-transform duration-700 rotate-y-6 hover:rotate-y-0">
                 <Image
@@ -446,23 +459,23 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </div>
 
             <div className="lg:pl-10">
-              <h2 className="mb-8 font-heading text-4xl font-black leading-[1.1] tracking-tighter text-white md:text-6xl">
+              <h2 className="mb-6 font-heading text-2xl font-black leading-[1.1] tracking-tighter text-white sm:mb-8 sm:text-4xl md:text-6xl">
                 {t('valueHeading')}{' '}
                 <span className="bg-gradient-to-br from-red-500 to-orange-500 bg-clip-text text-transparent">
                   {t('valueHighlight')}
                 </span>{' '}
                 {t('valueRest')}
               </h2>
-              <ul className="space-y-8">
+              <ul className="space-y-4 sm:space-y-8">
                 {valueItems.map((feature, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-6 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-inner"
+                    className="flex items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-4 shadow-inner sm:gap-6 sm:p-6"
                   >
-                    <div className="rounded-lg bg-gradient-to-br from-red-600 to-orange-600 p-3 shadow-[0_4px_10px_rgba(220,38,38,0.5)]">
-                      <CheckCircle className="h-8 w-8 text-white" />
+                    <div className="rounded-lg bg-gradient-to-br from-red-600 to-orange-600 p-2 shadow-[0_4px_10px_rgba(220,38,38,0.5)] sm:p-3">
+                      <CheckCircle className="h-6 w-6 text-white sm:h-8 sm:w-8" />
                     </div>
-                    <span className="text-lg font-bold text-white">{feature}</span>
+                    <span className="text-base font-bold text-white sm:text-lg">{feature}</span>
                   </li>
                 ))}
               </ul>
