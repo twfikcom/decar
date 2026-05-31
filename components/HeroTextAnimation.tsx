@@ -63,7 +63,7 @@ function HeroContent({ animated }: { animated: boolean }) {
   return (
     <Wrapper className="max-w-3xl rtl:ms-auto" {...containerProps}>
       <Item {...itemProps}>
-        <span className="inline-block py-1 px-4 bg-red-600 text-white font-black uppercase tracking-[0.3em] rounded-sm mb-6 drop-shadow-[0_4px_10px_rgba(220,38,38,0.8)] shadow-[0_4px_0_0_#7f1d1d] rotate-1">
+        <span className="mb-6 inline-block rounded-sm bg-red-600 px-4 py-1.5 text-sm font-black tracking-wide text-white shadow-[0_4px_0_0_#7f1d1d] drop-shadow-[0_4px_10px_rgba(220,38,38,0.8)] sm:text-base sm:tracking-wider">
           {t('badge')}
         </span>
       </Item>

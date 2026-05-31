@@ -211,22 +211,22 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      <section className="border-y-4 border-emerald-600/50 bg-gradient-to-b from-slate-100 to-slate-200 py-24">
+      <section className="border-y-4 border-orange-600/40 bg-gradient-to-b from-slate-100 to-slate-200 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end md:mb-16">
             <div>
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-emerald-600/40 bg-emerald-50 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-emerald-800">
+              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-orange-600/40 bg-orange-50 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-orange-900">
                 <CarFront className="h-4 w-4" aria-hidden />
                 {t('pkwBadge')}
               </div>
               <h2 className="font-heading text-4xl font-black tracking-tight text-slate-900 drop-shadow-sm md:text-5xl">
-                {t('pkwTitle')} <span className="text-emerald-700">{t('pkwTitleAccent')}</span>
+                {t('pkwTitle')} <span className="text-orange-600">{t('pkwTitleAccent')}</span>
               </h2>
               <p className="mt-2 text-sm font-bold uppercase tracking-widest text-slate-500">{t('pkwSubtitle')}</p>
             </div>
             <Link
               href="/cars"
-              className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-emerald-700 transition hover:translate-x-1 hover:text-emerald-600"
+              className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-red-600 transition hover:translate-x-1 hover:text-orange-600"
             >
               {t('allPkw')} <ArrowRight className="h-5 w-5" />
             </Link>
@@ -241,9 +241,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 <Link
                   href={`/cars/${car.id}`}
                   key={car.id}
-                  className="group flex flex-col overflow-hidden rounded-2xl border-4 border-slate-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-emerald-500 hover:shadow-[0_24px_50px_rgba(16,185,129,0.18)]"
+                  className="group flex flex-col overflow-hidden rounded-2xl border-4 border-slate-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.18)]"
                 >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-slate-200 bg-slate-900 transition group-hover:border-emerald-500">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-slate-200 bg-slate-900 transition group-hover:border-orange-500">
                     <Image
                       src={car.images[0]}
                       alt={copy.title}
@@ -251,7 +251,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       className="object-cover transition duration-700 group-hover:scale-110"
                     />
                     <div className="absolute left-4 top-4 flex gap-2">
-                      <span className="bg-emerald-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
+                      <span className="bg-orange-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
                         {t('pkwBadge')}
                       </span>
                       <span className="bg-black/75 px-3 py-1 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm">
@@ -260,7 +260,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-8">
-                    <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-emerald-800">
+                    <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-orange-800">
                       {copy.title}
                     </h3>
                     <div className="mb-8 flex flex-wrap gap-2 text-sm font-bold uppercase tracking-widest text-slate-600">
@@ -268,7 +268,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{bodyLabel(car.bodyType)}</span>
                       <span className="rounded-sm bg-slate-200 px-3 py-1 text-slate-900">{fuelLabel(car.fuel)}</span>
                     </div>
-                    <div className="mt-auto flex items-center justify-between border-t-2 border-slate-200 pt-6 transition group-hover:border-emerald-200">
+                    <div className="mt-auto flex items-center justify-between border-t-2 border-slate-200 pt-6 transition group-hover:border-orange-200">
                       <span className="font-heading text-3xl font-black text-slate-900">
                         {new Intl.NumberFormat(nl, {
                           style: 'currency',
@@ -276,7 +276,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                           maximumFractionDigits: 0,
                         }).format(car.price)}
                       </span>
-                      <span className="rounded-xl bg-slate-900 p-3 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-emerald-600 group-hover:shadow-[0_4px_0_0_#065f46] active:translate-y-1 active:shadow-none">
+                      <span className="rounded-xl bg-slate-900 p-3 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-red-600 group-hover:shadow-[0_4px_0_0_#7f1d1d] active:translate-y-1 active:shadow-none">
                         <ArrowRight className="h-6 w-6" />
                       </span>
                     </div>
@@ -285,13 +285,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               ) : (
                 <div
                   key={car.id}
-                  className="group flex flex-col overflow-hidden rounded-2xl border-4 border-slate-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-emerald-500 hover:shadow-[0_24px_50px_rgba(16,185,129,0.18)]"
+                  className="group flex flex-col overflow-hidden rounded-2xl border-4 border-slate-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.18)]"
                 >
                   <Link
                     href={`/cars/${car.id}`}
-                    className="flex min-h-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+                    className="flex min-h-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                   >
-                    <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-slate-200 bg-slate-900 transition group-hover:border-emerald-500">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-slate-200 bg-slate-900 transition group-hover:border-orange-500">
                       <Image
                         src={car.images[0]}
                         alt={copy.title}
@@ -299,7 +299,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                         className="object-cover transition duration-700 group-hover:scale-110"
                       />
                       <div className="absolute left-4 top-4 flex gap-2">
-                        <span className="bg-emerald-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
+                        <span className="bg-orange-600 px-3 py-1 text-xs font-black uppercase tracking-widest text-white shadow-lg">
                           {t('pkwBadge')}
                         </span>
                         <span className="bg-black/75 px-3 py-1 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm">
@@ -308,7 +308,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       </div>
                     </div>
                     <div className="flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-8">
-                      <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-emerald-800">
+                      <h3 className="mb-4 line-clamp-2 font-heading text-2xl font-black leading-tight text-slate-900 transition group-hover:text-orange-800">
                         {copy.title}
                       </h3>
                       <div className="flex flex-wrap gap-2 text-sm font-bold uppercase tracking-widest text-slate-600">
@@ -318,19 +318,19 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       </div>
                     </div>
                   </Link>
-                  <div className="flex items-center justify-between border-t-2 border-slate-200 bg-gradient-to-b from-white to-slate-50 px-8 pb-8 pt-6">
+                  <div className="flex items-center justify-between gap-2 border-t-2 border-slate-200 bg-gradient-to-b from-white to-slate-50 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
                     <a
                       href={waCar}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-emerald-500 to-emerald-700 px-5 py-3 text-sm font-black uppercase tracking-widest text-white shadow-[0_4px_0_0_#065f46] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none"
+                      className="inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-b from-orange-500 to-orange-700 px-2.5 py-2 text-[10px] font-black uppercase leading-tight tracking-wide text-white shadow-[0_4px_0_0_#9a3412] transition hover:brightness-105 active:translate-y-0.5 active:shadow-none sm:flex-none sm:gap-2 sm:px-5 sm:py-3 sm:text-sm sm:tracking-widest"
                     >
-                      <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
+                      <MessageCircle className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
                       {tCommon('askPrice')}
                     </a>
                     <Link
                       href={`/cars/${car.id}`}
-                      className="rounded-xl bg-slate-900 p-3 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-emerald-600 group-hover:shadow-[0_4px_0_0_#065f46] active:translate-y-1 active:shadow-none"
+                      className="shrink-0 rounded-xl bg-slate-900 p-2.5 text-white shadow-[0_4px_0_0_#334155] transition group-hover:bg-red-600 group-hover:shadow-[0_4px_0_0_#7f1d1d] active:translate-y-1 active:shadow-none sm:p-3"
                       aria-label={copy.title}
                     >
                       <ArrowRight className="h-6 w-6" />
@@ -344,9 +344,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <div className="mt-16 text-center">
             <Link
               href="/cars"
-              className="inline-flex items-center gap-3 rounded-xl bg-emerald-600 px-8 py-5 text-lg font-black uppercase tracking-widest text-white shadow-[0_6px_0_0_#065f46] transition hover:translate-y-[2px] hover:bg-emerald-500 hover:shadow-[0_4px_0_0_#047857] active:translate-y-[6px] active:shadow-none"
+              className="inline-flex max-w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-xs font-black uppercase leading-tight tracking-wide text-white shadow-[0_6px_0_0_#7f1d1d] transition hover:translate-y-[2px] hover:bg-orange-600 hover:shadow-[0_4px_0_0_#9a3412] active:translate-y-[6px] active:shadow-none sm:gap-3 sm:px-8 sm:py-5 sm:text-lg sm:tracking-widest"
             >
-              {t('allPkwCta')} <ArrowRight className="h-6 w-6" />
+              {t('allPkwCta')} <ArrowRight className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
             </Link>
           </div>
         </div>
