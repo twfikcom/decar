@@ -70,7 +70,7 @@ export default async function HomeCategoryStrip() {
       <div className="mx-auto max-w-7xl">
         <h2
           id="category-strip-heading"
-          className="mb-6 text-center font-sans text-base font-bold leading-snug text-zinc-100 sm:mb-8 sm:text-xl md:text-2xl"
+          className="mb-6 text-center font-sans text-xs font-bold leading-tight tracking-tight text-zinc-100 max-sm:whitespace-nowrap sm:mb-8 sm:whitespace-normal sm:text-xl sm:leading-snug sm:tracking-normal md:text-2xl"
         >
           {t('heading')}
         </h2>
