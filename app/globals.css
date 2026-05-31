@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+/* Hide page chrome before React hydrates when the home splash is pending */
+html.home-loader-active body {
+  overflow: hidden;
+  background: #000;
+}
+
+html.home-loader-active #site-navbar,
+html.home-loader-active #site-main,
+html.home-loader-active #site-footer {
+  visibility: hidden;
+}

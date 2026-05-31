@@ -54,7 +54,9 @@ export default async function LocaleLayout({
       <DocumentLang locale={locale} />
       <HomeLoader />
       <Navbar />
-      <main className="flex-1 overflow-x-hidden">{children}</main>
+      <main id="site-main" className="flex-1 overflow-x-hidden">
+        {children}
+      </main>
       <Footer />
     </NextIntlClientProvider>
   );

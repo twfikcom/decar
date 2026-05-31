@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import Script from 'next/script';
 import { Inter, Space_Grotesk, Noto_Sans_Arabic } from 'next/font/google';
 import './globals.css';
 
@@ -22,6 +23,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         suppressHydrationWarning
         className="flex min-h-screen flex-col bg-zinc-100 font-sans text-zinc-900 antialiased selection:bg-orange-500 selection:text-white"
       >
+        <Script id="home-loader-init" strategy="beforeInteractive">
+          {`(function(){try{var p=location.pathname.replace(/\\/$/,'')||'/';var home=p==='/'||p==='/en'||p==='/ar';if(home&&!sessionStorage.getItem('appLoaded')){document.documentElement.classList.add('home-loader-active');}}catch(e){}})();`}
+        </Script>
         {children}
       </body>
     </html>

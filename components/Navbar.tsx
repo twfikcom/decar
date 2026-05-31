@@ -24,7 +24,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="w-full flex flex-col z-[100] relative">
+    <header id="site-navbar" className="w-full flex flex-col z-[100] relative">
       {/* Top Bar - Contact Info (Small) */}
       <div className="bg-black text-zinc-400 py-1.5 px-4 sm:px-6 lg:px-8 text-xs font-bold uppercase tracking-widest hidden md:block border-b border-zinc-900">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
