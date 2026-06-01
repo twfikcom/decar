@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import Script from 'next/script';
 import { Inter, Space_Grotesk, Noto_Sans_Arabic } from 'next/font/google';
+import { HOME_LOADER_INIT_SCRIPT } from '@/lib/home-loader';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
@@ -19,13 +19,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
       className={`${inter.variable} ${space.variable} ${notoArabic.variable} scroll-smooth`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: HOME_LOADER_INIT_SCRIPT }} />
+      </head>
       <body
         suppressHydrationWarning
         className="flex min-h-screen flex-col bg-zinc-100 font-sans text-zinc-900 antialiased selection:bg-orange-500 selection:text-white"
       >
-        <Script id="home-loader-init" strategy="beforeInteractive">
-          {`(function(){try{var p=location.pathname.replace(/\\/$/,'')||'/';var home=p==='/'||p==='/en'||p==='/ar';if(home&&!sessionStorage.getItem('appLoaded')){document.documentElement.classList.add('home-loader-active');}}catch(e){}})();`}
-        </Script>
         {children}
       </body>
     </html>

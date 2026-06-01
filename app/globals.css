@@ -10,4 +10,5 @@ html.home-loader-active #site-navbar,
 html.home-loader-active #site-main,
 html.home-loader-active #site-footer {
   visibility: hidden;
+  pointer-events: none;
 }

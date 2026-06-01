@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { useEffect, useState } from 'react';
 import { Search, MessageCircle } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { useHomeHeroReady } from '@/hooks/use-home-hero-ready';
 
 function HeroContent({ animated }: { animated: boolean }) {
   const t = useTranslations('Hero');
@@ -108,11 +108,6 @@ function HeroContent({ animated }: { animated: boolean }) {
 }
 
 export default function HeroTextAnimation() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  return <HeroContent animated={mounted} />;
+  const heroReady = useHomeHeroReady();
+  return <HeroContent animated={heroReady} />;
 }
