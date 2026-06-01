@@ -1,5 +1,5 @@
-/** Site logo served from /public/as.png */
-export const SITE_LOGO_URL = '/as.png';
+/** Site logo served from /public/logoo.webp */
+export const SITE_LOGO_URL = '/logoo.webp';
 
 /** White plate behind logo so light text in the asset stays readable on dark headers. */
 export const SITE_LOGO_FRAME_CLASS =
