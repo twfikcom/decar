@@ -1,5 +1,5 @@
-/** Site logo served from /public/logohim.webp */
-export const SITE_LOGO_URL = '/logohim.webp';
+/** Site logo served from /public/givehim.png */
+export const SITE_LOGO_URL = '/givehim.png';
 
 /** White plate behind logo so light text in the asset stays readable on dark headers. */
 export const SITE_LOGO_FRAME_CLASS =
