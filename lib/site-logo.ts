@@ -1,8 +1,5 @@
-/**
- * Logo served from WordPress admin host (same as inventory CDN).
- * Host must match next.config `images.remotePatterns` for `admin.xn--lwetrucks-07a.de`.
- */
-export const SITE_LOGO_URL = 'https://admin.xn--lwetrucks-07a.de/pics/logo241.png';
+/** Site logo served from /public/logohim.webp */
+export const SITE_LOGO_URL = '/logohim.webp';
 
 /** White plate behind logo so light text in the asset stays readable on dark headers. */
 export const SITE_LOGO_FRAME_CLASS =
