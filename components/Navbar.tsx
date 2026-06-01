@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { SITE_LOGO_URL } from '@/lib/site-logo';
+import { SITE_LOGO_FRAME_CLASS, SITE_LOGO_URL } from '@/lib/site-logo';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +60,7 @@ export default function Navbar() {
               aria-label={`LÖWE TRUCKS, ${t('companyLegal')}`}
               className="relative z-30 inline-flex min-w-0 shrink-0 items-center justify-start justify-self-start"
             >
-              <div className="relative shrink-0">
+              <div className={`relative shrink-0 ${SITE_LOGO_FRAME_CLASS}`}>
                 <Image
                   src={SITE_LOGO_URL}
                   alt=""

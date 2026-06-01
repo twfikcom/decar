@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useLayoutEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from '@/i18n/navigation';
-import { SITE_LOGO_URL } from '@/lib/site-logo';
+import { SITE_LOGO_FRAME_CLASS, SITE_LOGO_URL } from '@/lib/site-logo';
 import {
   HOME_LOADER_SESSION_KEY,
   dispatchHomeLoaderDone,
@@ -87,7 +87,7 @@ export default function HomeLoader() {
             transition={{ type: 'spring', stiffness: 120, damping: 18 }}
             className="relative mb-8 flex justify-center px-4"
           >
-            <div className="rounded-md border border-black/50 bg-gradient-to-r from-red-700 via-orange-600 to-red-600 px-2 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] sm:px-2.5 sm:py-2">
+            <div className={SITE_LOGO_FRAME_CLASS}>
               <Image
                 src={SITE_LOGO_URL}
                 alt="Löwe Trucks"
