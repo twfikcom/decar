@@ -60,15 +60,53 @@ class LTI_Vocabulary {
 		return array( 'BMW', 'Mercedes-Benz', 'Volkswagen', 'Audi' );
 	}
 
+	/**
+	 * Admin UI labels are always English so editors are not required to read German.
+	 */
 	public static function admin_lang(): string {
-		$loc = get_user_locale();
-		if ( preg_match( '/^ar/i', $loc ) ) {
-			return 'ar';
-		}
-		if ( preg_match( '/^en/i', $loc ) ) {
-			return 'en';
-		}
-		return 'de';
+		return 'en';
+	}
+
+	/** @return array<string, string> */
+	public static function condition_admin_labels(): array {
+		return array(
+			'Neu'       => 'New',
+			'Gebraucht' => 'Used',
+		);
+	}
+
+	/** @return array<string, string> */
+	public static function body_type_admin_labels(): array {
+		return array(
+			'Limousine' => 'Sedan',
+			'SUV'       => 'SUV',
+			'Kombi'     => 'Estate',
+			'Kompakt'   => 'Compact',
+			'Coupé'     => 'Coupé',
+		);
+	}
+
+	/** @return array<string, string> */
+	public static function fuel_admin_labels(): array {
+		return array(
+			'Benzin'  => 'Petrol',
+			'Diesel'  => 'Diesel',
+			'Hybrid'  => 'Hybrid',
+			'Elektro' => 'Electric',
+		);
+	}
+
+	/** @return array<string, string> */
+	public static function transmission_admin_labels(): array {
+		return array(
+			'Manual'    => 'Manual',
+			'Automatic' => 'Automatic',
+		);
+	}
+
+	public static function validate_transmission( string $value ): string {
+		$value = trim( $value );
+		return in_array( $value, array( 'Manual', 'Automatic' ), true ) ? $value : 'Automatic';
 	}
 
 	public static function truck_category_label( string $slug, ?string $lang = null ): string {

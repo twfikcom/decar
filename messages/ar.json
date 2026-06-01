@@ -242,6 +242,8 @@
     "mileage": "المسافة",
     "power": "القوة",
     "body": "نوع الهيكل",
+    "transmission": "ناقل الحركة",
+    "fuelEconomy": "استهلاك الوقود",
     "vat": "ض.ق.م. قابلة للاسترداد (19٪)",
     "whatsapp": "واتساب",
     "emailRequest": "طلب شراء (بريد)",
@@ -271,6 +273,8 @@
     "power": "القوة",
     "body": "الهيكل",
     "fuel": "الوقود",
+    "transmission": "ناقل الحركة",
+    "fuelEconomy": "استهلاك الوقود",
     "vat": "ض.ق.م. قابلة للاسترداد (19٪)",
     "whatsapp": "واتساب",
     "buyRequest": "طلب شراء",
@@ -331,6 +335,10 @@
       "Diesel": "ديزل",
       "Hybrid": "هجين",
       "Elektro": "كهرباء"
+    },
+    "transmission": {
+      "Manual": "يدوي",
+      "Automatic": "أوتوماتيك"
     },
     "truckCategory": {
       "Sattelzugmaschine": "رؤوس تريلات أو قاطرات",

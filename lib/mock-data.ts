@@ -11,6 +11,8 @@ export type Car = {
   condition: "Neu" | "Gebraucht";
   bodyType: "Limousine" | "SUV" | "Kombi" | "Kompakt" | "Coupé";
   fuel: "Benzin" | "Diesel" | "Hybrid" | "Elektro";
+  transmission?: "Manual" | "Automatic";
+  fuelEconomy?: string;
   images: string[];
   description: string;
   features: string[];
@@ -109,6 +111,8 @@ export type Truck = {
   price: number; // in EUR
   power: number; // in PS (HP)
   condition: "Neu" | "Gebraucht";
+  transmission?: "Manual" | "Automatic";
+  fuelEconomy?: string;
   category: "Sattelzugmaschine" | "Festaufbau" | "Kipper" | "Kastenwagen" | "Auflieger";
   images: string[];
   description: string;

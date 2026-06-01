@@ -12,6 +12,15 @@
       $panels.removeClass('is-active');
       $(this).addClass('is-active');
       $('[data-lang-panel="' + lang + '"]').addClass('is-active');
+
+      if (window.tinyMCE) {
+        window.setTimeout(function () {
+          window.tinyMCE.editors.forEach(function (ed) {
+            if (!ed) return;
+            ed.execCommand('mceRepaint');
+          });
+        }, 0);
+      }
     });
   }
 
@@ -115,9 +124,20 @@
     renderPreview(currentIds());
   }
 
+  function initEditorSave() {
+    var $form = $('#post');
+    if (!$form.length) return;
+    $form.on('submit', function () {
+      if (window.tinyMCE) {
+        window.tinyMCE.triggerSave();
+      }
+    });
+  }
+
   $(function () {
     initLangTabs();
     initFeatureSyncAcrossLangs();
     initGallery();
+    initEditorSave();
   });
 })(jQuery);

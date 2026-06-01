@@ -156,3 +156,11 @@
 .lti-feature-option input {
   margin-top: 2px;
 }
+
+.lti-description-field {
+  margin: 0 0 16px;
+}
+
+.lti-description-field .wp-editor-wrap {
+  margin-top: 8px;
+}

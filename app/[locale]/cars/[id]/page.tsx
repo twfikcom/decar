@@ -26,7 +26,11 @@ export async function generateMetadata({
   const tMeta = await getTranslations({ locale, namespace: 'PageMeta' });
   return withSeo(locale, `cars/${id}`, {
     title: `${copy.title} ${tMeta('titleSuffix')}`,
-    description: String(copy.description ?? '').slice(0, 160),
+    description: String(copy.description ?? '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 160),
   });
 }
 
@@ -66,6 +70,8 @@ export default async function CarDetailPage({
 
   const bodyLabel = (v: string) => tEnum(`bodyType.${v}` as 'bodyType.Limousine');
   const fuelLabel = (v: string) => tEnum(`fuel.${v}` as 'fuel.Diesel');
+  const transmissionLabel = (v: NonNullable<typeof carNorm.transmission>) =>
+    tEnum(`transmission.${v}` as 'transmission.Manual');
 
   return (
     <div className="min-h-screen bg-slate-50 py-12 md:py-20">
@@ -168,6 +174,24 @@ export default async function CarDetailPage({
                   </p>
                   <p className="font-black text-lg text-slate-900">{fuelLabel(carNorm.fuel)}</p>
                 </div>
+                {carNorm.transmission ? (
+                  <div className="col-span-2">
+                    <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">
+                      {t('transmission')}
+                    </p>
+                    <p className="font-black text-lg text-slate-900">
+                      {transmissionLabel(carNorm.transmission)}
+                    </p>
+                  </div>
+                ) : null}
+                {carNorm.fuelEconomy ? (
+                  <div className="col-span-2">
+                    <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">
+                      {t('fuelEconomy')}
+                    </p>
+                    <p className="font-black text-lg text-slate-900">{carNorm.fuelEconomy}</p>
+                  </div>
+                ) : null}
               </div>
 
               <div className="space-y-4">
@@ -215,7 +239,10 @@ export default async function CarDetailPage({
 
           <div className="rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-lg md:p-12 lg:col-span-2 lg:col-start-1 lg:row-start-3">
             <h2 className="mb-4 font-heading text-3xl font-black text-slate-900">{t('description')}</h2>
-            <p className="mb-10 text-lg font-medium leading-relaxed text-slate-600">{copy.description}</p>
+            <div
+              className="prose prose-slate mb-10 max-w-none text-lg leading-relaxed text-slate-600 prose-headings:font-heading prose-headings:font-black prose-p:font-medium prose-a:text-orange-600 prose-strong:text-slate-900"
+              dangerouslySetInnerHTML={{ __html: copy.description }}
+            />
             <h2 className="mb-6 border-b-4 border-slate-100 pb-4 font-heading text-3xl font-black text-slate-900">
               {t('featuresTitle')}
             </h2>

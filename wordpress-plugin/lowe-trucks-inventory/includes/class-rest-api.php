@@ -243,23 +243,30 @@ class LTI_REST_API {
 			$condition = 'Gebraucht';
 		}
 
+		$transmission = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'transmission' );
+		$transmission = LTI_Vocabulary::validate_transmission( $transmission );
+
+		$fuel_economy = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'fuel_economy' );
+
 		return array(
-			'id'          => self::resolve_external_id( $post ),
-			'title'       => $localized['title'],
-			'description' => $localized['description'],
-			'features'    => $localized['features'],
-			'brand'       => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'brand' ),
-			'model'       => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'model' ),
-			'year'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'year' ),
-			'mileage'     => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'mileage' ),
-			'price'       => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'price' ),
-			'power'       => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'power' ),
-			'condition'   => $condition,
-			'category'    => $category,
-			'images'      => $images,
-			'videoUrl'    => $video_url,
-			'featured'    => '1' === LTI_Meta_Fields::get_meta_value( $post->ID, 'featured' ),
-			'i18n'        => self::build_i18n_block( $post->ID, $post->post_type ),
+			'id'           => self::resolve_external_id( $post ),
+			'title'        => $localized['title'],
+			'description'  => $localized['description'],
+			'features'     => $localized['features'],
+			'brand'        => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'brand' ),
+			'model'        => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'model' ),
+			'year'         => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'year' ),
+			'mileage'      => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'mileage' ),
+			'price'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'price' ),
+			'power'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'power' ),
+			'condition'    => $condition,
+			'transmission' => $transmission,
+			'fuelEconomy'  => $fuel_economy,
+			'category'     => $category,
+			'images'       => $images,
+			'videoUrl'     => $video_url,
+			'featured'     => '1' === LTI_Meta_Fields::get_meta_value( $post->ID, 'featured' ),
+			'i18n'         => self::build_i18n_block( $post->ID, $post->post_type ),
 		);
 	}
 
@@ -289,24 +296,31 @@ class LTI_REST_API {
 			$condition = 'Gebraucht';
 		}
 
+		$transmission = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'transmission' );
+		$transmission = LTI_Vocabulary::validate_transmission( $transmission );
+
+		$fuel_economy = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'fuel_economy' );
+
 		return array(
-			'id'          => self::resolve_external_id( $post ),
-			'title'       => $localized['title'],
-			'description' => $localized['description'],
-			'features'    => $localized['features'],
-			'brand'       => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'brand' ),
-			'model'       => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'model' ),
-			'year'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'year' ),
-			'mileage'     => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'mileage' ),
-			'price'       => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'price' ),
-			'power'       => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'power' ),
-			'condition'   => $condition,
-			'bodyType'    => $body_type,
-			'fuel'        => $fuel,
-			'images'      => $images,
-			'videoUrl'    => $video_url,
-			'featured'    => '1' === LTI_Meta_Fields::get_meta_value( $post->ID, 'featured' ),
-			'i18n'        => self::build_i18n_block( $post->ID, $post->post_type ),
+			'id'           => self::resolve_external_id( $post ),
+			'title'        => $localized['title'],
+			'description'  => $localized['description'],
+			'features'     => $localized['features'],
+			'brand'        => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'brand' ),
+			'model'        => (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'model' ),
+			'year'         => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'year' ),
+			'mileage'      => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'mileage' ),
+			'price'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'price' ),
+			'power'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'power' ),
+			'condition'    => $condition,
+			'transmission' => $transmission,
+			'fuelEconomy'  => $fuel_economy,
+			'bodyType'     => $body_type,
+			'fuel'         => $fuel,
+			'images'       => $images,
+			'videoUrl'     => $video_url,
+			'featured'     => '1' === LTI_Meta_Fields::get_meta_value( $post->ID, 'featured' ),
+			'i18n'         => self::build_i18n_block( $post->ID, $post->post_type ),
 		);
 	}
 

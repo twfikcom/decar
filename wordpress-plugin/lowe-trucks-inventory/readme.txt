@@ -22,7 +22,7 @@ Manage Cars, Trucks & Spare parts with DE/EN/AR content and expose a REST API fo
 2. Activate the plugin in WordPress admin.
 3. Go to **Löwe Inventory** in the sidebar.
 4. Add trucks under **Add Truck**, cars under **Add Car**, and spare parts under **Add spare part**.
-5. For trucks/cars: fill shared specs once, then title/description/features in DE, EN, and AR tabs. **Truck category** and **brand** are predefined lists (category labels follow your WordPress user language). Cars use a separate predefined brand list.
+5. For trucks/cars: fill shared specs once (including transmission and fuel economy), then title/description/features in DE, EN, and AR tabs. Admin labels are in English; truck category and brand use predefined lists. The description field supports rich text formatting. Cars use a separate predefined brand list.
 6. For spare parts: set **Featured Image**, then title and description in each language tab. Parts appear together on the Next.js `/parts` page only.
 7. Set **Vehicle ID** (e.g. `t-001`, `c-001`) — used in Next.js URLs for vehicles. Parts use an optional Part ID (auto `p-{id}`) for reference only.
 

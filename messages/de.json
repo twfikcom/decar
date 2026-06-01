@@ -270,6 +270,8 @@
     "mileage": "Kilometer",
     "power": "Leistung",
     "body": "Aufbau",
+    "transmission": "Getriebe",
+    "fuelEconomy": "Verbrauch",
     "vat": "MwSt. ausweisbar (19%)",
     "whatsapp": "WhatsApp Anfrage",
     "emailRequest": "Kaufanfrage (Email)",
@@ -299,6 +301,8 @@
     "power": "Leistung",
     "body": "Karosserie",
     "fuel": "Kraftstoff",
+    "transmission": "Getriebe",
+    "fuelEconomy": "Verbrauch",
     "vat": "MwSt. ausweisbar (19%)",
     "whatsapp": "WhatsApp PKW-Anfrage",
     "buyRequest": "Kaufanfrage",
@@ -359,6 +363,10 @@
       "Diesel": "Diesel",
       "Hybrid": "Hybrid",
       "Elektro": "Elektro"
+    },
+    "transmission": {
+      "Manual": "Schaltgetriebe",
+      "Automatic": "Automatik"
     },
     "truckCategory": {
       "Sattelzugmaschine": "Sattelzugmaschine",

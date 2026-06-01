@@ -18,6 +18,8 @@ const CAR_BODY: readonly Car['bodyType'][] = ['Limousine', 'SUV', 'Kombi', 'Komp
 
 const CAR_FUEL: readonly Car['fuel'][] = ['Benzin', 'Diesel', 'Hybrid', 'Elektro'];
 
+const TRANSMISSION: readonly NonNullable<Car['transmission']>[] = ['Manual', 'Automatic'];
+
 /** Normalize title/description/features from WP REST or i18n blocks (prevents server crashes). */
 export function normalizeLocalizedBlock(raw: {
   title?: unknown;
@@ -54,6 +56,19 @@ export function normalizeCarFuel(raw: string): Car['fuel'] {
   return (CAR_FUEL as readonly string[]).includes(v) ? (v as Car['fuel']) : 'Diesel';
 }
 
+export function normalizeTransmission(raw: string | undefined): Car['transmission'] | undefined {
+  const v = (raw ?? '').trim();
+  if ((TRANSMISSION as readonly string[]).includes(v)) return v as Car['transmission'];
+  if (v === 'Manuell' || v === 'Schaltgetriebe') return 'Manual';
+  if (v === 'Automatik') return 'Automatic';
+  return undefined;
+}
+
+export function normalizeFuelEconomy(raw: unknown): string | undefined {
+  const v = typeof raw === 'string' ? raw.trim() : '';
+  return v || undefined;
+}
+
 /** Coerce numeric / array fields from REST so server render never throws. */
 export function normalizeTruckForPage(t: Truck): Truck {
   return {
@@ -63,6 +78,10 @@ export function normalizeTruckForPage(t: Truck): Truck {
     price: Number(t.price) || 0,
     power: Number(t.power) || 0,
     category: normalizeTruckCategory(String(t.category)),
+    transmission: normalizeTransmission(
+      typeof t.transmission === 'string' ? t.transmission : undefined,
+    ),
+    fuelEconomy: normalizeFuelEconomy(t.fuelEconomy),
     images: Array.isArray(t.images) ? t.images.filter(Boolean).map(String) : [],
     description: typeof t.description === 'string' ? t.description : String(t.description ?? ''),
     features: Array.isArray(t.features) ? t.features.map(String) : [],
@@ -78,6 +97,10 @@ export function normalizeCarForPage(c: Car): Car {
     power: Number(c.power) || 0,
     bodyType: normalizeCarBodyType(String(c.bodyType)),
     fuel: normalizeCarFuel(String(c.fuel)),
+    transmission: normalizeTransmission(
+      typeof c.transmission === 'string' ? c.transmission : undefined,
+    ),
+    fuelEconomy: normalizeFuelEconomy(c.fuelEconomy),
     images: Array.isArray(c.images) ? c.images.filter(Boolean).map(String) : [],
     description: typeof c.description === 'string' ? c.description : String(c.description ?? ''),
     features: Array.isArray(c.features) ? c.features.map(String) : [],

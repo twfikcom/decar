@@ -23,6 +23,7 @@ class LTI_Admin_UI {
 		}
 
 		wp_enqueue_media();
+		wp_enqueue_editor();
 
 		wp_enqueue_style(
 			'lti-admin',
@@ -176,27 +177,20 @@ class LTI_Admin_UI {
 			);
 			echo '</p>';
 
-			echo '<p><label><strong>' . esc_html__( 'Description', 'lowe-trucks-inventory' ) . '</strong></label>';
-			printf(
-				'<textarea class="widefat" rows="6" name="lti_description_%1$s" placeholder="%2$s">%3$s</textarea>',
-				esc_attr( $lang ),
-				esc_attr__( 'Full vehicle description…', 'lowe-trucks-inventory' ),
-				esc_textarea( $desc )
-			);
-			echo '</p>';
+			self::render_description_editor( $lang, $desc, __( 'Full vehicle description…', 'lowe-trucks-inventory' ), 10 );
 
 			echo '<div class="lti-features-section">';
 			echo '<strong>' . esc_html__( 'Features & options', 'lowe-trucks-inventory' ) . '</strong>';
 			echo '<div class="lti-feature-groups">';
 
 			foreach ( $groups as $group_key => $group ) {
-				$group_label = $group['label'][ $lang ] ?? $group['label']['de'];
+				$group_label = $group['label']['en'] ?? $group['label']['de'];
 				echo '<div class="lti-feature-group">';
 				echo '<h4 class="lti-feature-group-title">' . esc_html( $group_label ) . '</h4>';
 				echo '<div class="lti-feature-grid">';
 
 				foreach ( $group['items'] as $item_key => $labels ) {
-					$label    = $labels[ $lang ] ?? $labels['de'];
+					$label    = $labels['en'] ?? $labels['de'];
 					$checked  = in_array( $item_key, $keys, true );
 					$input_id = 'lti_feature_' . $lang . '_' . $group_key . '_' . $item_key;
 
@@ -271,19 +265,39 @@ class LTI_Admin_UI {
 			);
 			echo '</p>';
 
-			echo '<p><label><strong>' . esc_html__( 'Description', 'lowe-trucks-inventory' ) . '</strong></label>';
-			printf(
-				'<textarea class="widefat" rows="8" name="lti_description_%1$s" placeholder="%2$s">%3$s</textarea>',
-				esc_attr( $lang ),
-				esc_attr__( 'Explain the part, compatibility, condition…', 'lowe-trucks-inventory' ),
-				esc_textarea( $desc )
-			);
-			echo '</p>';
+			self::render_description_editor( $lang, $desc, __( 'Explain the part, compatibility, condition…', 'lowe-trucks-inventory' ), 8 );
 
 			echo '</div>';
 		}
 
 		echo '<p class="description">' . esc_html__( 'German (DE) is used as fallback when a translation is empty.', 'lowe-trucks-inventory' ) . '</p>';
+	}
+
+	private static function render_description_editor( string $lang, string $content, string $placeholder, int $rows ): void {
+		$editor_id = 'lti_description_' . $lang;
+
+		echo '<div class="lti-description-field">';
+		echo '<label for="' . esc_attr( $editor_id ) . '"><strong>' . esc_html__( 'Description', 'lowe-trucks-inventory' ) . '</strong></label>';
+		echo '<p class="description">' . esc_html__( 'Formatting (bold, lists, links) is preserved on the website.', 'lowe-trucks-inventory' ) . '</p>';
+
+		wp_editor(
+			$content,
+			$editor_id,
+			array(
+				'textarea_name' => $editor_id,
+				'textarea_rows' => $rows,
+				'media_buttons' => true,
+				'teeny'         => false,
+				'quicktags'     => true,
+				'tinymce'       => array(
+					'toolbar1' => 'formatselect,bold,italic,underline,bullist,numlist,link,unlink,blockquote,undo,redo',
+				),
+				'editor_class'  => 'lti-wp-editor',
+				'placeholder'   => $placeholder,
+			)
+		);
+
+		echo '</div>';
 	}
 
 	private static function render_field( int $post_id, string $key, array $def ): void {
@@ -339,11 +353,13 @@ class LTI_Admin_UI {
 				break;
 
 			default:
+				$placeholder = isset( $def['placeholder'] ) ? (string) $def['placeholder'] : '';
 				printf(
-					'<input type="text" id="%1$s" name="%2$s" value="%3$s" class="widefat">',
+					'<input type="text" id="%1$s" name="%2$s" value="%3$s" class="widefat"%4$s>',
 					esc_attr( $input_id ),
 					esc_attr( $input_name ),
-					esc_attr( $value )
+					esc_attr( $value ),
+					$placeholder ? ' placeholder="' . esc_attr( $placeholder ) . '"' : ''
 				);
 		}
 

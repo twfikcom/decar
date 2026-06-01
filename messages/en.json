@@ -242,6 +242,8 @@
     "mileage": "Mileage",
     "power": "Power",
     "body": "Body type",
+    "transmission": "Transmission",
+    "fuelEconomy": "Fuel economy",
     "vat": "VAT deductible (19%)",
     "whatsapp": "WhatsApp enquiry",
     "emailRequest": "Purchase enquiry\n(email)",
@@ -271,6 +273,8 @@
     "power": "Power",
     "body": "Body style",
     "fuel": "Fuel",
+    "transmission": "Transmission",
+    "fuelEconomy": "Fuel economy",
     "vat": "VAT deductible (19%)",
     "whatsapp": "WhatsApp (car)",
     "buyRequest": "Purchase enquiry",
@@ -331,6 +335,10 @@
       "Diesel": "Diesel",
       "Hybrid": "Hybrid",
       "Elektro": "Electric"
+    },
+    "transmission": {
+      "Manual": "Manual",
+      "Automatic": "Automatic"
     },
     "truckCategory": {
       "Sattelzugmaschine": "Tractor units",

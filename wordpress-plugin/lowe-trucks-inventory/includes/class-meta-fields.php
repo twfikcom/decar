@@ -16,15 +16,55 @@ class LTI_Meta_Fields {
 
 	public static function shared_field_defs(): array {
 		return array(
-			'external_id' => array( 'type' => 'text', 'label' => 'Vehicle ID (slug for Next.js, e.g. t-001)' ),
-			'model'       => array( 'type' => 'text', 'label' => 'Model' ),
-			'year'        => array( 'type' => 'number', 'label' => 'Year' ),
-			'mileage'     => array( 'type' => 'number', 'label' => 'Mileage (km)' ),
-			'price'       => array( 'type' => 'number', 'label' => 'Price (EUR)' ),
-			'power'       => array( 'type' => 'number', 'label' => 'Power (PS)' ),
-			'condition'   => array( 'type' => 'select', 'label' => 'Condition', 'options' => array( 'Neu', 'Gebraucht' ) ),
-			'featured'    => array( 'type' => 'checkbox', 'label' => 'Featured on homepage' ),
-			'video_url'   => array( 'type' => 'url', 'label' => 'YouTube video URL' ),
+			'external_id'   => array(
+				'type'  => 'text',
+				'label' => __( 'Vehicle ID (slug for Next.js, e.g. t-001)', 'lowe-trucks-inventory' ),
+			),
+			'model'         => array(
+				'type'  => 'text',
+				'label' => __( 'Model', 'lowe-trucks-inventory' ),
+			),
+			'year'          => array(
+				'type'  => 'number',
+				'label' => __( 'Year', 'lowe-trucks-inventory' ),
+			),
+			'mileage'       => array(
+				'type'  => 'number',
+				'label' => __( 'Mileage (km)', 'lowe-trucks-inventory' ),
+			),
+			'price'         => array(
+				'type'  => 'number',
+				'label' => __( 'Price (EUR)', 'lowe-trucks-inventory' ),
+			),
+			'power'         => array(
+				'type'  => 'number',
+				'label' => __( 'Power (HP)', 'lowe-trucks-inventory' ),
+			),
+			'condition'     => array(
+				'type'           => 'select',
+				'label'          => __( 'Condition', 'lowe-trucks-inventory' ),
+				'options'        => array( 'Neu', 'Gebraucht' ),
+				'option_labels'  => LTI_Vocabulary::condition_admin_labels(),
+			),
+			'transmission'  => array(
+				'type'           => 'select',
+				'label'          => __( 'Transmission', 'lowe-trucks-inventory' ),
+				'options'        => array( 'Manual', 'Automatic' ),
+				'option_labels'  => LTI_Vocabulary::transmission_admin_labels(),
+			),
+			'fuel_economy'  => array(
+				'type'        => 'text',
+				'label'       => __( 'Fuel economy', 'lowe-trucks-inventory' ),
+				'placeholder' => __( 'e.g. 5.2 l/100 km or 42 mpg', 'lowe-trucks-inventory' ),
+			),
+			'featured'      => array(
+				'type'  => 'checkbox',
+				'label' => __( 'Featured on homepage', 'lowe-trucks-inventory' ),
+			),
+			'video_url'     => array(
+				'type'  => 'url',
+				'label' => __( 'YouTube video URL', 'lowe-trucks-inventory' ),
+			),
 		);
 	}
 
@@ -57,14 +97,16 @@ class LTI_Meta_Fields {
 				'options' => LTI_Vocabulary::car_brands(),
 			),
 			'body_type' => array(
-				'type'    => 'select',
-				'label'   => 'Body type',
-				'options' => array( 'Limousine', 'SUV', 'Kombi', 'Kompakt', 'Coupé' ),
+				'type'           => 'select',
+				'label'          => __( 'Body type', 'lowe-trucks-inventory' ),
+				'options'        => array( 'Limousine', 'SUV', 'Kombi', 'Kompakt', 'Coupé' ),
+				'option_labels'  => LTI_Vocabulary::body_type_admin_labels(),
 			),
 			'fuel'      => array(
-				'type'    => 'select',
-				'label'   => 'Fuel',
-				'options' => array( 'Benzin', 'Diesel', 'Hybrid', 'Elektro' ),
+				'type'           => 'select',
+				'label'          => __( 'Fuel', 'lowe-trucks-inventory' ),
+				'options'        => array( 'Benzin', 'Diesel', 'Hybrid', 'Elektro' ),
+				'option_labels'  => LTI_Vocabulary::fuel_admin_labels(),
 			),
 		);
 	}
@@ -128,6 +170,8 @@ class LTI_Meta_Fields {
 						$clean = LTI_Vocabulary::validate_truck_category( $clean );
 					} elseif ( 'brand' === $key ) {
 						$clean = LTI_Vocabulary::validate_brand( $post->post_type, $clean );
+					} elseif ( 'transmission' === $key ) {
+						$clean = LTI_Vocabulary::validate_transmission( $clean );
 					}
 					update_post_meta( $post_id, $meta_key, $clean );
 					break;
