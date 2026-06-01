@@ -38,7 +38,6 @@ const homeSectionNavLink =
   'inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wide transition sm:gap-2 sm:text-sm sm:tracking-widest';
 const homeCardBody = 'flex flex-1 flex-col bg-gradient-to-b from-white to-zinc-50 p-5 sm:p-8';
 const homeCardBodySlate = 'flex flex-1 flex-col bg-gradient-to-b from-white to-slate-50 p-5 sm:p-8';
-const homeCardBodyAmber = 'flex min-w-0 flex-1 flex-col bg-gradient-to-b from-white to-amber-50/60 p-5 sm:p-8';
 const homeCardExcerpt = 'line-clamp-3 text-sm font-semibold leading-relaxed sm:text-base';
 const homeCardTitle =
   'mb-3 line-clamp-2 font-heading text-lg font-black leading-tight sm:mb-4 sm:text-2xl';
@@ -360,29 +359,29 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      <section className="border-y-4 border-amber-500/45 bg-gradient-to-b from-amber-50 via-orange-50/80 to-amber-100/90 py-12 sm:py-24">
+      <section className="bg-zinc-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] py-12 [background-size:16px_16px] sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:mb-14 sm:gap-6 sm:flex-row sm:items-end md:mb-16">
             <div>
-              <div className={`border-amber-600/35 bg-amber-100/80 text-amber-900 ${homeEyebrowBadge}`}>
+              <div className={`border-orange-600/40 bg-orange-50 text-orange-900 ${homeEyebrowBadge}`}>
                 <Package className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" aria-hidden />
                 {t('partsBadge')}
               </div>
-              <h2 className={`text-amber-950 ${homeSectionTitle}`}>
+              <h2 className={`text-black ${homeSectionTitle}`}>
                 {t('partsTitle')} <span className="text-orange-600">{t('partsTitleAccent')}</span>
               </h2>
-              <p className={`${homeSectionSubtitle} text-amber-800/80`}>{t('partsSubtitle')}</p>
+              <p className={homeSectionSubtitle}>{t('partsSubtitle')}</p>
             </div>
             <Link
               href="/parts"
-              className={`text-orange-700 hover:translate-x-1 hover:text-orange-600 ${homeSectionNavLink}`}
+              className={`text-red-600 hover:translate-x-1 hover:text-orange-600 ${homeSectionNavLink}`}
             >
               {t('allParts')} <ArrowRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
             </Link>
           </div>
 
           {featuredParts.length === 0 ? (
-            <p className="mb-8 text-center text-sm font-bold text-amber-900/80 sm:mb-10 sm:text-base">{t('partsEmpty')}</p>
+            <p className="mb-8 text-center text-sm font-bold text-zinc-600 sm:mb-10 sm:text-base">{t('partsEmpty')}</p>
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
               {featuredParts.map((part) => {
@@ -391,13 +390,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 return (
                   <div
                     key={part.id}
-                    className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border-4 border-amber-200/90 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.2)]"
+                    className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border-4 border-zinc-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.18)]"
                   >
                     <Link
                       href="/parts"
                       className="flex min-h-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                     >
-                      <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-amber-200 bg-amber-950 transition group-hover:border-orange-500">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-zinc-200 bg-zinc-900 transition group-hover:border-orange-500">
                         <Image
                           src={part.imageUrl}
                           alt={part.title}
@@ -409,16 +408,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                           <span className={homeBrandBadgeCar}>{t('partsBadge')}</span>
                         </div>
                       </div>
-                      <div className={homeCardBodyAmber}>
+                      <div className={homeCardBody}>
                         <h3
-                          className={`min-w-0 max-w-full break-words text-amber-950 [overflow-wrap:anywhere] transition group-hover:text-orange-800 line-clamp-2 ${homeCardTitle}`}
+                          className={`min-w-0 max-w-full break-words text-black [overflow-wrap:anywhere] transition group-hover:text-orange-800 line-clamp-2 ${homeCardTitle}`}
                         >
                           {part.title}
                         </h3>
-                        <p className={`text-amber-900/85 ${homeCardExcerpt}`}>{excerpt}</p>
+                        <p className={`text-zinc-600 ${homeCardExcerpt}`}>{excerpt}</p>
                       </div>
                     </Link>
-                    <div className="flex items-center justify-between gap-2 border-t-2 border-amber-200 bg-gradient-to-b from-white to-amber-50/60 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
+                    <div className="flex items-center justify-between gap-2 border-t-2 border-zinc-200 bg-gradient-to-b from-white to-zinc-50 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
                       <a href={waPart} target="_blank" rel="noopener noreferrer" className={homeAskPriceBtn}>
                         <MessageCircle className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
                         {tCommon('askPrice')}
