@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import SocialLinks from '@/components/SocialLinks';
-import { SITE_LOGO_FRAME_CLASS, SITE_LOGO_URL } from '@/lib/site-logo';
+import { SITE_LOGO_FOOTER_FRAME_CLASS, SITE_LOGO_URL } from '@/lib/site-logo';
 
 export default async function Footer() {
   const t = await getTranslations('Footer');
@@ -14,7 +14,7 @@ export default async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="mb-6 inline-block w-fit max-w-full">
-              <div className={SITE_LOGO_FRAME_CLASS}>
+              <div className={SITE_LOGO_FOOTER_FRAME_CLASS}>
                 <Image
                   src={SITE_LOGO_URL}
                   alt={t('logoAlt')}
