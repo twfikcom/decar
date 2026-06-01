@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
-import { ArrowLeft, MessageCircle, Check, Phone } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Check, Phone, Cog } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { numberLocale } from '@/lib/locale-format';
 import { getLocalizedTruck } from '@/lib/vehicle-i18n';
@@ -156,6 +156,15 @@ export default async function TruckDetailPage({
                   <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('body')}</p>
                   <p className="font-black text-lg text-black">{categoryLabel}</p>
                 </div>
+                {truckNorm.engine ? (
+                  <div className="col-span-2">
+                    <p className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-zinc-400">
+                      <Cog className="h-3.5 w-3.5" aria-hidden />
+                      {t('engine')}
+                    </p>
+                    <p className="font-black text-lg text-black">{truckNorm.engine}</p>
+                  </div>
+                ) : null}
                 {truckNorm.transmission ? (
                   <div className="col-span-2">
                     <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">

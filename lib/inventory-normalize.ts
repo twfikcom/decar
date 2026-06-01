@@ -69,6 +69,11 @@ export function normalizeFuelEconomy(raw: unknown): string | undefined {
   return v || undefined;
 }
 
+export function normalizeEngine(raw: unknown): string | undefined {
+  const v = typeof raw === 'string' ? raw.trim() : '';
+  return v || undefined;
+}
+
 /** Coerce numeric / array fields from REST so server render never throws. */
 export function normalizeTruckForPage(t: Truck): Truck {
   return {
@@ -78,6 +83,7 @@ export function normalizeTruckForPage(t: Truck): Truck {
     price: Number(t.price) || 0,
     power: Number(t.power) || 0,
     category: normalizeTruckCategory(String(t.category)),
+    engine: normalizeEngine(t.engine),
     transmission: normalizeTransmission(
       typeof t.transmission === 'string' ? t.transmission : undefined,
     ),
@@ -97,6 +103,7 @@ export function normalizeCarForPage(c: Car): Car {
     power: Number(c.power) || 0,
     bodyType: normalizeCarBodyType(String(c.bodyType)),
     fuel: normalizeCarFuel(String(c.fuel)),
+    engine: normalizeEngine(c.engine),
     transmission: normalizeTransmission(
       typeof c.transmission === 'string' ? c.transmission : undefined,
     ),

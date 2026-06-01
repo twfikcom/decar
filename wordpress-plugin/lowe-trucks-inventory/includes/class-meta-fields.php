@@ -40,6 +40,11 @@ class LTI_Meta_Fields {
 				'type'  => 'number',
 				'label' => __( 'Power (HP)', 'lowe-trucks-inventory' ),
 			),
+			'engine'        => array(
+				'type'        => 'text',
+				'label'       => __( 'Engine', 'lowe-trucks-inventory' ),
+				'placeholder' => __( 'e.g. 3.0 L V6 or 2000 cc', 'lowe-trucks-inventory' ),
+			),
 			'condition'     => array(
 				'type'           => 'select',
 				'label'          => __( 'Condition', 'lowe-trucks-inventory' ),

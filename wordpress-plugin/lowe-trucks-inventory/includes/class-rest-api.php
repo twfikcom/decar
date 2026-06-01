@@ -247,6 +247,7 @@ class LTI_REST_API {
 		$transmission = LTI_Vocabulary::validate_transmission( $transmission );
 
 		$fuel_economy = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'fuel_economy' );
+		$engine       = sanitize_text_field( (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'engine' ) );
 
 		return array(
 			'id'           => self::resolve_external_id( $post ),
@@ -259,6 +260,7 @@ class LTI_REST_API {
 			'mileage'      => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'mileage' ),
 			'price'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'price' ),
 			'power'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'power' ),
+			'engine'       => $engine,
 			'condition'    => $condition,
 			'transmission' => $transmission,
 			'fuelEconomy'  => $fuel_economy,
@@ -300,6 +302,7 @@ class LTI_REST_API {
 		$transmission = LTI_Vocabulary::validate_transmission( $transmission );
 
 		$fuel_economy = (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'fuel_economy' );
+		$engine       = sanitize_text_field( (string) LTI_Meta_Fields::get_meta_value( $post->ID, 'engine' ) );
 
 		return array(
 			'id'           => self::resolve_external_id( $post ),
@@ -312,6 +315,7 @@ class LTI_REST_API {
 			'mileage'      => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'mileage' ),
 			'price'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'price' ),
 			'power'        => (int) LTI_Meta_Fields::get_meta_value( $post->ID, 'power' ),
+			'engine'       => $engine,
 			'condition'    => $condition,
 			'transmission' => $transmission,
 			'fuelEconomy'  => $fuel_economy,
