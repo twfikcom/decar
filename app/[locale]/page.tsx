@@ -103,16 +103,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       <HomeCategoryStrip />
 
-      <section className="bg-zinc-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] py-12 [background-size:16px_16px] sm:py-24">
+      <section className="border-y-4 border-orange-600/40 bg-gradient-to-b from-slate-100 to-slate-200 py-12 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:mb-14 sm:gap-6 sm:flex-row sm:items-end md:mb-16">
             <div>
-              <h2 className={`text-black ${homeSectionTitle}`}>
-                <span className="text-black">{t('trucksLine1')}</span>{' '}
+              <h2 className={`text-slate-900 ${homeSectionTitle}`}>
+                <span className="text-slate-900">{t('trucksLine1')}</span>{' '}
                 <span className="text-red-600">{t('trucksLine2')}</span>{' '}
                 <span className="text-zinc-500">{t('trucksLine3')}</span>
               </h2>
-              <p className={homeSectionSubtitle}>{t('trucksSubtitle')}</p>
+              <p className={`${homeSectionSubtitle} text-slate-500`}>{t('trucksSubtitle')}</p>
             </div>
             <Link
               href="/trucks"
@@ -359,7 +359,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      <section className="bg-zinc-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] py-12 [background-size:16px_16px] sm:py-24">
+      <section className="border-y-4 border-orange-600/40 bg-gradient-to-b from-slate-100 to-slate-200 py-12 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:mb-14 sm:gap-6 sm:flex-row sm:items-end md:mb-16">
             <div>
@@ -367,10 +367,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 <Package className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" aria-hidden />
                 {t('partsBadge')}
               </div>
-              <h2 className={`text-black ${homeSectionTitle}`}>
+              <h2 className={`text-slate-900 ${homeSectionTitle}`}>
                 {t('partsTitle')} <span className="text-orange-600">{t('partsTitleAccent')}</span>
               </h2>
-              <p className={homeSectionSubtitle}>{t('partsSubtitle')}</p>
+              <p className={`${homeSectionSubtitle} text-slate-500`}>{t('partsSubtitle')}</p>
             </div>
             <Link
               href="/parts"
@@ -381,7 +381,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
 
           {featuredParts.length === 0 ? (
-            <p className="mb-8 text-center text-sm font-bold text-zinc-600 sm:mb-10 sm:text-base">{t('partsEmpty')}</p>
+            <p className="mb-8 text-center text-sm font-bold text-slate-600 sm:mb-10 sm:text-base">{t('partsEmpty')}</p>
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
               {featuredParts.map((part) => {
@@ -390,13 +390,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 return (
                   <div
                     key={part.id}
-                    className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border-4 border-zinc-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.18)]"
+                    className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border-4 border-slate-200 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:border-orange-500 hover:shadow-[0_24px_50px_rgba(234,88,12,0.18)]"
                   >
                     <Link
                       href="/parts"
                       className="flex min-h-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                     >
-                      <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-zinc-200 bg-zinc-900 transition group-hover:border-orange-500">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden border-b-4 border-slate-200 bg-slate-900 transition group-hover:border-orange-500">
                         <Image
                           src={part.imageUrl}
                           alt={part.title}
@@ -408,16 +408,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                           <span className={homeBrandBadgeCar}>{t('partsBadge')}</span>
                         </div>
                       </div>
-                      <div className={homeCardBody}>
+                      <div className={homeCardBodySlate}>
                         <h3
-                          className={`min-w-0 max-w-full break-words text-black [overflow-wrap:anywhere] transition group-hover:text-orange-800 line-clamp-2 ${homeCardTitle}`}
+                          className={`min-w-0 max-w-full break-words text-slate-900 [overflow-wrap:anywhere] transition group-hover:text-orange-800 line-clamp-2 ${homeCardTitle}`}
                         >
                           {part.title}
                         </h3>
-                        <p className={`text-zinc-600 ${homeCardExcerpt}`}>{excerpt}</p>
+                        <p className={`text-slate-600 ${homeCardExcerpt}`}>{excerpt}</p>
                       </div>
                     </Link>
-                    <div className="flex items-center justify-between gap-2 border-t-2 border-zinc-200 bg-gradient-to-b from-white to-zinc-50 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
+                    <div className="flex items-center justify-between gap-2 border-t-2 border-slate-200 bg-gradient-to-b from-white to-slate-50 px-4 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
                       <a href={waPart} target="_blank" rel="noopener noreferrer" className={homeAskPriceBtn}>
                         <MessageCircle className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" aria-hidden />
                         {tCommon('askPrice')}
