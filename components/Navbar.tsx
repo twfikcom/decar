@@ -68,7 +68,7 @@ export default function Navbar() {
                   height={330}
                   unoptimized
                   quality={100}
-                  className="block h-8 w-auto max-w-[min(78vw,160px)] object-contain object-start [image-rendering:high-quality] sm:h-9 sm:max-w-[min(72vw,185px)] md:h-10 lg:h-12 lg:max-w-[min(42vw,270px)] xl:h-14 xl:max-w-[min(40vw,310px)] 2xl:h-14 2xl:max-w-[340px]"
+                  className="block h-9 w-auto max-w-[min(78vw,180px)] object-contain object-start [image-rendering:high-quality] sm:h-10 sm:max-w-[min(72vw,205px)] md:h-11 lg:h-14 lg:max-w-[min(42vw,300px)] xl:h-16 xl:max-w-[min(40vw,350px)] 2xl:h-16 2xl:max-w-[380px]"
                   priority
                   sizes="(max-width: 640px) 480px, (max-width: 768px) 560px, (max-width: 1024px) 720px, (max-width: 1536px) 900px, 960px"
                   aria-hidden

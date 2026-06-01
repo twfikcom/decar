@@ -1,5 +1,5 @@
-/** Site logo served from /public/givehim.png */
-export const SITE_LOGO_URL = '/givehim.png';
+/** Site logo served from /public/hislogo.png */
+export const SITE_LOGO_URL = '/hislogo.png';
 
 /** White plate behind logo so light text in the asset stays readable on dark headers. */
 export const SITE_LOGO_FRAME_CLASS =
