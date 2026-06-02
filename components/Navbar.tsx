@@ -3,15 +3,63 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { Menu, X, Phone, MessageCircle, MapPin, Clock } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { SITE_LOGO_URL } from '@/lib/site-logo';
 
+const SCROLL_UP_THRESHOLD = 8;
+const SCROLL_TOP_LOCK = 24;
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const headerRef = useRef<HTMLElement>(null);
+  const lastScrollY = useRef(0);
   const t = useTranslations('Nav');
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const measure = () => setHeaderHeight(header.offsetHeight);
+    measure();
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(header);
+    window.addEventListener('resize', measure);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastScrollY.current;
+
+      if (y <= SCROLL_TOP_LOCK) {
+        setHeaderVisible(true);
+      } else if (delta < -SCROLL_UP_THRESHOLD) {
+        setHeaderVisible(true);
+      } else if (delta > SCROLL_UP_THRESHOLD) {
+        setHeaderVisible(false);
+      }
+
+      lastScrollY.current = y;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const showHeader = headerVisible || isOpen;
 
   const links = [
     { labelKey: 'home' as const, href: '/' },
@@ -24,7 +72,19 @@ export default function Navbar() {
   ];
 
   return (
-    <header id="site-navbar" className="w-full flex flex-col z-[100] relative">
+    <>
+      <div
+        className="w-full shrink-0"
+        style={{ height: headerHeight > 0 ? headerHeight : undefined }}
+        aria-hidden
+      />
+      <header
+        ref={headerRef}
+        id="site-navbar"
+        className={`fixed inset-x-0 top-0 z-[100] flex w-full flex-col transition-transform duration-300 ease-out motion-reduce:transition-none ${
+          showHeader ? 'translate-y-0' : '-translate-y-full pointer-events-none'
+        }`}
+      >
       {/* Top Bar - Contact Info (Small) */}
       <div className="bg-black text-zinc-400 py-1.5 px-4 sm:px-6 lg:px-8 text-xs font-bold uppercase tracking-widest hidden md:block border-b border-zinc-900">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -51,7 +111,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Header (Single Row) */}
-      <div className="bg-gradient-to-r from-red-700 via-orange-600 to-red-600 shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b-[4px] border-black sticky top-0 z-50">
+      <div className="bg-gradient-to-r from-red-700 via-orange-600 to-red-600 shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b-[4px] border-black">
         <div className="mx-auto max-w-7xl ps-2 pe-3 sm:ps-3 sm:pe-5 lg:ps-4 lg:pe-6">
           {/* شبكة: لوجو | عمود مرن (قائمة في المنتصف) | لغة + واتساب — الموبايل: لوجو | فراغ | أزرار */}
           <div className="grid min-h-[5rem] w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 py-1.5 sm:gap-3 sm:py-2 lg:min-h-[5.75rem] lg:gap-3 lg:py-2.5 xl:min-h-[6.25rem]">
@@ -165,5 +225,6 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }
