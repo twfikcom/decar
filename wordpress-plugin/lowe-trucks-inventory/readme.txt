@@ -11,6 +11,10 @@ Manage Cars, Trucks & Spare parts with DE/EN/AR content and expose a REST API fo
 
 == Changelog ==
 
+= 1.5.2 =
+* Features & options: full passenger checklist (Comfort, Seats, Safety, Windows, Entertainment) for trucks as well as cars.
+* Added missing option: 17'' Wheels (Other).
+
 = 1.4.0 =
 * Spare parts post type (image + multilingual title/description).
 * REST: `GET /parts?lang=de|en|ar` for the Next.js Parts page (no single-part endpoint).
