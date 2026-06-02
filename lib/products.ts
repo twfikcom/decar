@@ -1,5 +1,7 @@
 import { cars as mockCars, spareParts as mockSpareParts, trucks as mockTrucks, type Car, type Truck } from '@/lib/mock-data';
 import {
+  applyPartLocale,
+  applyVehicleLocale,
   fetchCarFromWordPress,
   fetchCarsFromWordPress,
   fetchPartsFromWordPress,
@@ -13,22 +15,47 @@ import {
 
 export type { Car, Truck, CarFromWP, TruckFromWP, PartFromWP };
 
+function hasDisplayTitle(title: string): boolean {
+  return title.trim().length > 0;
+}
+
+function mapCars(locale: string, items: CarFromWP[]): CarFromWP[] {
+  return items
+    .map((car) => applyVehicleLocale(locale, car))
+    .filter((car) => hasDisplayTitle(car.title));
+}
+
+function mapTrucks(locale: string, items: TruckFromWP[]): TruckFromWP[] {
+  return items
+    .map((truck) => applyVehicleLocale(locale, truck))
+    .filter((truck) => hasDisplayTitle(truck.title));
+}
+
+function mapParts(locale: string, items: PartFromWP[]): PartFromWP[] {
+  return items
+    .map((part) => applyPartLocale(locale, part))
+    .filter((part) => hasDisplayTitle(part.title));
+}
+
 export async function getCars(locale: string): Promise<CarFromWP[]> {
   if (!isWordPressConfigured()) return mockCars;
   const remote = await fetchCarsFromWordPress(locale);
-  return remote ?? [];
+  if (!remote) return [];
+  return mapCars(locale, remote);
 }
 
 export async function getTrucks(locale: string): Promise<TruckFromWP[]> {
   if (!isWordPressConfigured()) return mockTrucks;
   const remote = await fetchTrucksFromWordPress(locale);
-  return remote ?? [];
+  if (!remote) return [];
+  return mapTrucks(locale, remote);
 }
 
 export async function getParts(locale: string): Promise<PartFromWP[]> {
   if (!isWordPressConfigured()) return mockSpareParts;
   const remote = await fetchPartsFromWordPress(locale);
-  return remote ?? [];
+  if (!remote) return [];
+  return mapParts(locale, remote);
 }
 
 /** First N spare parts for homepage preview (same order as API / listing). */
@@ -39,16 +66,18 @@ export async function getFeaturedParts(locale: string, limit = 3): Promise<PartF
 
 export async function getCarById(locale: string, id: string): Promise<CarFromWP | undefined> {
   const remote = await fetchCarFromWordPress(locale, id);
-  if (remote) return remote;
+  if (remote) return applyVehicleLocale(locale, remote);
   if (isWordPressConfigured()) return undefined;
-  return mockCars.find((c) => c.id === id);
+  const mock = mockCars.find((c) => c.id === id);
+  return mock ? applyVehicleLocale(locale, mock) : undefined;
 }
 
 export async function getTruckById(locale: string, id: string): Promise<TruckFromWP | undefined> {
   const remote = await fetchTruckFromWordPress(locale, id);
-  if (remote) return remote;
+  if (remote) return applyVehicleLocale(locale, remote);
   if (isWordPressConfigured()) return undefined;
-  return mockTrucks.find((t) => t.id === id);
+  const mock = mockTrucks.find((t) => t.id === id);
+  return mock ? applyVehicleLocale(locale, mock) : undefined;
 }
 
 function pickFeaturedWithFallback<T extends { id: string; year: number; featured?: boolean }>(

@@ -116,18 +116,18 @@ export default async function CarDetailPage({
           </div>
 
           <aside className="min-w-0 lg:col-start-3 lg:row-span-3 lg:row-start-1 lg:self-start">
-            <div className="min-w-0 max-w-full overflow-hidden rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-xl md:p-10 lg:sticky lg:top-36">
-              <span className="mb-3 inline-block rounded-md bg-slate-900 px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
+            <div className="min-w-0 max-w-full overflow-hidden rounded-3xl border-4 border-slate-200 bg-white p-6 shadow-xl md:p-8 lg:sticky lg:top-36">
+              <span className="mb-3 inline-block rounded-md bg-slate-900 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
                 {carNorm.brand}
               </span>
-              <h1 className="mb-6 min-w-0 max-w-full break-words font-heading text-3xl font-black leading-tight text-slate-900 [overflow-wrap:anywhere] md:text-4xl">
+              <h1 className="mb-4 min-w-0 max-w-full break-words font-heading text-2xl font-black leading-snug text-slate-900 [overflow-wrap:anywhere] md:text-3xl">
                 {copy.title}
               </h1>
-              <div className="mb-8 border-b-4 border-slate-100 pb-8">
+              <div className="mb-6 border-b-2 border-slate-100 pb-6">
                 {showPrice ? (
                   <>
-                    <p className="font-heading text-4xl font-black text-emerald-700 drop-shadow-sm lg:text-5xl">{priceStr}</p>
-                    <span className="mt-2 block text-xs font-black uppercase tracking-widest text-slate-400">{t('vat')}</span>
+                    <p className="font-heading text-3xl font-black text-emerald-700 lg:text-4xl">{priceStr}</p>
+                    <span className="mt-1 block text-[11px] font-bold uppercase tracking-wider text-slate-400">{t('vat')}</span>
                   </>
                 ) : (
                   <a
@@ -142,66 +142,66 @@ export default async function CarDetailPage({
                 )}
               </div>
 
-              <div className="mb-10 grid grid-cols-2 gap-6">
-                <div>
-                  <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('model')}</p>
-                  <p className="font-black text-lg text-slate-900">{carNorm.model}</p>
+              <dl className="mb-8 grid grid-cols-2 gap-2.5 sm:gap-3">
+                <div className="rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('model')}</dt>
+                  <dd className="text-base font-bold leading-snug text-slate-900">{carNorm.model}</dd>
                 </div>
-                <div>
-                  <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('firstReg')}</p>
-                  <p className="font-black text-lg text-slate-900">{carNorm.year}</p>
+                <div className="rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('firstReg')}</dt>
+                  <dd className="text-base font-bold leading-snug text-slate-900">{carNorm.year}</dd>
                 </div>
-                <div>
-                  <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('mileage')}</p>
-                  <p className="font-black text-lg text-slate-900">
+                <div className="rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('mileage')}</dt>
+                  <dd className="text-base font-bold leading-snug text-slate-900">
                     {carNorm.mileage.toLocaleString(nl)} {tCommon('km')}
-                  </p>
+                  </dd>
                 </div>
-                <div>
-                  <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('power')}</p>
-                  <p className="font-black text-lg text-slate-900">
+                <div className="rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('power')}</dt>
+                  <dd className="text-base font-bold leading-snug text-slate-900">
                     {carNorm.power} {tCommon('powerUnit')}
-                  </p>
+                  </dd>
                 </div>
-                <div className="col-span-2">
-                  <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">{t('body')}</p>
-                  <p className="font-black text-lg text-slate-900">{bodyLabel(carNorm.bodyType)}</p>
+                <div className="col-span-2 rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('body')}</dt>
+                  <dd className="text-base font-bold leading-snug text-slate-900">{bodyLabel(carNorm.bodyType)}</dd>
                 </div>
-                <div className="col-span-2">
-                  <p className="mb-1 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400">
-                    <Fuel className="h-3.5 w-3.5" aria-hidden />
+                <div className="col-span-2 rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    <Fuel className="h-3 w-3 shrink-0" aria-hidden />
                     {t('fuel')}
-                  </p>
-                  <p className="font-black text-lg text-slate-900">{fuelLabel(carNorm.fuel)}</p>
+                  </dt>
+                  <dd className="text-base font-bold leading-snug text-slate-900">{fuelLabel(carNorm.fuel)}</dd>
                 </div>
                 {carNorm.engine ? (
-                  <div className="col-span-2">
-                    <p className="mb-1 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400">
-                      <Cog className="h-3.5 w-3.5" aria-hidden />
+                  <div className="col-span-2 rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                    <dt className="mb-0.5 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      <Cog className="h-3 w-3 shrink-0" aria-hidden />
                       {t('engine')}
-                    </p>
-                    <p className="font-black text-lg text-slate-900">{carNorm.engine}</p>
+                    </dt>
+                    <dd className="text-base font-bold leading-snug text-slate-900">{carNorm.engine}</dd>
                   </div>
                 ) : null}
                 {carNorm.transmission ? (
-                  <div className="col-span-2">
-                    <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">
+                  <div className="col-span-2 rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                    <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
                       {t('transmission')}
-                    </p>
-                    <p className="font-black text-lg text-slate-900">
+                    </dt>
+                    <dd className="text-base font-bold leading-snug text-slate-900">
                       {transmissionLabel(carNorm.transmission)}
-                    </p>
+                    </dd>
                   </div>
                 ) : null}
                 {carNorm.fuelEconomy ? (
-                  <div className="col-span-2">
-                    <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">
+                  <div className="col-span-2 rounded-lg border border-slate-100 bg-slate-50/90 px-3 py-2.5">
+                    <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
                       {t('fuelEconomy')}
-                    </p>
-                    <p className="font-black text-lg text-slate-900">{carNorm.fuelEconomy}</p>
+                    </dt>
+                    <dd className="text-base font-bold leading-snug text-slate-900">{carNorm.fuelEconomy}</dd>
                   </div>
                 ) : null}
-              </div>
+              </dl>
 
               <div className="space-y-4">
                 {showPrice ? (
@@ -222,12 +222,12 @@ export default async function CarDetailPage({
                 >
                   {t('buyRequest')}
                 </Link>
-                <div className="border-t border-slate-100 pt-6 text-center">
+                <div className="border-t border-slate-100 pt-5 text-center">
                   <a
                     href="tel:+491625330280"
-                    className="inline-flex items-center gap-2 font-black text-emerald-700 transition hover:text-emerald-600"
+                    className="inline-flex items-center gap-2 text-base font-bold text-emerald-700 transition hover:text-emerald-600 sm:text-lg"
                   >
-                    <Phone className="h-6 w-6" aria-hidden />
+                    <Phone className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden />
                     +49 162 5330280
                   </a>
                 </div>

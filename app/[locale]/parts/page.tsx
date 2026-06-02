@@ -57,7 +57,10 @@ export default async function PartsPage({ params }: { params: Promise<{ locale: 
         {parts.length === 0 ? (
           <p className="text-center text-lg font-bold text-zinc-600">{t('empty')}</p>
         ) : (
-          <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <ul
+            key={locale}
+            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {parts.map((part) => {
               const wa = whatsappDeepLinkWithText(tCommon('whatsappAskPrefill', { title: part.title }));
               return (

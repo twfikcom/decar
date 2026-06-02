@@ -356,6 +356,18 @@ class LTI_REST_API {
 		return 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1200&q=80';
 	}
 
+	private static function build_part_i18n_block( int $post_id ): array {
+		$block = array();
+		foreach ( LTI_Meta_Fields::LANGS as $lang ) {
+			$localized = LTI_Meta_Fields::get_localized_block( $post_id, $lang, LTI_Post_Types::PART );
+			$block[ $lang ] = array(
+				'title'       => $localized['title'],
+				'description' => $localized['description'],
+			);
+		}
+		return $block;
+	}
+
 	private static function format_part( WP_Post $post, string $lang ): array {
 		$localized = LTI_Meta_Fields::get_localized_block( $post->ID, $lang, $post->post_type );
 
@@ -364,6 +376,7 @@ class LTI_REST_API {
 			'title'       => $localized['title'],
 			'description' => $localized['description'],
 			'imageUrl'    => self::part_primary_image_url( $post ),
+			'i18n'        => self::build_part_i18n_block( $post->ID ),
 		);
 	}
 }

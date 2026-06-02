@@ -11,6 +11,9 @@ Manage Cars, Trucks & Spare parts with DE/EN/AR content and expose a REST API fo
 
 == Changelog ==
 
+= 1.5.3 =
+* REST parts: include `i18n` block (DE/EN/AR title + description) for reliable locale switching on the storefront.
+
 = 1.5.2 =
 * Features & options: full passenger checklist (Comfort, Seats, Safety, Windows, Entertainment) for trucks as well as cars.
 * Added missing option: 17'' Wheels (Other).

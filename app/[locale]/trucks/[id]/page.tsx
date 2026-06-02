@@ -101,22 +101,20 @@ export default async function TruckDetailPage({
           </div>
 
           <aside className="min-w-0 lg:col-start-3 lg:row-span-3 lg:row-start-1 lg:self-start">
-            <div className="min-w-0 max-w-full transform-gpu overflow-hidden rounded-3xl border-4 border-zinc-200 bg-white p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-10 lg:sticky lg:top-40">
-              <div className="mb-4">
-                <span className="mb-4 inline-block rounded-md bg-black px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
-                  {truckNorm.brand}
-                </span>
-              </div>
+            <div className="min-w-0 max-w-full transform-gpu overflow-hidden rounded-3xl border-4 border-zinc-200 bg-white p-6 shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-8 lg:sticky lg:top-40">
+              <span className="mb-3 inline-block rounded-md bg-black px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
+                {truckNorm.brand}
+              </span>
 
-              <h1 className="mb-6 min-w-0 max-w-full break-words font-heading text-3xl font-black leading-tight text-black drop-shadow-sm [overflow-wrap:anywhere] md:text-4xl">
+              <h1 className="mb-4 min-w-0 max-w-full break-words font-heading text-2xl font-black leading-snug text-black [overflow-wrap:anywhere] md:text-3xl">
                 {copy.title}
               </h1>
 
-              <div className="mb-10 border-b-4 border-zinc-100 pb-8">
+              <div className="mb-6 border-b-2 border-zinc-100 pb-6">
                 {showPrice ? (
                   <>
-                    <div className="mb-2 font-heading text-4xl font-black text-red-600 drop-shadow-sm lg:text-5xl">{priceStr}</div>
-                    <span className="block text-sm font-black uppercase tracking-widest text-zinc-400">{t('vat')}</span>
+                    <div className="mb-1 font-heading text-3xl font-black text-red-600 lg:text-4xl">{priceStr}</div>
+                    <span className="block text-[11px] font-bold uppercase tracking-wider text-zinc-400">{t('vat')}</span>
                   </>
                 ) : (
                   <a
@@ -131,59 +129,59 @@ export default async function TruckDetailPage({
                 )}
               </div>
 
-              <div className="mb-12 grid grid-cols-2 gap-x-6 gap-y-8">
-                <div>
-                  <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('model')}</p>
-                  <p className="font-black text-lg text-black">{truckNorm.model}</p>
+              <dl className="mb-8 grid grid-cols-2 gap-2.5 sm:gap-3">
+                <div className="rounded-lg border border-zinc-100 bg-zinc-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">{t('model')}</dt>
+                  <dd className="text-base font-bold leading-snug text-black">{truckNorm.model}</dd>
                 </div>
-                <div>
-                  <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('firstReg')}</p>
-                  <p className="font-black text-lg text-black">{truckNorm.year}</p>
+                <div className="rounded-lg border border-zinc-100 bg-zinc-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">{t('firstReg')}</dt>
+                  <dd className="text-base font-bold leading-snug text-black">{truckNorm.year}</dd>
                 </div>
-                <div>
-                  <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('mileage')}</p>
-                  <p className="font-black text-lg text-black">
+                <div className="rounded-lg border border-zinc-100 bg-zinc-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">{t('mileage')}</dt>
+                  <dd className="text-base font-bold leading-snug text-black">
                     {truckNorm.mileage.toLocaleString(nl)} {tCommon('km')}
-                  </p>
+                  </dd>
                 </div>
-                <div>
-                  <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('power')}</p>
-                  <p className="font-black text-lg text-black">
+                <div className="rounded-lg border border-zinc-100 bg-zinc-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">{t('power')}</dt>
+                  <dd className="text-base font-bold leading-snug text-black">
                     {truckNorm.power} {tCommon('powerUnit')}
-                  </p>
+                  </dd>
                 </div>
-                <div className="col-span-2">
-                  <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">{t('body')}</p>
-                  <p className="font-black text-lg text-black">{categoryLabel}</p>
+                <div className="col-span-2 rounded-lg border border-zinc-100 bg-zinc-50/90 px-3 py-2.5">
+                  <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">{t('body')}</dt>
+                  <dd className="text-base font-bold leading-snug text-black">{categoryLabel}</dd>
                 </div>
                 {truckNorm.engine ? (
-                  <div className="col-span-2">
-                    <p className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-zinc-400">
-                      <Cog className="h-3.5 w-3.5" aria-hidden />
+                  <div className="col-span-2 rounded-lg border border-zinc-100 bg-zinc-50/90 px-3 py-2.5">
+                    <dt className="mb-0.5 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
+                      <Cog className="h-3 w-3 shrink-0" aria-hidden />
                       {t('engine')}
-                    </p>
-                    <p className="font-black text-lg text-black">{truckNorm.engine}</p>
+                    </dt>
+                    <dd className="text-base font-bold leading-snug text-black">{truckNorm.engine}</dd>
                   </div>
                 ) : null}
                 {truckNorm.transmission ? (
-                  <div className="col-span-2">
-                    <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">
+                  <div className="col-span-2 rounded-lg border border-zinc-100 bg-zinc-50/90 px-3 py-2.5">
+                    <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
                       {t('transmission')}
-                    </p>
-                    <p className="font-black text-lg text-black">
+                    </dt>
+                    <dd className="text-base font-bold leading-snug text-black">
                       {transmissionLabel(truckNorm.transmission)}
-                    </p>
+                    </dd>
                   </div>
                 ) : null}
                 {truckNorm.fuelEconomy ? (
-                  <div className="col-span-2">
-                    <p className="mb-2 text-xs font-black uppercase tracking-widest text-zinc-400">
+                  <div className="col-span-2 rounded-lg border border-zinc-100 bg-zinc-50/90 px-3 py-2.5">
+                    <dt className="mb-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
                       {t('fuelEconomy')}
-                    </p>
-                    <p className="font-black text-lg text-black">{truckNorm.fuelEconomy}</p>
+                    </dt>
+                    <dd className="text-base font-bold leading-snug text-black">{truckNorm.fuelEconomy}</dd>
                   </div>
                 ) : null}
-              </div>
+              </dl>
 
               <div className="space-y-6">
                 {showPrice ? (
@@ -204,10 +202,10 @@ export default async function TruckDetailPage({
                   {t('emailRequest')}
                 </Link>
 
-                <div className="border-t-2 border-zinc-100 pt-6 text-center">
+                <div className="border-t border-zinc-100 pt-5 text-center">
                   <a
                     href="tel:+491625330280"
-                    className="inline-flex items-center gap-3 text-xl font-black text-red-600 transition-colors hover:text-orange-600"
+                    className="inline-flex items-center gap-2 text-base font-bold text-red-600 transition-colors hover:text-orange-600 sm:text-lg"
                   >
                     <Phone className="h-6 w-6" /> +49 162 5330280
                   </a>
