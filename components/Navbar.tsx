@@ -3,11 +3,12 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { Menu, X, Phone, MessageCircle, MapPin, Clock } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { SITE_LOGO_URL } from '@/lib/site-logo';
+import { HOME_LOADER_DONE_EVENT } from '@/lib/home-loader';
 
 const SCROLL_UP_THRESHOLD = 8;
 const SCROLL_TOP_LOCK = 24;
@@ -20,20 +21,26 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
   const t = useTranslations('Nav');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const header = headerRef.current;
     if (!header) return;
 
-    const measure = () => setHeaderHeight(header.offsetHeight);
+    const measure = () => {
+      const h = header.offsetHeight;
+      setHeaderHeight(h);
+      document.documentElement.style.setProperty('--site-navbar-height', `${h}px`);
+    };
     measure();
 
     const ro = new ResizeObserver(measure);
     ro.observe(header);
     window.addEventListener('resize', measure);
+    window.addEventListener(HOME_LOADER_DONE_EVENT, measure);
 
     return () => {
       ro.disconnect();
       window.removeEventListener('resize', measure);
+      window.removeEventListener(HOME_LOADER_DONE_EVENT, measure);
     };
   }, []);
 
@@ -74,16 +81,19 @@ export default function Navbar() {
   return (
     <>
       <div
-        className="w-full shrink-0"
-        style={{ height: headerHeight > 0 ? headerHeight : undefined }}
+        id="site-navbar-spacer"
+        className="w-full shrink-0 min-h-[5.5rem] md:min-h-[8.25rem]"
+        style={headerHeight > 0 ? { height: headerHeight } : undefined}
         aria-hidden
       />
       <header
         ref={headerRef}
         id="site-navbar"
-        className={`fixed inset-x-0 top-0 z-[100] flex w-full flex-col transition-transform duration-300 ease-out motion-reduce:transition-none ${
-          showHeader ? 'translate-y-0' : '-translate-y-full pointer-events-none'
-        }`}
+        className={`fixed inset-x-0 top-0 z-[100] flex w-full flex-col ${
+          headerHeight > 0
+            ? 'transition-transform duration-300 ease-out motion-reduce:transition-none'
+            : ''
+        } ${showHeader ? 'translate-y-0' : '-translate-y-full pointer-events-none'}`}
       >
       {/* Top Bar - Contact Info (Small) */}
       <div className="bg-black text-zinc-400 py-1.5 px-4 sm:px-6 lg:px-8 text-xs font-bold uppercase tracking-widest hidden md:block border-b border-zinc-900">
