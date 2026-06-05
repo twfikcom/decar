@@ -3,89 +3,87 @@
 import { motion } from 'motion/react';
 import { Search, MessageCircle } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { usePathname } from '@/i18n/navigation';
 import { useHomeHeroReady } from '@/hooks/use-home-hero-ready';
+import { HOME_LOADER_SESSION_KEY, isHomeAppPath } from '@/lib/home-loader';
 
-function HeroContent({ animated }: { animated: boolean }) {
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { delayChildren: 0.12, staggerChildren: 0.22 },
+  },
+};
+
+const itemVariants = {
+  hidden: { scale: 1.5, opacity: 0, y: -20 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring' as const, stiffness: 350, damping: 10, mass: 1 },
+  },
+};
+
+const textVariants = {
+  hidden: { scale: 1.2, opacity: 0, y: 20 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring' as const, stiffness: 350, damping: 10, mass: 1 },
+  },
+};
+
+function initialHeroReady(pathname: string): boolean {
+  if (!isHomeAppPath(pathname)) return true;
+  if (typeof window === 'undefined') return false;
+  try {
+    return Boolean(sessionStorage.getItem(HOME_LOADER_SESSION_KEY));
+  } catch {
+    return true;
+  }
+}
+
+export default function HeroTextAnimation() {
+  const pathname = usePathname();
+  const heroReady = useHomeHeroReady();
   const t = useTranslations('Hero');
-
-  const wrapper = animated ? motion.div : 'div';
-  const item = animated ? motion.div : 'div';
-  const heading = animated ? motion.h1 : 'h1';
-  const paragraph = animated ? motion.p : 'p';
-
-  const containerProps = animated
-    ? {
-        initial: 'hidden' as const,
-        animate: 'visible' as const,
-        variants: {
-          hidden: {},
-          visible: {
-            transition: { delayChildren: 0.15, staggerChildren: 0.25 },
-          },
-        },
-      }
-    : {};
-
-  const itemProps = animated
-    ? {
-        variants: {
-          hidden: { scale: 1.5, opacity: 0, y: -20 },
-          visible: {
-            scale: 1,
-            opacity: 1,
-            y: 0,
-            transition: { type: 'spring' as const, stiffness: 350, damping: 10, mass: 1 },
-          },
-        },
-      }
-    : {};
-
-  const textProps = animated
-    ? {
-        variants: {
-          hidden: { scale: 1.2, opacity: 0, y: 20 },
-          visible: {
-            scale: 1,
-            opacity: 1,
-            y: 0,
-            transition: { type: 'spring' as const, stiffness: 350, damping: 10, mass: 1 },
-          },
-        },
-      }
-    : {};
-
-  const Wrapper = wrapper;
-  const Item = item;
-  const Heading = heading;
-  const Paragraph = paragraph;
+  const [skipEntrance] = useState(() => initialHeroReady(pathname));
+  const motionState = heroReady ? 'visible' : 'hidden';
 
   return (
-    <Wrapper className="max-w-3xl rtl:ms-auto" {...containerProps}>
-      <Item {...itemProps}>
+    <motion.div
+      className="max-w-3xl rtl:ms-auto"
+      initial={skipEntrance ? false : 'hidden'}
+      animate={motionState}
+      variants={containerVariants}
+    >
+      <motion.div variants={itemVariants}>
         <span className="mb-4 inline-block max-w-full rounded-sm bg-red-600 px-3 py-1 text-[11px] font-black leading-tight tracking-wide text-white shadow-[0_4px_0_0_#7f1d1d] drop-shadow-[0_4px_10px_rgba(220,38,38,0.8)] sm:mb-6 sm:px-4 sm:py-1.5 sm:text-sm sm:tracking-wider">
           {t('badge')}
         </span>
-      </Item>
+      </motion.div>
 
-      <Heading
-        {...textProps}
+      <motion.h1
+        variants={textVariants}
         className="mb-4 font-heading text-3xl font-black leading-[1.1] tracking-tighter text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] sm:mb-6 sm:text-5xl md:mb-8 md:text-7xl"
       >
         {t('titleLine1')} <br />
         <span className="bg-gradient-to-br from-red-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_5px_10px_rgba(239,68,68,0.5)]">
           {t('titleHighlight')}
         </span>
-      </Heading>
+      </motion.h1>
 
-      <Paragraph
-        {...itemProps}
+      <motion.p
+        variants={itemVariants}
         className="mb-6 max-w-2xl text-base font-medium leading-relaxed text-zinc-300 drop-shadow-md sm:mb-10 sm:text-xl md:mb-12 md:text-2xl"
       >
         {t('subtitle')}
-      </Paragraph>
+      </motion.p>
 
-      <Item {...itemProps} className="flex flex-col gap-2.5 sm:flex-row sm:gap-6">
+      <motion.div variants={itemVariants} className="flex flex-col gap-2.5 sm:flex-row sm:gap-6">
         <Link
           href="/trucks"
           className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-red-600 to-red-800 px-5 py-3 text-sm font-black uppercase leading-tight tracking-wide text-white shadow-[0_6px_0_0_#7f1d1d,0_12px_24px_rgba(220,38,38,0.35)] transition-all hover:translate-y-[3px] hover:shadow-[0_3px_0_0_#7f1d1d,0_8px_16px_rgba(220,38,38,0.45)] active:translate-y-[6px] active:shadow-none sm:gap-3 sm:px-10 sm:py-5 sm:text-xl sm:tracking-wider sm:shadow-[0_8px_0_0_#7f1d1d,0_15px_30px_rgba(220,38,38,0.4)] sm:hover:translate-y-[4px] sm:active:translate-y-[8px]"
@@ -102,12 +100,7 @@ function HeroContent({ animated }: { animated: boolean }) {
           <MessageCircle className="h-5 w-5 shrink-0 text-orange-500 sm:h-6 sm:w-6" />
           {t('ctaWhatsapp')}
         </a>
-      </Item>
-    </Wrapper>
+      </motion.div>
+    </motion.div>
   );
-}
-
-export default function HeroTextAnimation() {
-  const heroReady = useHomeHeroReady();
-  return <HeroContent animated={heroReady} />;
 }

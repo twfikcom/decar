@@ -48,6 +48,9 @@ export default function HomeLoader() {
       } catch {
         /* ignore */
       }
+      // Reveal page + start hero while splash fades (avoids black gap after loader).
+      setHomeLoaderActive(false);
+      dispatchHomeLoaderDone();
       setShowSplash(false);
     }, 2500);
 
@@ -62,7 +65,6 @@ export default function HomeLoader() {
 
   const handleExitComplete = () => {
     setHomeLoaderActive(false);
-    dispatchHomeLoaderDone();
   };
 
   if (!isHomeAppPath(pathname)) {
@@ -75,7 +77,7 @@ export default function HomeLoader() {
         <motion.div
           key="home-splash"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.55, ease: 'easeInOut' } }}
+          exit={{ opacity: 0, transition: { duration: 0.4, ease: 'easeOut' } }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden bg-black"
         >
           <div className="pointer-events-none absolute inset-0 rounded-full bg-red-900/20 blur-[120px]" />

@@ -8,13 +8,25 @@ import {
   isHomeAppPath,
 } from '@/lib/home-loader';
 
+function readSessionLoaded(): boolean {
+  try {
+    return Boolean(sessionStorage.getItem(HOME_LOADER_SESSION_KEY));
+  } catch {
+    return true;
+  }
+}
+
 /**
  * False while the home splash is visible; true when hero motion should run.
  * Prevents the hero from animating behind the loader (invisible), then appearing static.
  */
 export function useHomeHeroReady(): boolean {
   const pathname = usePathname();
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(() => {
+    if (!isHomeAppPath(pathname)) return true;
+    if (typeof window === 'undefined') return false;
+    return readSessionLoaded();
+  });
 
   useLayoutEffect(() => {
     if (!isHomeAppPath(pathname)) {
@@ -22,12 +34,7 @@ export function useHomeHeroReady(): boolean {
       return;
     }
 
-    try {
-      if (sessionStorage.getItem(HOME_LOADER_SESSION_KEY)) {
-        setReady(true);
-        return;
-      }
-    } catch {
+    if (readSessionLoaded()) {
       setReady(true);
       return;
     }
