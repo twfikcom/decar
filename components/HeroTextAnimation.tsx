@@ -3,11 +3,8 @@
 import { motion } from 'motion/react';
 import { Search, MessageCircle } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
-import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname } from '@/i18n/navigation';
 import { useHomeHeroReady } from '@/hooks/use-home-hero-ready';
-import { HOME_LOADER_SESSION_KEY, isHomeAppPath } from '@/lib/home-loader';
 
 const containerVariants = {
   hidden: {},
@@ -36,39 +33,19 @@ const textVariants = {
   },
 };
 
-function hasSeenHomeLoader(): boolean {
-  if (typeof window === 'undefined') return false;
-  try {
-    return Boolean(sessionStorage.getItem(HOME_LOADER_SESSION_KEY));
-  } catch {
-    return true;
-  }
-}
-
 export default function HeroTextAnimation() {
-  const pathname = usePathname();
   const locale = useLocale();
   const heroReady = useHomeHeroReady();
   const t = useTranslations('Hero');
-  const [landingLocale] = useState(locale);
-  const [skipReloadEntrance] = useState(
-    () => isHomeAppPath(pathname) && hasSeenHomeLoader(),
-  );
 
-  // Remount on loader done or locale change; skip only same-locale reload in-session.
-  const entranceKey = !heroReady
-    ? 'pending'
-    : skipReloadEntrance && locale === landingLocale
-      ? 'static'
-      : `entrance-${locale}`;
-  const animateState = entranceKey === 'pending' ? 'hidden' : 'visible';
+  const entranceKey = heroReady ? `entrance-${locale}` : 'pending';
 
   return (
     <motion.div
       key={entranceKey}
       className="max-w-3xl rtl:ms-auto"
-      initial={entranceKey === 'static' ? false : 'hidden'}
-      animate={animateState}
+      initial="hidden"
+      animate={heroReady ? 'visible' : 'hidden'}
       variants={containerVariants}
     >
       <motion.div variants={itemVariants}>
