@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { Search, MessageCircle } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/navigation';
 import { useHomeHeroReady } from '@/hooks/use-home-hero-ready';
 import { HOME_LOADER_SESSION_KEY, isHomeAppPath } from '@/lib/home-loader';
@@ -47,14 +47,20 @@ function hasSeenHomeLoader(): boolean {
 
 export default function HeroTextAnimation() {
   const pathname = usePathname();
+  const locale = useLocale();
   const heroReady = useHomeHeroReady();
   const t = useTranslations('Hero');
-  const [skipEntrance] = useState(
+  const [landingLocale] = useState(locale);
+  const [skipReloadEntrance] = useState(
     () => isHomeAppPath(pathname) && hasSeenHomeLoader(),
   );
 
-  // Remount motion tree when the loader finishes so hidden → visible actually plays.
-  const entranceKey = skipEntrance ? 'static' : heroReady ? 'entrance' : 'pending';
+  // Remount on loader done or locale change; skip only same-locale reload in-session.
+  const entranceKey = !heroReady
+    ? 'pending'
+    : skipReloadEntrance && locale === landingLocale
+      ? 'static'
+      : `entrance-${locale}`;
   const animateState = entranceKey === 'pending' ? 'hidden' : 'visible';
 
   return (
