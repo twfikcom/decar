@@ -43,15 +43,15 @@ export default function HomeLoader() {
     setShowSplash(true);
 
     timer = window.setTimeout(() => {
+      // Reveal page + start hero while splash fades (avoids black gap after loader).
+      setHomeLoaderActive(false);
+      dispatchHomeLoaderDone();
+      setShowSplash(false);
       try {
         sessionStorage.setItem(HOME_LOADER_SESSION_KEY, 'true');
       } catch {
         /* ignore */
       }
-      // Reveal page + start hero while splash fades (avoids black gap after loader).
-      setHomeLoaderActive(false);
-      dispatchHomeLoaderDone();
-      setShowSplash(false);
     }, 2500);
 
     return () => {

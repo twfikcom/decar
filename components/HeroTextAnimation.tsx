@@ -12,7 +12,7 @@ import { HOME_LOADER_SESSION_KEY, isHomeAppPath } from '@/lib/home-loader';
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { delayChildren: 0.12, staggerChildren: 0.22 },
+    transition: { delayChildren: 0.15, staggerChildren: 0.25 },
   },
 };
 
@@ -36,8 +36,7 @@ const textVariants = {
   },
 };
 
-function initialHeroReady(pathname: string): boolean {
-  if (!isHomeAppPath(pathname)) return true;
+function hasSeenHomeLoader(): boolean {
   if (typeof window === 'undefined') return false;
   try {
     return Boolean(sessionStorage.getItem(HOME_LOADER_SESSION_KEY));
@@ -50,14 +49,20 @@ export default function HeroTextAnimation() {
   const pathname = usePathname();
   const heroReady = useHomeHeroReady();
   const t = useTranslations('Hero');
-  const [skipEntrance] = useState(() => initialHeroReady(pathname));
-  const motionState = heroReady ? 'visible' : 'hidden';
+  const [skipEntrance] = useState(
+    () => isHomeAppPath(pathname) && hasSeenHomeLoader(),
+  );
+
+  // Remount motion tree when the loader finishes so hidden → visible actually plays.
+  const entranceKey = skipEntrance ? 'static' : heroReady ? 'entrance' : 'pending';
+  const animateState = entranceKey === 'pending' ? 'hidden' : 'visible';
 
   return (
     <motion.div
+      key={entranceKey}
       className="max-w-3xl rtl:ms-auto"
-      initial={skipEntrance ? false : 'hidden'}
-      animate={motionState}
+      initial={entranceKey === 'static' ? false : 'hidden'}
+      animate={animateState}
       variants={containerVariants}
     >
       <motion.div variants={itemVariants}>
