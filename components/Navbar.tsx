@@ -54,7 +54,7 @@ export default function Navbar() {
       <div className="bg-black shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b-[4px] border-red-600 sticky top-0 z-50">
         <div className="mx-auto max-w-7xl ps-2 pe-3 sm:ps-3 sm:pe-5 lg:ps-4 lg:pe-6">
           {/* شبكة: لوجو | عمود مرن (قائمة في المنتصف) | لغة + واتساب — الموبايل: لوجو | فراغ | أزرار */}
-          <div className="grid min-h-[5rem] w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 py-1.5 sm:gap-3 sm:py-2 lg:min-h-[5.75rem] lg:gap-3 lg:py-2.5 xl:min-h-[6.25rem]">
+          <div className="grid min-h-[6rem] w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 py-1.5 sm:gap-3 sm:py-2 lg:min-h-[6.75rem] lg:gap-3 lg:py-2.5 xl:min-h-[7.25rem]">
             <Link
               href="/"
               aria-label={`LÖWE TRUCKS, ${t('companyLegal')}`}
@@ -68,7 +68,7 @@ export default function Navbar() {
                   height={330}
                   unoptimized
                   quality={100}
-                  className="block h-10 w-auto max-w-[min(78vw,195px)] object-contain object-start [image-rendering:high-quality] sm:h-[3rem] sm:max-w-[min(72vw,230px)] md:h-12 lg:h-16 lg:max-w-[min(42vw,340px)] xl:h-[4.5rem] xl:max-w-[min(40vw,400px)] 2xl:h-[4.75rem] 2xl:max-w-[430px]"
+                  className="block h-12 w-auto max-w-[min(82vw,240px)] object-contain object-start [image-rendering:high-quality] sm:h-14 sm:max-w-[min(76vw,280px)] md:h-16 lg:h-20 lg:max-w-[min(44vw,420px)] xl:h-[5.5rem] xl:max-w-[min(42vw,480px)] 2xl:h-24 2xl:max-w-[520px]"
                   priority
                   sizes="(max-width: 640px) 480px, (max-width: 768px) 560px, (max-width: 1024px) 720px, (max-width: 1536px) 900px, 960px"
                   aria-hidden

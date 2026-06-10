@@ -97,7 +97,7 @@ export default function HomeLoader() {
                 height={330}
                 unoptimized
                 quality={100}
-                className="block h-8 w-auto max-h-10 object-contain object-center [image-rendering:high-quality] sm:h-10 sm:max-h-12 md:h-12 md:max-h-14"
+                className="block h-10 w-auto max-h-12 object-contain object-center [image-rendering:high-quality] sm:h-12 sm:max-h-14 md:h-14 md:max-h-16"
                 priority
                 sizes="(max-width: 768px) 260px, 320px"
               />
