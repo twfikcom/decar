@@ -51,7 +51,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Header (Single Row) */}
-      <div className="bg-gradient-to-r from-red-700 via-orange-600 to-red-600 shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b-[4px] border-black sticky top-0 z-50">
+      <div className="bg-black shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b-[4px] border-red-600 sticky top-0 z-50">
         <div className="mx-auto max-w-7xl ps-2 pe-3 sm:ps-3 sm:pe-5 lg:ps-4 lg:pe-6">
           {/* شبكة: لوجو | عمود مرن (قائمة في المنتصف) | لغة + واتساب — الموبايل: لوجو | فراغ | أزرار */}
           <div className="grid min-h-[5rem] w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 py-1.5 sm:gap-3 sm:py-2 lg:min-h-[5.75rem] lg:gap-3 lg:py-2.5 xl:min-h-[6.25rem]">
@@ -85,7 +85,7 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="shrink-0 text-[11px] font-black uppercase tracking-[0.06em] text-white transition-all hover:-translate-y-0.5 hover:text-black drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)] lg:text-xs xl:text-sm 2xl:text-base"
+                    className="shrink-0 text-[11px] font-black uppercase tracking-[0.06em] text-white transition-all hover:-translate-y-0.5 hover:text-red-500 drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)] lg:text-xs xl:text-sm 2xl:text-base"
                   >
                     {t(link.labelKey)}
                   </Link>
@@ -111,7 +111,7 @@ export default function Navbar() {
                 <LanguageSwitcher />
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className="p-2 text-white transition-colors hover:text-black focus:outline-none"
+                  className="p-2 text-white transition-colors hover:text-red-500 focus:outline-none"
                   aria-label="Menu"
                 >
                   {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
