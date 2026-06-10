@@ -81,23 +81,23 @@ export default async function HomeCategoryStrip() {
               <li key={href} className="min-w-0">
                 <Link
                   href={href}
-                  className="group relative grid aspect-square w-full grid-rows-[1fr_auto] overflow-hidden rounded-md border border-white/10 p-0.5 text-center shadow-[0_6px_18px_rgba(0,0,0,0.4)] outline-none ring-orange-400/0 transition-[transform,box-shadow,background-position] duration-700 ease-out focus-visible:ring-2 focus-visible:ring-orange-400 sm:rounded-sm sm:p-2 sm:shadow-[0_8px_24px_rgba(0,0,0,0.45)] active:translate-y-0.5 max-sm:bg-orange-500 sm:bg-[length:220%_220%] sm:bg-[position:0%_50%] sm:hover:bg-[position:100%_50%] sm:hover:shadow-[0_12px_28px_rgba(0,0,0,0.55)] sm:bg-[linear-gradient(128deg,#fdba74_0%,#fb923c_14%,#f97316_28%,#ea580c_40%,#dc2626_55%,#991b1b_68%,#292524_82%,#0a0a0a_100%)]"
+                  className="group relative grid aspect-square w-full grid-rows-[1fr_auto] overflow-hidden rounded-md border border-white/10 p-0.5 text-center shadow-[0_6px_18px_rgba(0,0,0,0.4)] outline-none ring-orange-400/0 transition-[transform,box-shadow,background-position] duration-700 ease-out focus-visible:ring-2 focus-visible:ring-orange-400 sm:rounded-sm sm:p-2 sm:shadow-[0_8px_24px_rgba(0,0,0,0.45)] active:translate-y-0.5 max-sm:bg-orange-500 sm:bg-[length:220%_220%] sm:bg-[position:0%_50%] sm:hover:bg-[position:100%_50%] sm:hover:shadow-[0_12px_28px_rgba(0,0,0,0.55)] sm:bg-[linear-gradient(128deg,#fdba74_0%,#fb923c_14%,#f97316_28%,#ea580c_40%,#dc2626_55%,#991b1b_68%,#292524_82%,#0a0a0a_100%)] lg:grid-rows-[minmax(0,1.12fr)_auto] lg:p-2.5"
                 >
                   <span
                     className="pointer-events-none absolute inset-0 max-sm:hidden bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.15)_55%,rgba(0,0,0,0.45)_100%)] sm:block"
                     aria-hidden
                   />
-                  <span className="relative flex h-full min-h-0 w-full items-end justify-center max-sm:pt-0.5 sm:items-center">
+                  <span className="relative flex h-full min-h-0 w-full items-end justify-center max-sm:pt-0.5 sm:items-center lg:items-center lg:justify-center lg:px-0.5 lg:pt-1 lg:pb-0">
                     <Image
                       src={iconSrc}
                       alt=""
                       width={400}
                       height={240}
-                      className="h-full w-full max-h-full max-w-full object-contain object-bottom object-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-[1.03] sm:max-h-full sm:max-w-[92%] sm:h-auto sm:w-auto sm:object-center sm:drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
-                      sizes="(max-width: 640px) 33vw, (max-width: 1024px) 31vw, 16vw"
+                      className="h-full w-full max-h-full max-w-full object-contain object-bottom object-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-[1.03] sm:max-h-full sm:max-w-[92%] sm:h-auto sm:w-auto sm:object-center sm:drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] lg:h-[88%] lg:w-[88%] lg:max-h-none lg:max-w-none lg:translate-y-0.5 lg:object-center lg:drop-shadow-[0_3px_12px_rgba(0,0,0,0.75)] xl:h-[90%] xl:w-[90%]"
+                      sizes="(max-width: 640px) 33vw, (max-width: 1024px) 31vw, 18vw"
                     />
                   </span>
-                  <div className="relative z-10 flex w-full min-w-0 flex-col items-center justify-end gap-0 px-0.5 pb-0.5 max-sm:gap-0 max-sm:pb-1 sm:gap-0.5 sm:pb-1">
+                  <div className="relative z-10 flex w-full min-w-0 flex-col items-center justify-end gap-0 px-0.5 pb-0.5 max-sm:gap-0 max-sm:pb-1 sm:gap-0.5 sm:pb-1 lg:gap-0 lg:px-1 lg:pb-1 lg:pt-0">
                     {n !== null ? (
                       <span className="font-heading text-base font-black tabular-nums leading-none text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] sm:text-xl lg:text-2xl">
                         {n}
