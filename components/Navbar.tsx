@@ -7,7 +7,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { SITE_LOGO_URL } from '@/lib/site-logo';
+import {
+  SITE_LOGO_HEADER_CLASS,
+  SITE_LOGO_HEIGHT,
+  SITE_LOGO_URL,
+  SITE_LOGO_WIDTH,
+} from '@/lib/site-logo';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,17 +65,16 @@ export default function Navbar() {
               aria-label={`LÖWE TRUCKS, ${t('companyLegal')}`}
               className="relative z-30 inline-flex min-w-0 shrink-0 items-center justify-start justify-self-start overflow-visible"
             >
-              <div className="relative shrink-0 origin-left scale-[1.28] sm:scale-[1.32] lg:scale-[1.38] xl:scale-[1.42]">
+              <div className="relative shrink-0">
                 <Image
                   src={SITE_LOGO_URL}
                   alt=""
-                  width={960}
-                  height={330}
+                  width={SITE_LOGO_WIDTH}
+                  height={SITE_LOGO_HEIGHT}
                   unoptimized
-                  quality={100}
-                  className="block h-12 w-auto max-w-[min(82vw,240px)] object-contain object-start [image-rendering:high-quality] sm:h-14 sm:max-w-[min(76vw,280px)] md:h-16 lg:h-[4.25rem] lg:max-w-[min(44vw,420px)] xl:h-[4.5rem] xl:max-w-[min(42vw,480px)] 2xl:h-[4.75rem] 2xl:max-w-[520px]"
+                  className={SITE_LOGO_HEADER_CLASS}
                   priority
-                  sizes="(max-width: 640px) 480px, (max-width: 768px) 560px, (max-width: 1024px) 720px, (max-width: 1536px) 900px, 960px"
+                  sizes="(max-width: 640px) 308px, (max-width: 768px) 370px, (max-width: 1024px) 580px, (max-width: 1536px) 682px, 740px"
                   aria-hidden
                 />
               </div>

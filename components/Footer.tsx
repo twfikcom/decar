@@ -2,7 +2,13 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import SocialLinks from '@/components/SocialLinks';
-import { SITE_LOGO_FOOTER_FRAME_CLASS, SITE_LOGO_URL } from '@/lib/site-logo';
+import {
+  SITE_LOGO_FOOTER_CLASS,
+  SITE_LOGO_FOOTER_FRAME_CLASS,
+  SITE_LOGO_HEIGHT,
+  SITE_LOGO_URL,
+  SITE_LOGO_WIDTH,
+} from '@/lib/site-logo';
 
 export default async function Footer() {
   const t = await getTranslations('Footer');
@@ -18,11 +24,10 @@ export default async function Footer() {
                 <Image
                   src={SITE_LOGO_URL}
                   alt={t('logoAlt')}
-                  width={960}
-                  height={330}
+                  width={SITE_LOGO_WIDTH}
+                  height={SITE_LOGO_HEIGHT}
                   unoptimized
-                  quality={100}
-                  className="block h-10 w-auto max-h-12 object-contain object-center [image-rendering:high-quality] sm:h-12 sm:max-h-14 md:h-14 md:max-h-16"
+                  className={SITE_LOGO_FOOTER_CLASS}
                   sizes="(max-width: 768px) 260px, 320px"
                 />
               </div>
