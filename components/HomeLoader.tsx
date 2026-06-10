@@ -2,14 +2,12 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import { useLayoutEffect, useState } from 'react';
-import Image from 'next/image';
 import { usePathname } from '@/i18n/navigation';
+import SiteLogo from '@/components/SiteLogo';
 import {
   SITE_LOGO_FOOTER_CLASS,
   SITE_LOGO_FOOTER_FRAME_CLASS,
-  SITE_LOGO_HEIGHT,
-  SITE_LOGO_URL,
-  SITE_LOGO_WIDTH,
+  SITE_LOGO_FOOTER_SIZES,
 } from '@/lib/site-logo';
 import {
   HOME_LOADER_SESSION_KEY,
@@ -96,15 +94,11 @@ export default function HomeLoader() {
             className="relative mb-8 flex justify-center px-4"
           >
             <div className={SITE_LOGO_FOOTER_FRAME_CLASS}>
-              <Image
-                src={SITE_LOGO_URL}
+              <SiteLogo
                 alt="Löwe Trucks"
-                width={SITE_LOGO_WIDTH}
-                height={SITE_LOGO_HEIGHT}
-                unoptimized
                 className={SITE_LOGO_FOOTER_CLASS}
+                sizes={SITE_LOGO_FOOTER_SIZES}
                 priority
-                sizes="(max-width: 768px) 260px, 320px"
               />
             </div>
           </motion.div>

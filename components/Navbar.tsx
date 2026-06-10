@@ -1,18 +1,13 @@
 'use client';
 
 import { Link } from '@/i18n/navigation';
-import Image from 'next/image';
 import { Menu, X, Phone, MessageCircle, MapPin, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import {
-  SITE_LOGO_HEADER_CLASS,
-  SITE_LOGO_HEIGHT,
-  SITE_LOGO_URL,
-  SITE_LOGO_WIDTH,
-} from '@/lib/site-logo';
+import SiteLogo from '@/components/SiteLogo';
+import { SITE_LOGO_HEADER_CLASS, SITE_LOGO_HEADER_SIZES } from '@/lib/site-logo';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,16 +61,11 @@ export default function Navbar() {
               className="relative z-30 inline-flex min-w-0 shrink-0 items-center justify-start justify-self-start overflow-visible"
             >
               <div className="relative shrink-0">
-                <Image
-                  src={SITE_LOGO_URL}
-                  alt=""
-                  width={SITE_LOGO_WIDTH}
-                  height={SITE_LOGO_HEIGHT}
-                  unoptimized
+                <SiteLogo
                   className={SITE_LOGO_HEADER_CLASS}
+                  sizes={SITE_LOGO_HEADER_SIZES}
                   priority
-                  sizes="(max-width: 640px) 308px, (max-width: 768px) 370px, (max-width: 1024px) 580px, (max-width: 1536px) 682px, 740px"
-                  aria-hidden
+                  ariaHidden
                 />
               </div>
             </Link>

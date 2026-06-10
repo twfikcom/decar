@@ -1,15 +1,25 @@
 export const SITE_LOGO_URL = '/lionlogo.png';
+export const SITE_LOGO_URL_640 = '/lionlogo-640.png';
+export const SITE_LOGO_URL_1280 = '/lionlogo-1280.png';
 
-/** Intrinsic pixels of `public/lionlogo.png` — keeps Next/Image aspect ratio correct. */
+/** Intrinsic pixels of `public/lionlogo.png`. */
 export const SITE_LOGO_WIDTH = 2065;
 export const SITE_LOGO_HEIGHT = 762;
 
-/** Header: native display size (no CSS scale — scale blurs raster logos). */
+/** Pre-downscaled assets — sharper on mobile than browser scaling 2065px → ~170px. */
+export const SITE_LOGO_SRC_SET = `${SITE_LOGO_URL_640} 640w, ${SITE_LOGO_URL_1280} 1280w, ${SITE_LOGO_URL} 2065w`;
+
+export const SITE_LOGO_HEADER_SIZES =
+  '(max-width: 640px) 308px, (max-width: 768px) 370px, (max-width: 1024px) 480px, 560px';
+
+export const SITE_LOGO_FOOTER_SIZES = '(max-width: 768px) 260px, 320px';
+
+/** Integer px heights avoid sub-pixel blur on mobile; no CSS scale. */
 export const SITE_LOGO_HEADER_CLASS =
-  'block h-[3.85rem] w-auto max-w-[min(82vw,308px)] object-contain object-start sm:h-[4.65rem] sm:max-w-[min(76vw,370px)] md:h-[5.3rem] lg:h-[5.85rem] lg:max-w-[min(44vw,580px)] xl:h-[6.4rem] xl:max-w-[min(42vw,682px)] 2xl:h-[6.75rem] 2xl:max-w-[740px]';
+  'block h-[62px] w-auto max-w-[min(82vw,308px)] object-contain object-start max-sm:[image-rendering:-webkit-optimize-contrast] sm:h-[74px] sm:max-w-[min(76vw,370px)] md:h-[84px] lg:h-[72px] lg:max-w-[min(40vw,480px)] xl:h-[76px] xl:max-w-[min(38vw,520px)] 2xl:h-[80px] 2xl:max-w-[560px]';
 
 export const SITE_LOGO_FOOTER_CLASS =
-  'block h-10 w-auto max-h-12 object-contain object-center sm:h-12 sm:max-h-14 md:h-14 md:max-h-16';
+  'block h-10 w-auto max-h-12 object-contain object-center max-sm:[image-rendering:-webkit-optimize-contrast] sm:h-12 sm:max-h-14 md:h-14 md:max-h-16';
 
 /** Logo frame behind footer / home splash loader (matches header). */
 export const SITE_LOGO_FOOTER_FRAME_CLASS =
