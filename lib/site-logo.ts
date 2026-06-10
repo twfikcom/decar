@@ -1,13 +1,13 @@
-export const SITE_LOGO_URL = '/lionlogo.png';
-export const SITE_LOGO_URL_640 = '/lionlogo-640.png';
-export const SITE_LOGO_URL_1280 = '/lionlogo-1280.png';
+export const SITE_LOGO_URL = '/llog.webp';
+export const SITE_LOGO_URL_640 = '/llog-640.webp';
+export const SITE_LOGO_URL_1280 = '/llog-1280.webp';
 
-/** Intrinsic pixels of `public/lionlogo.png`. */
-export const SITE_LOGO_WIDTH = 2065;
-export const SITE_LOGO_HEIGHT = 762;
+/** Intrinsic pixels of `public/llog.webp`. */
+export const SITE_LOGO_WIDTH = 1768;
+export const SITE_LOGO_HEIGHT = 680;
 
-/** Pre-downscaled assets — sharper on mobile than browser scaling 2065px → ~170px. */
-export const SITE_LOGO_SRC_SET = `${SITE_LOGO_URL_640} 640w, ${SITE_LOGO_URL_1280} 1280w, ${SITE_LOGO_URL} 2065w`;
+/** Pre-downscaled assets — sharper on mobile than browser scaling full size → ~170px. */
+export const SITE_LOGO_SRC_SET = `${SITE_LOGO_URL_640} 640w, ${SITE_LOGO_URL_1280} 1280w, ${SITE_LOGO_URL} 1768w`;
 
 export const SITE_LOGO_HEADER_SIZES =
   '(max-width: 640px) 308px, (max-width: 768px) 370px, (max-width: 1024px) 480px, 560px';
