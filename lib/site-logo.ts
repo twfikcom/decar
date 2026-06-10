@@ -1,13 +1,13 @@
-export const SITE_LOGO_URL = '/llog.webp';
-export const SITE_LOGO_URL_640 = '/llog-640.webp';
-export const SITE_LOGO_URL_1280 = '/llog-1280.webp';
+export const SITE_LOGO_URL = '/llogo.webp';
+export const SITE_LOGO_URL_640 = '/llogo-640.webp';
+export const SITE_LOGO_URL_1280 = '/llogo-1280.webp';
 
-/** Intrinsic pixels of `public/llog.webp`. */
-export const SITE_LOGO_WIDTH = 1768;
-export const SITE_LOGO_HEIGHT = 680;
+/** Intrinsic pixels of `public/llogo.webp`. */
+export const SITE_LOGO_WIDTH = 1770;
+export const SITE_LOGO_HEIGHT = 661;
 
 /** Pre-downscaled assets — sharper on mobile than browser scaling full size → ~170px. */
-export const SITE_LOGO_SRC_SET = `${SITE_LOGO_URL_640} 640w, ${SITE_LOGO_URL_1280} 1280w, ${SITE_LOGO_URL} 1768w`;
+export const SITE_LOGO_SRC_SET = `${SITE_LOGO_URL_640} 640w, ${SITE_LOGO_URL_1280} 1280w, ${SITE_LOGO_URL} 1770w`;
 
 export const SITE_LOGO_HEADER_SIZES =
   '(max-width: 640px) 308px, (max-width: 768px) 370px, (max-width: 1024px) 480px, 560px';
