@@ -1,10 +1,10 @@
-export const SITE_LOGO_URL = '/llogo.webp';
-export const SITE_LOGO_URL_640 = '/llogo-640.webp';
-export const SITE_LOGO_URL_1280 = '/llogo-1280.webp';
+export const SITE_LOGO_URL = '/llogoa.png';
+export const SITE_LOGO_URL_640 = '/llogoa-640.png';
+export const SITE_LOGO_URL_1280 = '/llogoa-1280.png';
 
-/** Intrinsic pixels of `public/llogo.webp`. */
+/** Intrinsic pixels of `public/llogoa.png`. */
 export const SITE_LOGO_WIDTH = 1770;
-export const SITE_LOGO_HEIGHT = 661;
+export const SITE_LOGO_HEIGHT = 624;
 
 /** Pre-downscaled assets — sharper on mobile than browser scaling full size → ~170px. */
 export const SITE_LOGO_SRC_SET = `${SITE_LOGO_URL_640} 640w, ${SITE_LOGO_URL_1280} 1280w, ${SITE_LOGO_URL} 1770w`;
