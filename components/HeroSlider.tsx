@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-const HERO_BG_SRC = '/image.png';
+const HERO_BG_SRC = '/bgh.png';
 
 export default function HeroSlider() {
   const t = useTranslations('Hero');

@@ -449,7 +449,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             <div className="perspective-1000">
               <div className="relative aspect-square transform-gpu rounded-3xl border-2 border-zinc-800 bg-gradient-to-tr from-zinc-900 to-zinc-800 p-4 shadow-[0_20px_50px_rgba(220,38,38,0.3)] transition-transform duration-700 rotate-y-6 hover:rotate-y-0">
                 <Image
-                  src="/image.png"
+                  src="/b38).png"
                   alt={t('valueBlockImageAlt')}
                   fill
                   className="rounded-2xl object-cover"
