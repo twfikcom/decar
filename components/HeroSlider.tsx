@@ -2,8 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-const HERO_BG_SRC =
-  'https://wheat-duck-884743.hostingersite.com/backk.png';
+const HERO_BG_SRC = '/image.png';
 
 export default function HeroSlider() {
   const t = useTranslations('Hero');
